@@ -379,8 +379,10 @@ html[data-theme=light]{background:#e3e6e4;--bg:#e3e6e4;--tx:#1b2420;--mu:#5a6962
 [data-theme=light] #usr{color:#23755a;border-color:rgba(0,0,0,.2)}
 [data-theme=light] .x-sres button{border-color:rgba(0,0,0,.12)}
 [data-theme=light] .warn{background:rgba(217,162,94,.16)}
+.x-note h4{margin:16px 0 6px;font-size:13px;font-weight:600;color:var(--mu);letter-spacing:.02em}.x-note ul{margin:0;padding-left:20px}.x-note li{margin:5px 0;line-height:1.5}.x-note p{margin:8px 0}.x-note li b{font-weight:600}
+.nav{height:40px}
 </style></head><body>
-<canvas id="sky" width="800" height="450"></canvas><aside><div class="x-logo">&#931;</div><button class="nav" id="n-call" title="Liga&#231;&#245;es" onclick="go('call')"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></button><button class="nav" id="n-sched" title="Agendadas" onclick="go('sched')"></button><button class="nav" id="n-ans" title="Respostas salvas" onclick="go('ans')"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></button><button class="nav" id="n-imp" title="Importar leads" onclick="go('imp')"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7 9m5-5 5 5M4 20h16"/></svg></button><button class="nav" id="n-stats" title="Resultados" onclick="go('stats')"><svg viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg></button><button class="nav" id="n-map" title="Mapa dos leads" onclick="go('map')"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.2"/><rect x="14" y="4" width="6" height="6" rx="1.2"/><rect x="4" y="14" width="6" height="6" rx="1.2"/><rect x="14" y="14" width="6" height="6" rx="1.2"/></svg></button><button class="nav" id="n-team" title="Equipe" onclick="go('team')"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M16 5.2a3.2 3.2 0 0 1 0 5.6M18 14.8c1.8.7 3 2.4 3 5.2"/></svg></button><button class="nav" id="n-bkp" title="Backup e nova pesquisa" onclick="go('bkp')"><svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM8 4v5h7M8 20v-6h8v6"/></svg></button><button class="nav" id="n-theme" onclick="toggleTheme()"></button><div id="usr" style="display:none"></div><div id="conn"></div></aside><div id="cmsg" style="display:none"></div><main><div class="top" id="head"></div><div id="body"></div></main><div id="ov"></div><div id="toast"></div>
+<canvas id="sky" width="800" height="450"></canvas><aside><div class="x-logo">&#931;</div><button class="nav" id="n-call" title="Liga&#231;&#245;es" onclick="go('call')"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></button><button class="nav" id="n-sched" title="Agendadas" onclick="go('sched')"></button><button class="nav" id="n-ans" title="Respostas salvas" onclick="go('ans')"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></button><button class="nav" id="n-imp" title="Importar leads" onclick="go('imp')"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7 9m5-5 5 5M4 20h16"/></svg></button><button class="nav" id="n-stats" title="Resultados" onclick="go('stats')"><svg viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg></button><button class="nav" id="n-map" title="Mapa dos leads" onclick="go('map')"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.2"/><rect x="14" y="4" width="6" height="6" rx="1.2"/><rect x="4" y="14" width="6" height="6" rx="1.2"/><rect x="14" y="14" width="6" height="6" rx="1.2"/></svg></button><button class="nav" id="n-team" title="Equipe" onclick="go('team')"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M16 5.2a3.2 3.2 0 0 1 0 5.6M18 14.8c1.8.7 3 2.4 3 5.2"/></svg></button><button class="nav" id="n-notes" title="Patch notes" onclick="go('notes')"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4M10 12h6M10 16h6"/></svg></button><button class="nav" id="n-bkp" title="Backup e nova pesquisa" onclick="go('bkp')"><svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM8 4v5h7M8 20v-6h8v6"/></svg></button><button class="nav" id="n-theme" onclick="toggleTheme()"></button><div id="usr" style="display:none"></div><div id="conn"></div></aside><div id="cmsg" style="display:none"></div><main><div class="top" id="head"></div><div id="body"></div></main><div id="ov"></div><div id="toast"></div>
 <script>
 let D=[],ALL=[],BY={},LSC={};
 const TEAM0=[{n:'Maria',a:1},{n:'In\u00eas',a:1},{n:'Jo\u00e3o Paulo',a:1},{n:'GB',a:1}];
@@ -425,7 +427,7 @@ const SC0=[
  {t:'Indica\u00e7\u00e3o de outra empresa (nome e telefone)',u:1}]}];
 
 const LSK='psj_crm_v4';
-let S={theme:'dark',des:null,team:null,tn:{},ess:true,qrb:false,cfg:{},hist:{},rd:{},meta:null,st:{},ans:{},sv:{},imp:{},lotes:{},lem:{},dr:{},q:{},al:{},cur:{},prefix:'021',person:'Maria',tab:'call',qr:'M',ph:{},script:null,full:false,sf:'all',af:'all',lf:'all',edit:false,gmail:'',gauto:false};
+let S={notas:{},theme:'dark',des:null,team:null,tn:{},ess:true,qrb:false,cfg:{},hist:{},rd:{},meta:null,st:{},ans:{},sv:{},imp:{},lotes:{},lem:{},dr:{},q:{},al:{},cur:{},prefix:'021',person:'Maria',tab:'call',qr:'M',ph:{},script:null,full:false,sf:'all',af:'all',lf:'all',edit:false,gmail:'',gauto:false};
 const DIRTY={};let online=false,cs='off',cerr=null,saveTm=null,SDIRTY=false,sTm=null;
 const clone=o=>JSON.parse(JSON.stringify(o));
 const sj=o=>JSON.stringify(Object.keys(o||{}).sort().map(k=>[k,o[k]]));
@@ -434,7 +436,7 @@ try{
  if(raw)Object.assign(S,JSON.parse(raw));
 
  const c=JSON.parse(localStorage.getItem(LSK+'_c')||'null');
- if(c){['st','ans','sv','imp','lotes','lem','rd','cfg','hist','tn','team','des'].forEach(k=>{if(c[k])S[k]=c[k]});if(c.meta)S.meta=c.meta;if(c.script)S.script=c.script}
+ if(c){['st','ans','sv','imp','lotes','lem','rd','cfg','hist','tn','team','des','notas'].forEach(k=>{if(c[k])S[k]=c[k]});if(c.meta)S.meta=c.meta;if(c.script)S.script=c.script}
 }catch(e){}
 const qt=q=>q&&typeof q=='object'?(q.t||''):String(q||'');
 const normQ=q=>{if(q&&typeof q=='object'){const o={t:q.t||''};['e','m','k','x','g','f','h','u'].forEach(k=>{if(q[k])o[k]=q[k]});if(q.o){const a=(Array.isArray(q.o)?q.o:Object.values(q.o)).filter(v=>v!=null&&v!=='');if(a.length)o.o=a}return o}return{t:String(q||'')}};
@@ -446,10 +448,10 @@ applyTheme();
 function applyTeam(){const t=(Array.isArray(S.team)?S.team:S.team?Object.values(S.team):[]).filter(m=>m&&m.n);S.team=t.length?t.map(m=>({n:String(m.n),a:m.a?1:0})):JSON.parse(JSON.stringify(TEAM0));if(!S.team.some(m=>m.a))S.team[0].a=1;P.length=0;S.team.forEach(m=>{if(m.a)P.push(m.n)});PALL=S.team.map(m=>m.n);if(!P.includes(S.person))S.person=P[0]}
 applyTeam();
 const PR=()=>PALL.filter(p=>P.includes(p)||(LSC[p]&&LSC[p].length));
-if(!['call','sched','ans','imp','bkp','stats','team','map'].includes(S.tab))S.tab='call';
+if(!['call','sched','ans','imp','bkp','stats','team','map','notes'].includes(S.tab))S.tab='call';
 S.edit=false;
 const save=()=>{try{localStorage.setItem(LSK,JSON.stringify({prefix:S.prefix,person:S.person,tab:S.tab,qr:S.qr,ph:S.ph,cur:S.cur,full:S.full,theme:S.theme,ess:S.ess,sf:S.sf,af:S.af,lf:S.lf,dr:S.dr,q:S.q,al:S.al,gmail:S.gmail,gauto:S.gauto}))}catch(e){}};
-const saveCache=()=>{try{localStorage.setItem(LSK+'_c',JSON.stringify({des:S.des,team:S.team,tn:S.tn,cfg:S.cfg,hist:S.hist,rd:S.rd,meta:S.meta,st:S.st,ans:S.ans,sv:S.sv,imp:S.imp,lotes:S.lotes,lem:S.lem,script:S.script}))}catch(e){}};
+const saveCache=()=>{try{localStorage.setItem(LSK+'_c',JSON.stringify({notas:S.notas,des:S.des,team:S.team,tn:S.tn,cfg:S.cfg,hist:S.hist,rd:S.rd,meta:S.meta,st:S.st,ans:S.ans,sv:S.sv,imp:S.imp,lotes:S.lotes,lem:S.lem,script:S.script}))}catch(e){}};
 /* ===== Firebase Realtime Database ===== */
 const firebaseConfig={apiKey:"AIzaSyDgc2OiBIUgEmMvhYRor3y8o2OKp9cbbPA",authDomain:"crm-c130b.firebaseapp.com",databaseURL:"https://crm-c130b-default-rtdb.firebaseio.com",projectId:"crm-c130b",storageBucket:"crm-c130b.firebasestorage.app",messagingSenderId:"850118166656",appId:"1:850118166656:web:887ecdb9c1e09179b2fe65"};
 
@@ -471,7 +473,7 @@ function sendQ(map){if(!db||!Object.keys(map).length)return;
 function flushQ(){if(Object.keys(S.q).length)sendQ(clone(S.q))}
 function overlay(v){const o=clone(v||{});for(const p in S.q){const parts=p.split('/').slice(1);let t=o;for(let i=0;i<parts.length-1;i++){if(t[parts[i]]==null||typeof t[parts[i]]!='object')t[parts[i]]={};t=t[parts[i]]}const val=S.q[p],lk=parts[parts.length-1];if(val===null)delete t[lk];else t[lk]=val}return o}
 function unk(o){const r={};if(o)Object.keys(o).forEach(k=>{if(o[k]!=null)r[String(k).replace(/^l/,'')]=o[k]});return r}
-function derive(v){S.st=unk(v.status);S.ans=unk(v.respostas);S.sv=unk(v.salvo);S.lem=unk(v.lembretes);S.rd=unk(v.rd);S.tn=unk(v.tent);S.team=v.equipe||null;applyTeam();S.des=v.desafio||null;S.meta=v.meta||null;S.cfg=v.config||{};S.hist=v.historico||{};S.imp=v.importados||{};S.lotes=v.lotes||{};
+function derive(v){S.st=unk(v.status);S.ans=unk(v.respostas);S.sv=unk(v.salvo);S.lem=unk(v.lembretes);S.rd=unk(v.rd);S.tn=unk(v.tent);S.team=v.equipe||null;applyTeam();S.des=v.desafio||null;S.notas=v.notas||{};S.meta=v.meta||null;S.cfg=v.config||{};S.hist=v.historico||{};S.imp=v.importados||{};S.lotes=v.lotes||{};
  const r=v.roteiro?(Array.isArray(v.roteiro)?v.roteiro:Object.values(v.roteiro)).filter(Boolean):null;
  if(!SDIRTY)S.script=normS(r||clone(SC0));
  Object.keys(S.dr).forEach(id=>{if(!DIRTY[id])delete S.dr[id]});build()}
@@ -532,7 +534,7 @@ function render(){
  pendR=false;
  const sb=document.querySelector('.sb'),sy=window.scrollY,sbt=sb?sb.scrollTop:0,tab=S.tab;
  try{
-  const nm={call:'n-call',sched:'n-sched',ans:'n-ans',imp:'n-imp',bkp:'n-bkp',stats:'n-stats',team:'n-team',map:'n-map'};
+  const nm={call:'n-call',sched:'n-sched',ans:'n-ans',imp:'n-imp',bkp:'n-bkp',stats:'n-stats',team:'n-team',map:'n-map',notes:'n-notes'};
   Object.keys(nm).forEach(k=>{const e=$(nm[k]);if(e)e.className='nav'+(S.tab==k?' on':'')});document.body.dataset.tab=S.tab;
   badges();head();paint();
   const nb=document.querySelector('.sb');if(nb&&tab=='call'&&sb)nb.scrollTop=sbt;window.scrollTo(0,sy);conn();
@@ -541,14 +543,14 @@ const ICO={sched:'<svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path 
 function badges(){const e=$('n-sched');if(!e)return;const ids=Object.keys(S.lem).filter(id=>BY[id]&&stat(BY[id])=='depois'&&BY[id].p==S.person);const now=Date.now();const od=ids.filter(id=>new Date(S.lem[id].w).getTime()<=now).length;
  e.innerHTML=ICO.sched+(ids.length?`<span class="bd${od?' red':''}">${ids.length}</span>`:'')}
 function head(){
- const T={map:['Mapa dos leads','Cada quadradinho \u00e9 um lead; a cor mostra a situa\u00e7\u00e3o'],team:['Equipe','Quem liga, quantos leads cada um tem e a redistribui\u00e7\u00e3o dos pendentes'],sched:['Liga\u00e7\u00f5es agendadas','Lembretes de \u201cLigar depois\u201d'],ans:['Respostas salvas','Todas as respostas salvas, separadas por lead'],imp:['Importar leads','Qualquer pessoa pode subir uma planilha \u2014 os contatos s\u00e3o distribu\u00eddos por igual entre a equipe'],bkp:['Backup','Exporte tudo em um arquivo e restaure quando precisar'],stats:['Resultados',`Desempenho das liga\u00e7\u00f5es \u00b7 ${ALL.length} contatos`]};
+ const T={notes:['Patch notes','O que mudou no CRM a cada atualiza\u00e7\u00e3o'],map:['Mapa dos leads','Cada quadradinho \u00e9 um lead; a cor mostra a situa\u00e7\u00e3o'],team:['Equipe','Quem liga, quantos leads cada um tem e a redistribui\u00e7\u00e3o dos pendentes'],sched:['Liga\u00e7\u00f5es agendadas','Lembretes de \u201cLigar depois\u201d'],ans:['Respostas salvas','Todas as respostas salvas, separadas por lead'],imp:['Importar leads','Qualquer pessoa pode subir uma planilha \u2014 os contatos s\u00e3o distribu\u00eddos por igual entre a equipe'],bkp:['Backup','Exporte tudo em um arquivo e restaure quando precisar'],stats:['Resultados',`Desempenho das liga\u00e7\u00f5es \u00b7 ${ALL.length} contatos`]};
  if(S.tab!='call'){const t=T[S.tab];$('head').innerHTML=`<div><h1>${t[0]}</h1><div class="sub">${t[1]}</div></div>`;return}
  const p=S.person,r=pend(p),ag=LS(p).filter(x=>stat(x)=='depois').length,g=goalCalc(),pct=Math.min(100,Math.round(g.done/g.m.alvo*100));
  $('head').innerHTML=`<div><h1>Fila de liga\u00e7\u00e3o</h1><div class="sub">${S.cfg&&S.cfg.nome?esc(S.cfg.nome)+' \u00b7 ':''}${esc(p)} \u00b7 ${r} ${r==1?'falta':'faltam'} de ${LS(p).length}${ag?` \u00b7 ${ag} para ligar depois`:''}</div></div>
 <button class="x-srch" onclick="openSearch()">Buscar empresa, telefone ou CNPJ<kbd>Ctrl K</kbd></button>
 <button class="x-goal" onclick="openMeta()" title="Clique para editar a meta"><span class="x-ring" style="background:conic-gradient(var(--pr) 0 ${pct*3.6}deg,var(--trk) 0)"></span><span><b>${g.done}/${g.m.alvo}</b><small>meta \u00b7 ${g.faltam==0?'batida':g.fim?'prazo encerrado':g.util?'hoje '+g.hoje+' de '+g.alvoHoje:'pr\u00f3x. dia '+g.prox}</small></span></button>
 <div class="seg">${P.map(n=>`<button class="${n==p?'on':''}" onclick="setP('${n}')">${n}<b>${pend(n)}</b></button>`).join('')}</div>`}
-function paint(){({call,sched,ans:ansPage,imp:impPage,bkp:bkpPage,stats,team:teamPage,map:mapPage}[S.tab]||call)()}
+function paint(){({call,sched,ans:ansPage,imp:impPage,bkp:bkpPage,stats,team:teamPage,map:mapPage,notes:notesPage}[S.tab]||call)()}
 function tel(x){return(S.ph[x.n]==2&&x.t2?x.t2:x.t1)||''}
 /* ===== Liga\u00e7\u00f5es ===== */
 const segName=x=>String(x.s||'').replace(/^\s*\d[\d.\-\/]*\s*-\s*/,'');
@@ -717,6 +719,47 @@ function mapPage(){const fc=S.mc||'',cities=[...new Set(ALL.map(x=>x.ci).filter(
 ${PR().map(p=>{const l=LS(p).filter(inC),k=cnt(l);return `<div class="card" style="margin-bottom:14px"><div class="x-mh"><b>${esc(p)}${P.includes(p)?'':' <span>\u00b7 inativa</span>'}</b><span>${l.length} leads \u00b7 ${k.done} contatados \u00b7 ${k.resp} responderam \u00b7 ${k.pend} pendentes</span></div>
 <div class="x-map">${l.map(x=>{const s=stat(x);return `<button class="x-sq${hasAns(x.n)?' a':''}" style="${s?'background:'+C[s]:''}" title="${esc(x.e)}${x.ci?' \u00b7 '+esc(x.ci):''} \u00b7 ${s?L[s]:'Pendente'}" onclick="gotoLead('${x.n}')"></button>`}).join('')||'<span class="mu">Sem leads nesta cidade.</span>'}</div></div>`}).join('')}
 <div class="mu" style="font-size:12.5px">Borda branca = lead com respostas salvas. Clique em um quadradinho para abrir o lead.</div>`}
+/* ===== Patch notes ===== */
+const NOTE0={t:'2026-11-13T12:00:00.000Z',titulo:'Atualiza\u00e7\u00e3o de 13/11/2026',fixo:1,txt:`Para quem vai ligar
+* Respostas de um clique: nota de 0 a 10 e op\u00e7\u00f5es prontas, com espa\u00e7o para o detalhe.
+* Pergunta atual em destaque: as outras ficam apagadas at\u00e9 voc\u00ea chegar nelas.
+* Roteiro que se adapta: esconde o que n\u00e3o se aplica e avisa quando a empresa est\u00e1 fora do perfil.
+* Teclado: Enter passa para a pr\u00f3xima pergunta.
+* Desfazer a \u00faltima marca\u00e7\u00e3o.
+* Busca por empresa, cidade, telefone ou CNPJ (Ctrl K).
+* WhatsApp e Copiar ao lado do n\u00famero, e contador de tentativas.
+* Cota por cidade: mostra o que j\u00e1 foi respondido e a fila pula cidades fechadas.
+* Tema claro ou escuro, \u00e0 escolha de cada pessoa.
+
+Sistema
+* Login pelo Google, liberado para e-mails @psjunior.com. Sem senha compartilhada.
+* Importa\u00e7\u00e3o direto da planilha tratada, com descarte de falidas, sem telefone e repetidas.
+* Divis\u00e3o igual dos leads, com todas as cidades na fila de cada pessoa.
+* Aba Equipe: adicionar ou remover quem liga e redistribuir automaticamente os leads pendentes.
+* Mapa dos leads: aba unicamente para isso, evitando polui\u00e7\u00e3o visual. Um quadradinho por lead, na cor da situa\u00e7\u00e3o, por pessoa.
+* Gamifica\u00e7\u00e3o do Sigma: ranking de respostas por pessoa.
+* Nova pesquisa: arquiva tudo e come\u00e7a do zero, sem perder o hist\u00f3rico.`};
+function noteHtml(txt){let h='',ul=false;const end=()=>{if(ul){h+='</ul>';ul=false}};
+ String(txt||'').split(/\r?\n/).forEach(l=>{const t=l.trim();if(!t){end();return}const m=t.match(/^(?:[*\-\u2022\u2013]|\d+[.)])\s+(.*)$/);
+  if(m){if(!ul){h+='<ul>';ul=true}const c=m[1].match(/^([^:]{2,40}):\s+(.*)$/);h+='<li>'+(c?'<b>'+esc(c[1])+':</b> '+esc(c[2]):esc(m[1]))+'</li>'}
+  else{end();h+=(t.length<=60&&!/[.!?]$/.test(t))?'<h4>'+esc(t.replace(/:$/,''))+'</h4>':'<p>'+esc(t)+'</p>'}});end();return h}
+function notesPage(){const list=Object.keys(S.notas||{}).map(k=>Object.assign({id:k},S.notas[k])).filter(n=>n&&n.txt).concat([Object.assign({id:'base'},NOTE0)]).sort((a,b)=>String(b.t).localeCompare(String(a.t)));
+ $('body').innerHTML=`<div class="card" style="margin-bottom:16px"><b>Nova atualiza\u00e7\u00e3o</b><div class="mu" style="font-size:13px;margin:4px 0 12px">Escreva s\u00f3 o que mudou, ou importe um documento (.docx, .txt ou .md). Linhas que come\u00e7am com * viram t\u00f3picos; linhas curtas sem * viram subt\u00edtulos.</div>
+<input id="ntt" class="srch" style="max-width:420px;margin-bottom:10px" maxlength="80" placeholder="T\u00edtulo (ex.: Atualiza\u00e7\u00e3o de ${new Date().toLocaleDateString('pt-BR')})">
+<textarea id="ntx" class="et" rows="7" placeholder="Para quem vai ligar&#10;* O que mudou...&#10;&#10;Sistema&#10;* O que mudou..."></textarea>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="sv" onclick="addNote()">Publicar</button><label class="sv alt filebtn">Importar documento<input type="file" accept=".docx,.txt,.md" hidden onchange="impNote(this.files[0]);this.value=''"></label></div></div>
+${list.map(n=>`<div class="card x-note" style="margin-bottom:14px"><div class="x-mh"><b>${esc(n.titulo||'Atualiza\u00e7\u00e3o')}</b><span>${esc(new Date(n.t).toLocaleDateString('pt-BR'))}${n.por?' \u00b7 '+esc(n.por):''}${n.fixo?'':` \u00b7 <button class="lnk" style="margin:0" onclick="delNote('${n.id}')">Excluir</button>`}</span></div>${noteHtml(n.txt)}</div>`).join('')}`}
+function addNote(){const txt=($('ntx').value||'').trim();if(!txt){toast('Escreva ou importe o que mudou');return}const t=new Date(),id='n'+t.getTime().toString(36);
+ const n={t:t.toISOString(),titulo:($('ntt').value||'').trim()||'Atualiza\u00e7\u00e3o de '+t.toLocaleDateString('pt-BR'),txt:txt.slice(0,6000)};if(AUSER&&AUSER.email)n.por=AUSER.email.split('@')[0];
+ S.notas=S.notas||{};S.notas[id]=n;W('fila/notas/'+id,n);saveCache();render();toast('Patch notes publicado')}
+function delNote(id){ask('Excluir esta atualiza\u00e7\u00e3o do patch notes?',()=>{delete S.notas[id];W('fila/notas/'+id,null);saveCache();render()})}
+async function impNote(file){if(!file)return;try{let txt='';const ext=(file.name.split('.').pop()||'').toLowerCase();
+  if(ext=='docx'){if(typeof JSZip=='undefined'){toast('Leitura de .docx indispon\u00edvel agora');return}const z=await JSZip.loadAsync(await file.arrayBuffer()),f=z.file('word/document.xml');if(!f)throw new Error('arquivo sem texto');const xml=await f.async('string');
+   const dec=v=>v.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&apos;/g,"'").replace(/&amp;/g,'&');
+   txt=xml.split(/<\/w:p>/).map(p=>{const li=/<w:numPr>|<w:pStyle w:val="[^"]*(List|Bullet|Topico|Marcador)/i.test(p),t=dec((p.match(/<w:t[^>]*>[^<]*<\/w:t>|<w:tab\/>|<w:br\/>/g)||[]).map(r=>r.startsWith('<w:t')&&!r.startsWith('<w:tab')?r.replace(/<[^>]+>/g,''):' ').join('')).trim();return t?(li&&!/^[*\-\u2022]/.test(t)?'* ':'')+t:''}).join('\n').replace(/\n{3,}/g,'\n\n').trim()}
+  else txt=(await file.text()).replace(/^\ufeff/,'').trim();
+  if(!txt){toast('N\u00e3o encontrei texto nesse documento');return}const a=$('ntx');a.value=(a.value.trim()?a.value.trim()+'\n\n':'')+txt;const tt=$('ntt');if(tt&&!tt.value)tt.value=file.name.replace(/\.[^.]+$/,'').slice(0,80);toast('Documento importado. Confira e clique em Publicar')}
+ catch(e){toast('N\u00e3o consegui ler o documento: '+(e.message||e))}}
 /* ===== Busca ===== */
 function openSearch(){ov(`<h3>Buscar lead</h3><input id="sq" placeholder="Empresa, respons\u00e1vel, cidade, telefone ou CNPJ" oninput="doSearch(this.value)" autocomplete="off"><div id="sres" class="x-sres"></div><div class="ma"><button class="pl2" onclick="ovc()">Fechar</button></div>`);setTimeout(()=>{const e=$('sq');if(e)e.focus()},30)}
 function doSearch(v){const t=norm(v),dg=digs(v);const r=(!t&&!dg)?[]:ALL.filter(x=>(t&&norm(x.e+' '+(x.r||'')+' '+(x.ci||'')).includes(t))||(dg.length>=4&&(digs(x.t1)+' '+digs(x.t2)+' '+digs(x.cnpj)).includes(dg))).slice(0,12);
@@ -947,7 +990,7 @@ function undoImp(b){const ids=Object.keys(S.imp).filter(k=>S.imp[k]&&S.imp[k].b=
 /* ===== Backup ===== */
 function snapshotAll(){flushSave();const o={status:{},respostas:{},salvo:{},lembretes:{},importados:clone(S.imp),lotes:clone(S.lotes),roteiro:clone(S.script)};
  Object.keys(S.st).forEach(k=>{if(S.st[k])o.status['l'+k]=S.st[k]});Object.keys(S.ans).forEach(k=>{if(hasAns(k))o.respostas['l'+k]=clone(S.ans[k])});
- Object.keys(S.sv).forEach(k=>{if(hasAns(k))o.salvo['l'+k]=S.sv[k]});Object.keys(S.lem).forEach(k=>o.lembretes['l'+k]=clone(S.lem[k]));o.equipe=clone(S.team);if(S.des)o.desafio=S.des;o.tent={};Object.keys(S.tn).forEach(k=>{if(S.tn[k])o.tent['l'+k]=S.tn[k]});o.rd={};Object.keys(S.rd).forEach(k=>{if(S.st[k]=='resp')o.rd['l'+k]=S.rd[k]});if(S.meta)o.meta=clone(S.meta);o.config=clone(S.cfg||{});o.historico=clone(S.hist||{});return o}
+ Object.keys(S.sv).forEach(k=>{if(hasAns(k))o.salvo['l'+k]=S.sv[k]});Object.keys(S.lem).forEach(k=>o.lembretes['l'+k]=clone(S.lem[k]));o.equipe=clone(S.team);o.notas=clone(S.notas||{});if(S.des)o.desafio=S.des;o.tent={};Object.keys(S.tn).forEach(k=>{if(S.tn[k])o.tent['l'+k]=S.tn[k]});o.rd={};Object.keys(S.rd).forEach(k=>{if(S.st[k]=='resp')o.rd['l'+k]=S.rd[k]});if(S.meta)o.meta=clone(S.meta);o.config=clone(S.cfg||{});o.historico=clone(S.hist||{});return o}
 function bkpPage(){const o=snapshotAll(),n=k=>Object.keys(o[k]).length;
  $('body').innerHTML=`<div class="card" style="margin-bottom:16px"><b>Exportar tudo</b><div class="mu" style="margin:6px 0 14px">Gera um arquivo com todos os dados que est\u00e3o no Firebase: status das liga\u00e7\u00f5es, respostas, agendamentos, leads importados e o roteiro .</div>
 <div class="kp" style="margin:0 0 14px"><div class="card" style="padding:14px"><small>Status registrados</small><strong style="font-size:28px">${n('status')}</strong></div><div class="card" style="padding:14px"><small>Leads com respostas</small><strong style="font-size:28px">${n('respostas')}</strong></div><div class="card" style="padding:14px"><small>Agendamentos</small><strong style="font-size:28px">${n('lembretes')}</strong></div><div class="card" style="padding:14px"><small>Leads importados</small><strong style="font-size:28px">${n('importados')}</strong></div></div>
