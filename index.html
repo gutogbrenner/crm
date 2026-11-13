@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>CRM Sigma &#183; Fila de liga&#231;&#227;o</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Cormorant+Garamond:ital@1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-app-compat.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-database-compat.min.js"></script>
@@ -103,8 +103,8 @@ table.tl{width:100%}table.tl th,table.tl td{text-align:left;vertical-align:top}t
 .charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;margin-bottom:6px}
 :root{--bg:#020604;--sb:rgba(3,10,7,.5);--card:rgba(7,18,13,.55);--bd:rgba(190,255,225,.14);--ln2:rgba(190,255,225,.24);--tx:#effff6;--mu:#8fb3a2;--pr:#19e68c;--pri:#7dffc0;--in:rgba(2,8,6,.5);--cy:#b6ff5c}
 html{background:#020604}
-body{background:transparent;font-family:'Space Grotesk',Inter,system-ui,sans-serif}
-.mono,.kp strong,kbd{font-family:'JetBrains Mono',ui-monospace,monospace}
+body{background:transparent;font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif}
+.mono,.kp strong,kbd{font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif}
 #sky{position:fixed;inset:0;width:100vw;height:100vh;z-index:-2;filter:blur(1.2px);opacity:0;transition:opacity 1.2s}
 body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(700px 420px at 62% -8%,rgba(25,230,140,.14),transparent 70%),linear-gradient(180deg,rgba(2,8,6,.5) 0,rgba(2,8,6,.05) 28%,rgba(2,8,6,.1) 72%,rgba(2,8,6,.6) 100%)}
 aside{width:76px;padding:22px 0;display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--sb);backdrop-filter:blur(18px);border-right:1px solid rgba(255,255,255,.08)}
@@ -114,7 +114,7 @@ aside{width:76px;padding:22px 0;display:flex;flex-direction:column;align-items:c
 .nav:hover{color:#fff}
 .nav.on{color:#fff;background:rgba(25,230,140,.14);box-shadow:inset 0 0 0 1px rgba(25,230,140,.5),0 0 18px rgba(25,230,140,.25)}
 .nav.on:before{content:"";position:absolute;left:-16px;top:10px;bottom:10px;width:3px;border-radius:3px;background:var(--pr);box-shadow:0 0 12px var(--pr)}
-.nav .bd{position:absolute;top:4px;right:4px;min-width:16px;height:16px;border-radius:8px;background:var(--pr);font:500 9.5px 'JetBrains Mono',monospace;color:#fff;display:grid;place-items:center;padding:0 3px;margin:0}
+.nav .bd{position:absolute;top:4px;right:4px;min-width:16px;height:16px;border-radius:8px;background:var(--pr);font:500 9.5px Inter,system-ui,-apple-system,'Segoe UI',sans-serif;color:#fff;display:grid;place-items:center;padding:0 3px;margin:0}
 .nav .bd.red{background:#ff5d6c}
 #usr{margin-top:auto;width:36px;height:36px;border-radius:50%;border:1px solid var(--ln2);display:grid;place-items:center;font-weight:600;font-size:12px;color:var(--cy);cursor:pointer;margin-bottom:0}
 #conn{width:8px;height:8px;border-radius:50%;margin-top:10px;background:#ffb454;border:0;padding:0}
@@ -127,7 +127,7 @@ h1{font-size:25px;font-weight:600;letter-spacing:.01em}.sub{font-size:13px;color
 .kp .card{border-radius:18px;box-shadow:none}
 .seg{background:rgba(4,12,9,.5);backdrop-filter:blur(18px);border:1px solid var(--bd);border-radius:40px;padding:4px}
 .seg button{border-radius:30px;padding:7px 14px;font-size:13px}.seg button.on{box-shadow:0 0 20px rgba(25,230,140,.5)}
-.seg b{font-family:'JetBrains Mono',monospace;font-weight:400}
+.seg b{font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;font-weight:400}
 .sv,.mini,.pl2,.rs,.filebtn{border-radius:30px!important}
 .sv{box-shadow:0 0 22px rgba(25,230,140,.35)}
 .srch,.md input,.mapg select,.ei,.et{border-radius:16px;background:var(--in);border-color:var(--bd)}
@@ -144,24 +144,24 @@ a{color:var(--pri)}
 .x-goal{display:flex;align-items:center;gap:12px;border:1px solid var(--bd);border-radius:40px;padding:5px 18px 5px 7px;height:48px;background:rgba(4,12,9,.5);backdrop-filter:blur(18px);color:var(--tx);font:inherit;cursor:pointer;text-align:left}
 .x-ring{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;box-shadow:0 0 16px rgba(25,230,140,.4)}
 .x-ring:after{content:"";width:25px;height:25px;border-radius:50%;background:#040a07}
-.x-goal b{font:500 15px 'JetBrains Mono',monospace;display:block;line-height:1.2}.x-goal small{color:var(--mu);font-size:11.5px}
+.x-goal b{font:500 15px Inter,system-ui,-apple-system,'Segoe UI',sans-serif;display:block;line-height:1.2}.x-goal small{color:var(--mu);font-size:11.5px}
 /* fila de liga&#231;&#227;o */
 .x-grid{display:grid;grid-template-columns:minmax(0,1fr) 520px;gap:26px;align-items:start}
-.x-lb{font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:#84a595}
+.x-lb{font:500 10.5px Inter,system-ui,-apple-system,'Segoe UI',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#84a595}
 .x-lead{padding:28px 30px;position:relative}
 .x-lead:before{content:"";position:absolute;left:30px;right:30px;top:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--pr),transparent)}
 .x-chips{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
-.x-chip{font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--ln2);border-radius:20px;padding:5px 11px;color:var(--mu);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.x-chip{font:500 10.5px Inter,system-ui,-apple-system,'Segoe UI',sans-serif;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--ln2);border-radius:20px;padding:5px 11px;color:var(--mu);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .x-chip.ok{color:#35e0a1;border-color:rgba(53,224,161,.45)}
-.x-quota{margin-left:auto;display:flex;gap:14px;align-items:center;font:500 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#9fc2b1}
+.x-quota{margin-left:auto;display:flex;gap:14px;align-items:center;font:500 10.5px Inter,system-ui,-apple-system,'Segoe UI',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#9fc2b1}
 .x-quota i{display:inline-block;width:8px;height:8px;border-radius:50%;border:1px solid #6fa58c;margin-left:5px;vertical-align:middle}.x-quota i.d{background:var(--cy);border-color:var(--cy);box-shadow:0 0 8px var(--cy)}
-.x-kick{font:italic 400 19px 'Cormorant Garamond',Georgia,serif;letter-spacing:.1em;color:#b9ffd9;margin-bottom:4px}
+.x-kick{font:400 13.5px Inter,system-ui,-apple-system,'Segoe UI',sans-serif;letter-spacing:.1em;color:#b9ffd9;margin-bottom:4px}
 .x-name{margin:0;font-size:29px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;line-height:1.2}
 .x-who{color:var(--mu);margin-top:6px;font-size:14.5px}
 .x-call{display:flex;align-items:center;gap:22px;margin:24px 0;padding:18px 22px 18px 18px;border:1px solid var(--bd);border-radius:40px;background:rgba(3,10,7,.35);flex-wrap:wrap}
 .x-pbtn{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#b6ff5c,#19e68c);display:grid;place-items:center;box-shadow:0 0 0 6px rgba(25,230,140,.14),0 0 34px rgba(25,230,140,.7);flex:none}
 .x-pbtn svg{width:24px;height:24px;fill:#fff}
-.x-num{font:500 36px 'JetBrains Mono',monospace;letter-spacing:-.02em;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.x-num{font:500 36px Inter,system-ui,-apple-system,'Segoe UI',sans-serif;letter-spacing:-.02em;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
 .x-num input{width:74px;background:none;border:0;border-bottom:1px dashed transparent;color:var(--pr);font:inherit;text-shadow:0 0 18px rgba(25,230,140,.8);padding:0;outline:0}
 .x-num input:hover,.x-num input:focus{border-bottom-color:var(--pr)}
 .x-alt{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
@@ -186,7 +186,7 @@ a{color:var(--pri)}
 .x-q{display:flex;align-items:center;gap:14px;margin-top:18px;flex-wrap:wrap}
 .x-bar{flex:1;min-width:160px;height:8px;border-radius:6px;display:flex;gap:1px;overflow:hidden}
 .x-bar i{flex:1;height:100%;background:#15281e;cursor:pointer;min-width:1px}.x-bar i.cur{background:#fff!important;box-shadow:0 0 8px #fff}
-.x-cnt{font:12px 'JetBrains Mono',monospace;color:var(--mu)}
+.x-cnt{font:12px Inter,system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--mu)}
 .x-nav{display:flex;gap:8px}
 .x-nx{font-size:12px;color:var(--mu);margin-top:12px}.x-nx b{color:#e3fff0;font-weight:500}
 /* roteiro */
@@ -198,12 +198,12 @@ a{color:var(--pri)}
 .x-steps{display:flex;gap:6px;padding:14px 22px 0}.x-steps span{flex:1;height:3px;border-radius:3px;background:#0f1f17}.x-steps .d{background:var(--pr);box-shadow:0 0 10px rgba(25,230,140,.7)}.x-steps .c{background:var(--cy)}
 .sb{padding:16px 22px;flex:1;overflow:auto;max-height:none}
 .x-blk{margin-bottom:22px}
-.x-pitch{font:italic 400 18.5px/1.45 'Cormorant Garamond',Georgia,serif;color:#e3fff0;padding:8px 0 12px;border-bottom:1px solid var(--bd);margin-bottom:8px}
+.x-pitch{font:400 15px/1.6 Inter,system-ui,-apple-system,'Segoe UI',sans-serif;color:#e3fff0;padding:8px 0 12px;border-bottom:1px solid var(--bd);margin-bottom:8px}
 .x-hint{font-size:12px;color:var(--mu);margin:2px 0 8px}
-.x-qq{font-weight:500;margin:16px 0 7px;font-size:14px;line-height:1.4}.x-qq em{font:500 11px 'JetBrains Mono',monospace;color:var(--pr);font-style:normal;margin-right:8px}
-.x-es{text-decoration:none;font:500 9px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--cy);border:1px solid rgba(182,255,92,.4);border-radius:20px;padding:2px 8px;margin-left:8px;white-space:nowrap;vertical-align:middle}
+.x-qq{font-weight:500;margin:16px 0 7px;font-size:14px;line-height:1.4}.x-qq em{font:500 11px Inter,system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--pr);font-style:normal;margin-right:8px}
+.x-es{text-decoration:none;font:500 9px Inter,system-ui,-apple-system,'Segoe UI',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--cy);border:1px solid rgba(182,255,92,.4);border-radius:20px;padding:2px 8px;margin-left:8px;white-space:nowrap;vertical-align:middle}
 .x-qk{display:flex;gap:6px;margin:0 0 8px;flex-wrap:wrap}.x-qk button{font:inherit;font-size:11.5px;border:1px solid var(--ln2);border-radius:30px;padding:4px 11px;color:#b9d6c8;background:none;cursor:pointer}
-.x-sc{display:flex;gap:5px;margin:0 0 8px}.x-sc button{flex:1;height:32px;border-radius:10px;border:1px solid var(--ln2);font:500 12.5px 'JetBrains Mono',monospace;color:#b9d6c8;background:none;cursor:pointer;padding:0}
+.x-sc{display:flex;gap:5px;margin:0 0 8px}.x-sc button{flex:1;height:32px;border-radius:10px;border:1px solid var(--ln2);font:500 12.5px Inter,system-ui,-apple-system,'Segoe UI',sans-serif;color:#b9d6c8;background:none;cursor:pointer;padding:0}
 .x-qk button.on,.x-sc button.on{background:var(--pr);border-color:var(--pr);color:#fff;box-shadow:0 0 16px rgba(25,230,140,.5)}
 .x-ta{display:block;width:100%;border:1px solid var(--bd);border-radius:22px;background:rgba(2,8,6,.45);min-height:44px;padding:11px 18px;color:#dff3e9;font:inherit;font-size:13.5px;resize:vertical;outline:0}
 .x-ta:focus{border-color:var(--pr);box-shadow:0 0 0 3px rgba(25,230,140,.16),0 0 22px rgba(25,230,140,.25)}
@@ -222,10 +222,71 @@ a{color:var(--pri)}
 .x-st.pri span{color:#03170e}.x-st.pri kbd{border-color:rgba(3,23,14,.45);color:#03170e}
 .x-st.pri.sel{box-shadow:0 0 0 3px rgba(255,255,255,.8),0 0 26px rgba(25,230,140,.7)}
 .x-pbtn{background:linear-gradient(135deg,#b6ff5c,#19e68c)}.x-pbtn svg{fill:#03170e}
-.x-logo{font-size:21px;font-weight:600;font-family:Georgia,'Times New Roman',serif;letter-spacing:0}
+.x-logo{font-size:21px;font-weight:600;font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;letter-spacing:0}
 .x-gh.wa{color:#7dffc0;border-color:rgba(125,255,192,.4)}
+
+/* ---- minimalista ---- */
+body,button,input,select,textarea,kbd{font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif}
+body{font-feature-settings:"tnum" 1,"cv11" 1;letter-spacing:-.005em}
+body:before{background:linear-gradient(180deg,rgba(2,8,6,.72),rgba(2,8,6,.6) 40%,rgba(2,8,6,.82))}
+#sky{filter:blur(6px)}
+.card{background:rgba(9,15,12,.74);backdrop-filter:blur(22px);box-shadow:none;border:1px solid rgba(255,255,255,.07);border-radius:18px}
+.kp .card{background:rgba(255,255,255,.025)}
+aside{border-right:1px solid rgba(255,255,255,.06)}
+.x-logo{box-shadow:none;border:1px solid rgba(25,230,140,.55);color:#19e68c;font-weight:500;font-size:19px}
+.nav.on{box-shadow:none;background:rgba(25,230,140,.1);color:#19e68c}.nav.on:before{box-shadow:none}
+.seg{border-color:rgba(255,255,255,.08)}.seg button.on,.sv,.x-pbtn,.x-st.pri,.x-ring,.x-qk button.on,.x-sc button.on,.x-steps .d,.x-bar i.cur,.x-st.sel,.x-st.pri.sel{box-shadow:none}
+.x-st.pri.sel{outline:2px solid #fff;outline-offset:2px}
+.x-num input{text-shadow:none}
+.x-lead:before{display:none}
+.x-lead{padding:26px 28px}
+h1{font-size:22px;font-weight:600;letter-spacing:-.01em}.sub{color:var(--mu)}
+.x-lb{font-size:11px;font-weight:500;letter-spacing:.06em;color:var(--mu)}
+.x-kick{color:var(--mu);letter-spacing:0;margin-bottom:6px}
+.x-name{text-transform:none;letter-spacing:-.015em;font-size:27px;font-weight:600}
+.x-who{font-size:14px}
+.x-chips{margin-bottom:12px;min-height:0}
+.x-chip{text-transform:none;letter-spacing:0;font-size:12px;font-weight:500;padding:4px 10px;border-color:rgba(255,255,255,.14)}
+.x-quota{text-transform:none;letter-spacing:0;font-size:12px;font-weight:400;color:var(--mu)}
+.x-call{border:0;background:none;padding:0;margin:22px 0;border-radius:0}
+.x-pbtn{width:52px;height:52px;background:#19e68c}.x-pbtn svg{width:21px;height:21px}
+.x-num{font-size:32px;font-weight:600;letter-spacing:-.02em}
+.x-gh{border-color:rgba(255,255,255,.14);color:var(--mu)}.x-gh:hover{border-color:rgba(255,255,255,.4)}
+.x-gh.wa{color:#7dffc0;border-color:rgba(125,255,192,.3)}
+.x-qr{border-radius:12px;width:104px;padding:8px}
+.x-info{padding-top:18px;border-top:1px solid rgba(255,255,255,.07)}
+.x-res{margin-top:16px;padding:20px 24px}
+.x-st{border-radius:12px;border-color:rgba(255,255,255,.12);height:48px}
+.x-st kbd,.x-srch kbd{border-color:rgba(255,255,255,.16);font-size:10.5px}
+.x-bar{height:6px}.x-bar i{background:rgba(255,255,255,.08)}
+.x-cnt{font-size:12px}
+.x-srch,.x-goal{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08);backdrop-filter:none}
+.x-goal b{font-size:14px;font-weight:600}
+.sh{border-bottom-color:rgba(255,255,255,.07);padding:14px 22px}.sf{border-top-color:rgba(255,255,255,.07)}
+.x-tg{border-color:rgba(255,255,255,.12)}
+.x-steps span{height:2px;background:rgba(255,255,255,.08)}.x-steps .c{background:rgba(25,230,140,.45)}
+.x-pitch{border-bottom:0;color:var(--tx);padding:6px 0 4px}
+.x-qq{font-size:14px;margin:18px 0 8px}.x-qq em{font-size:12px;font-weight:500;color:var(--mu)}
+.x-es{border:0;padding:0;font-size:11px;font-weight:500;letter-spacing:0;text-transform:none;color:#19e68c;margin-left:8px}
+.x-qk button{border-color:rgba(255,255,255,.14);font-size:12px;padding:4px 11px}
+.x-sc button{border-color:rgba(255,255,255,.14);font-size:12.5px;font-weight:500;border-radius:8px}
+.x-ta{border-radius:12px;border-color:rgba(255,255,255,.1);background:rgba(255,255,255,.025);padding:11px 14px}
+.x-ta:focus{border-color:#19e68c;box-shadow:none}
+.x-blk{margin-bottom:26px}
+.srch,.md input,.mapg select,.ei,.et{border-radius:12px}
+.md{border-radius:18px}
+#toast,#cmsg{border-color:rgba(255,255,255,.12)}
+/* mapa */
+.x-lg{display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--mu)}
+.x-lg i,.x-sq{display:inline-block;width:14px;height:14px;border-radius:4px;background:rgba(255,255,255,.1)}
+.x-lg i{margin-right:7px;vertical-align:-2px}.x-lg b{color:var(--tx);font-weight:600;margin-left:5px}
+.x-map{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}
+.x-sq{width:20px;height:20px;border-radius:5px;cursor:pointer;border:0;padding:0}.x-sq:hover{outline:2px solid #fff;outline-offset:1px}
+.x-sq.a{box-shadow:inset 0 0 0 2px rgba(255,255,255,.85)}
+.x-mh{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}.x-mh b{font-size:16px;font-weight:600}.x-mh span{color:var(--mu);font-size:13px}
+.x-sts{grid-template-columns:1.05fr 1.5fr 1.1fr 1.2fr 1.1fr}
 </style></head><body>
-<canvas id="sky" width="800" height="450"></canvas><aside><div class="x-logo">&#931;</div><button class="nav" id="n-call" title="Liga&#231;&#245;es" onclick="go('call')"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></button><button class="nav" id="n-sched" title="Agendadas" onclick="go('sched')"></button><button class="nav" id="n-ans" title="Respostas salvas" onclick="go('ans')"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></button><button class="nav" id="n-imp" title="Importar leads" onclick="go('imp')"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7 9m5-5 5 5M4 20h16"/></svg></button><button class="nav" id="n-stats" title="Resultados" onclick="go('stats')"><svg viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg></button><button class="nav" id="n-team" title="Equipe" onclick="go('team')"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M16 5.2a3.2 3.2 0 0 1 0 5.6M18 14.8c1.8.7 3 2.4 3 5.2"/></svg></button><button class="nav" id="n-bkp" title="Backup e nova pesquisa" onclick="go('bkp')"><svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM8 4v5h7M8 20v-6h8v6"/></svg></button><div id="usr" style="display:none"></div><div id="conn"></div></aside><div id="cmsg" style="display:none"></div><main><div class="top" id="head"></div><div id="body"></div></main><div id="ov"></div><div id="toast"></div>
+<canvas id="sky" width="800" height="450"></canvas><aside><div class="x-logo">&#931;</div><button class="nav" id="n-call" title="Liga&#231;&#245;es" onclick="go('call')"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></button><button class="nav" id="n-sched" title="Agendadas" onclick="go('sched')"></button><button class="nav" id="n-ans" title="Respostas salvas" onclick="go('ans')"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></button><button class="nav" id="n-imp" title="Importar leads" onclick="go('imp')"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7 9m5-5 5 5M4 20h16"/></svg></button><button class="nav" id="n-stats" title="Resultados" onclick="go('stats')"><svg viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg></button><button class="nav" id="n-map" title="Mapa dos leads" onclick="go('map')"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.2"/><rect x="14" y="4" width="6" height="6" rx="1.2"/><rect x="4" y="14" width="6" height="6" rx="1.2"/><rect x="14" y="14" width="6" height="6" rx="1.2"/></svg></button><button class="nav" id="n-team" title="Equipe" onclick="go('team')"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M16 5.2a3.2 3.2 0 0 1 0 5.6M18 14.8c1.8.7 3 2.4 3 5.2"/></svg></button><button class="nav" id="n-bkp" title="Backup e nova pesquisa" onclick="go('bkp')"><svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM8 4v5h7M8 20v-6h8v6"/></svg></button><div id="usr" style="display:none"></div><div id="conn"></div></aside><div id="cmsg" style="display:none"></div><main><div class="top" id="head"></div><div id="body"></div></main><div id="ov"></div><div id="toast"></div>
 <script>
 let D=[],ALL=[],BY={},LSC={};
 const TEAM0=[{n:'Maria',a:1},{n:'In\u00eas',a:1},{n:'Jo\u00e3o Paulo',a:1},{n:'GB',a:1}];
@@ -288,7 +349,7 @@ S.script=normS((S.script&&S.script.length)?S.script:clone(SC0));
 function applyTeam(){const t=(Array.isArray(S.team)?S.team:S.team?Object.values(S.team):[]).filter(m=>m&&m.n);S.team=t.length?t.map(m=>({n:String(m.n),a:m.a?1:0})):JSON.parse(JSON.stringify(TEAM0));if(!S.team.some(m=>m.a))S.team[0].a=1;P.length=0;S.team.forEach(m=>{if(m.a)P.push(m.n)});PALL=S.team.map(m=>m.n);if(!P.includes(S.person))S.person=P[0]}
 applyTeam();
 const PR=()=>PALL.filter(p=>P.includes(p)||(LSC[p]&&LSC[p].length));
-if(!['call','sched','ans','imp','bkp','stats','team'].includes(S.tab))S.tab='call';
+if(!['call','sched','ans','imp','bkp','stats','team','map'].includes(S.tab))S.tab='call';
 S.edit=false;
 const save=()=>{try{localStorage.setItem(LSK,JSON.stringify({prefix:S.prefix,person:S.person,tab:S.tab,qr:S.qr,ph:S.ph,cur:S.cur,full:S.full,ess:S.ess,sf:S.sf,af:S.af,lf:S.lf,dr:S.dr,q:S.q,al:S.al,gmail:S.gmail,gauto:S.gauto}))}catch(e){}};
 const saveCache=()=>{try{localStorage.setItem(LSK+'_c',JSON.stringify({team:S.team,tn:S.tn,cfg:S.cfg,hist:S.hist,rd:S.rd,meta:S.meta,st:S.st,ans:S.ans,sv:S.sv,imp:S.imp,lotes:S.lotes,lem:S.lem,script:S.script}))}catch(e){}};
@@ -374,7 +435,7 @@ function render(){
  pendR=false;
  const sb=document.querySelector('.sb'),sy=window.scrollY,sbt=sb?sb.scrollTop:0,tab=S.tab;
  try{
-  const nm={call:'n-call',sched:'n-sched',ans:'n-ans',imp:'n-imp',bkp:'n-bkp',stats:'n-stats',team:'n-team'};
+  const nm={call:'n-call',sched:'n-sched',ans:'n-ans',imp:'n-imp',bkp:'n-bkp',stats:'n-stats',team:'n-team',map:'n-map'};
   Object.keys(nm).forEach(k=>{const e=$(nm[k]);if(e)e.className='nav'+(S.tab==k?' on':'')});document.body.dataset.tab=S.tab;
   badges();head();paint();
   const nb=document.querySelector('.sb');if(nb&&tab=='call'&&sb)nb.scrollTop=sbt;window.scrollTo(0,sy);conn();
@@ -383,14 +444,14 @@ const ICO={sched:'<svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path 
 function badges(){const e=$('n-sched');if(!e)return;const ids=Object.keys(S.lem).filter(id=>BY[id]&&stat(BY[id])=='depois'&&BY[id].p==S.person);const now=Date.now();const od=ids.filter(id=>new Date(S.lem[id].w).getTime()<=now).length;
  e.innerHTML=ICO.sched+(ids.length?`<span class="bd${od?' red':''}">${ids.length}</span>`:'')}
 function head(){
- const T={team:['Equipe','Quem liga, quantos leads cada um tem e a redistribui\u00e7\u00e3o dos pendentes'],sched:['Liga\u00e7\u00f5es agendadas','Lembretes de \u201cLigar depois\u201d'],ans:['Respostas salvas','Todas as respostas salvas, separadas por lead'],imp:['Importar leads','Qualquer pessoa pode subir uma planilha \u2014 os contatos s\u00e3o distribu\u00eddos por igual entre a equipe'],bkp:['Backup','Exporte tudo em um arquivo e restaure quando precisar'],stats:['Resultados',`Desempenho das liga\u00e7\u00f5es \u00b7 ${ALL.length} contatos`]};
+ const T={map:['Mapa dos leads','Cada quadradinho \u00e9 um lead; a cor mostra a situa\u00e7\u00e3o'],team:['Equipe','Quem liga, quantos leads cada um tem e a redistribui\u00e7\u00e3o dos pendentes'],sched:['Liga\u00e7\u00f5es agendadas','Lembretes de \u201cLigar depois\u201d'],ans:['Respostas salvas','Todas as respostas salvas, separadas por lead'],imp:['Importar leads','Qualquer pessoa pode subir uma planilha \u2014 os contatos s\u00e3o distribu\u00eddos por igual entre a equipe'],bkp:['Backup','Exporte tudo em um arquivo e restaure quando precisar'],stats:['Resultados',`Desempenho das liga\u00e7\u00f5es \u00b7 ${ALL.length} contatos`]};
  if(S.tab!='call'){const t=T[S.tab];$('head').innerHTML=`<div><h1>${t[0]}</h1><div class="sub">${t[1]}</div></div>`;return}
  const p=S.person,r=pend(p),ag=LS(p).filter(x=>stat(x)=='depois').length,g=goalCalc(),pct=Math.min(100,Math.round(g.done/g.m.alvo*100));
  $('head').innerHTML=`<div><h1>Fila de liga\u00e7\u00e3o</h1><div class="sub">${S.cfg&&S.cfg.nome?esc(S.cfg.nome)+' \u00b7 ':''}${esc(p)} \u00b7 ${r} ${r==1?'falta':'faltam'} de ${LS(p).length}${ag?` \u00b7 ${ag} para ligar depois`:''}</div></div>
 <button class="x-srch" onclick="openSearch()">Buscar empresa, telefone ou CNPJ<kbd>Ctrl K</kbd></button>
 <button class="x-goal" onclick="openMeta()" title="Clique para editar a meta"><span class="x-ring" style="background:conic-gradient(var(--pr) 0 ${pct*3.6}deg,#0f1f17 0)"></span><span><b>${g.done}/${g.m.alvo}</b><small>meta \u00b7 ${g.faltam==0?'batida':g.fim?'prazo encerrado':g.util?'hoje '+g.hoje+' de '+g.alvoHoje:'pr\u00f3x. dia '+g.prox}</small></span></button>
 <div class="seg">${P.map(n=>`<button class="${n==p?'on':''}" onclick="setP('${n}')">${n}<b>${pend(n)}</b></button>`).join('')}</div>`}
-function paint(){({call,sched,ans:ansPage,imp:impPage,bkp:bkpPage,stats,team:teamPage}[S.tab]||call)()}
+function paint(){({call,sched,ans:ansPage,imp:impPage,bkp:bkpPage,stats,team:teamPage,map:mapPage}[S.tab]||call)()}
 function tel(x){return(S.ph[x.n]==2&&x.t2?x.t2:x.t1)||''}
 /* ===== Liga\u00e7\u00f5es ===== */
 const segName=x=>String(x.s||'').replace(/^\s*\d[\d.\-\/]*\s*-\s*/,'');
@@ -412,9 +473,9 @@ function call(){
  const site=x.si?`<a href="${/^http/.test(x.si)?'':'https://'}${esc(x.si)}" target="_blank" rel="noopener">${esc(x.si)}</a>`:'\u2014';
  const em=x.em?`<a href="mailto:${esc(x.em)}">${esc(x.em)}</a>`:'\u2014';
  $('body').innerHTML=`<div class="x-grid"><div><div class="card x-lead">
-<div class="x-chips">${segName(x)?`<span class="x-chip" title="${esc(x.s)}">${esc(segName(x))}</span>`:''}${x.fu?`<span class="x-chip">${esc(x.fu)}</span>`:''}${x.gr?`<span class="x-chip${+x.gr>=3?' w':''}">Grau de risco ${esc(x.gr)}</span>`:''}${tn?`<span class="x-chip">${tn+1}\u00aa tentativa</span>`:''}<span id="rbadge" class="x-chip ok" style="${hasAns(id)?'':'display:none'}">Respostas salvas</span><span class="x-chip" style="${s?`color:${C[s]};border-color:${C[s]}88`:''}">${s?L[s]:'Pendente'}</span>
-${qa?`<div class="x-quota" title="Cota de entrevistas respondidas nesta cidade"><span>Cota da cidade</span>${Object.keys(QT).map(k=>`<span>${k.replace(' a ','\u2013')}${Array.from({length:QT[k]},(_,j)=>`<i class="${j<qa.o[k]?'d':''}"></i>`).join('')}</span>`).join('')}</div>`:''}</div>
-<div class="x-kick">${x.ci?esc(x.ci)+' \u00b7 ':''}lead ${i+1} de ${l.length}</div>
+<div class="x-chips">${x.gr?`<span class="x-chip${+x.gr>=3?' w':''}">Grau de risco ${esc(x.gr)}</span>`:''}${tn?`<span class="x-chip">${tn+1}\u00aa tentativa</span>`:''}${s?`<span class="x-chip" style="color:${C[s]};border-color:${C[s]}77">${L[s]}</span>`:''}<span id="rbadge" class="x-chip ok" style="${hasAns(id)?'':'display:none'}">Respostas salvas</span>
+${qa?`<div class="x-quota" title="Entrevistas j\u00e1 respondidas nesta cidade, por porte">${Object.keys(QT).map(k=>`<span>${k.replace(' a ','\u2013')}${Array.from({length:QT[k]},(_,j)=>`<i class="${j<qa.o[k]?'d':''}"></i>`).join('')}</span>`).join('')}</div>`:''}</div>
+<div class="x-kick">${esc([x.ci,segName(x)].filter(Boolean).join(' \u00b7 '))}</div>
 <h2 class="x-name">${esc(x.e)}</h2><div class="x-who">Respons\u00e1vel \u00b7 ${esc(x.r||'\u2014')}</div>
 ${qa&&qa.tot>=QTOT&&!s?`<div class="warn" style="margin-top:14px"><b>Cota de ${esc(x.ci)} j\u00e1 est\u00e1 completa</b> (${qa.tot} respostas). Priorize outras cidades.</div>`:''}
 ${s=='depois'&&lm?`<div class="warn sch" style="margin-top:14px"><b>Ligar em ${esc(fmtL(lm.w))}</b>${lm.note?' \u00b7 '+esc(lm.note):''} <button class="lnk" onclick="openSched('${id}')">Reagendar</button><button class="lnk" onclick="unSched('${id}')">Cancelar</button></div>`:''}
@@ -422,10 +483,10 @@ ${s=='depois'&&lm?`<div class="warn sch" style="margin-top:14px"><b>Ligar em ${e
 <div><div class="x-num"><input id="pfx" maxlength="3" inputmode="numeric" value="${esc(S.prefix)}" placeholder="0xx" title="Prefixo da operadora"> ${esc(num)}</div>
 <div class="x-alt">${x.t2?`<button class="x-gh${S.ph[id]==2?'':' on'}" onclick="ph('${id}',1)">Telefone 1</button><button class="x-gh${S.ph[id]==2?' on':''}" onclick="ph('${id}',2)">Telefone 2</button>`:''}<a class="x-gh wa" href="https://wa.me/${dg.length<=11?'55':''}${dg}" target="_blank" rel="noopener">WhatsApp</a><button class="x-gh" onclick="copyNum('${esc(num)}')">Copiar</button></div></div>
 <div class="x-qr${S.qrb?' big':''}" onclick="S.qrb=!S.qrb;save();paint()" title="Escaneie para ligar pelo celular \u00b7 clique para ${S.qrb?'reduzir':'ampliar'}">${q}</div></div>
-<div class="x-info"><div><span class="x-lb">CNPJ</span><b class="mono">${esc(x.cnpj||'\u2014')}</b></div><div><span class="x-lb">Faturamento</span><b>${esc(x.f||'\u2014')}</b></div><div><span class="x-lb">Site</span><b>${site}</b></div><div><span class="x-lb">E-mail</span><b>${em}</b></div></div></div>
+<div class="x-info"><div><span class="x-lb">CNPJ</span><b class="mono">${esc(x.cnpj||'\u2014')}</b></div><div><span class="x-lb">Porte</span><b title="${esc(x.fu||x.tp||'')}">${esc(x.fu||x.tp||'\u2014')}</b></div><div><span class="x-lb">Site</span><b>${site}</b></div><div><span class="x-lb">E-mail</span><b>${em}</b></div></div></div>
 <div class="card x-res"><span class="x-lb">Resultado da liga\u00e7\u00e3o</span>
 <div class="x-sts">${ST5.map(k=>`<button class="x-st${k=='resp'?' pri':''}${s==k?' sel':''}" style="color:${C[k]}" onclick="mark('${k}')">${k=='resp'?'':'<u></u>'}<span>${L2[k]}</span><kbd>${K[k]}</kbd></button>`).join('')}</div>
-<div class="x-q"><span class="x-lb">Fila</span><div class="x-bar">${l.map((y,j)=>{const t=stat(y);return `<i class="${j==i?'cur':''}" style="${t?'background:'+C[t]:''}" onclick="sel(${j})" title="${j+1}. ${esc(y.e)}"></i>`}).join('')}</div><span class="x-cnt">${done} feitos \u00b7 ${l.length-done} faltam</span>
+<div class="x-q"><span class="x-lb">Fila</span><div class="x-bar">${l.map((y,j)=>{const t=stat(y);return `<i class="${j==i?'cur':''}" style="${t?'background:'+C[t]:''}" onclick="sel(${j})" title="${j+1}. ${esc(y.e)}"></i>`}).join('')}</div><span class="x-cnt">lead ${i+1} de ${l.length} \u00b7 ${l.length-done} faltam</span>
 <div class="x-nav"><button class="x-gh" onclick="mv(-1)">\u2190 Anterior</button><button class="x-gh" onclick="mv(1)">Pr\u00f3ximo \u2192</button><button class="x-gh" onclick="undoLast()" ${UNDO?'':'disabled'}>Desfazer</button></div></div>
 ${nxl?`<div class="x-nx">A seguir \u00b7 <b>${esc(nxl.e)}</b>${nxl.ci?' \u00b7 '+esc(nxl.ci):''}${nxl.fu?' \u00b7 '+esc(nxl.fu):''}</div>`:''}</div></div>
 ${rpanel(x)}</div>`;
@@ -458,7 +519,7 @@ function rpanel(x){
  return `<div class="card sp${S.full?' full':''}"><div class="sh"><b class="x-rt">Roteiro</b>${ed?'':`<span class="x-tg"><button class="${S.ess?'on':''}" onclick="setEss(true)">Essencial</button><button class="${S.ess?'':'on'}" onclick="setEss(false)">Completo</button></span>`}<span style="margin-left:auto;display:flex;gap:6px"><button class="x-gh${ed?' on':''}" onclick="toggleEdit()">${ed?'\u2713 Concluir edi\u00e7\u00e3o':'Editar roteiro'}</button><button class="x-gh" onclick="S.full=!S.full;save();paint()">${S.full?'Sair da tela cheia':'Tela cheia'}</button></span></div>
 ${ed?'':`<div class="x-steps">${blocks.filter(b=>b.vis).map(b=>`<span class="${b.done?'d':b.part?'c':''}"></span>`).join('')}</div>`}
 <div class="sb">${ed?`<div class="hint">Modo edi\u00e7\u00e3o: altere falas, t\u00edtulos, perguntas e op\u00e7\u00f5es. Salva sozinho e vale para toda a equipe. Perguntas n\u00e3o s\u00e3o removidas, para n\u00e3o perder respostas j\u00e1 salvas.</div>${editor()}<button class="rs" onclick="ask('Restaurar o roteiro original? As edi\u00e7\u00f5es do roteiro ser\u00e3o perdidas (as respostas continuam salvas).',()=>{SDIRTY=false;S.script=normS(clone(SC0));W('fila/roteiro',clone(S.script));saveCache();render()})">Restaurar roteiro original</button>`:blocks.map(b=>b.h).join('')}</div>
-<div class="sf"><span id="sfs">${fsText(id)}</span>${ed?'':`<span class="x-cnt" style="margin-left:auto">${ans}/${tot} respondidas \u00b7 Enter passa para a pr\u00f3xima</span>`}</div></div>`}
+<div class="sf"><span id="sfs">${fsText(id)}</span>${ed?'':`<span class="x-cnt" style="margin-left:auto">${ans} de ${tot} respondidas</span>`}</div></div>`}
 function setEss(v){flushSave();S.ess=!!v;save();paint()}
 function toggleEdit(){flushSave();S.edit=!S.edit;paint()}
 function flushScript(){clearTimeout(sTm);if(!SDIRTY)return;SDIRTY=false;saveCache();W('fila/roteiro',clone(S.script))}
@@ -547,6 +608,15 @@ function teamPage(){const rows=S.team.map((mb,i)=>{const l=LS(mb.n),c=cnt(l),pn=
  $('body').innerHTML=`<div class="card" style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center"><div><b>Pessoas que ligam</b><div class="mu" style="font-size:13px;margin-top:4px">${P.length} ativa(s). Ao adicionar ou remover algu\u00e9m, os leads pendentes s\u00e3o divididos de novo por igual, com todas as cidades misturadas.</div></div><button class="sv alt" onclick="askRedist()">Redistribuir pendentes</button></div>
 <div class="ov" style="margin-top:12px"><table class="tl"><tr><th>Pessoa</th><th>Leads</th><th>Pendentes</th><th>Contatados</th><th>Respostas</th><th></th></tr>${rows}</table></div></div>
 <div class="card"><b>Adicionar pessoa</b><div class="mu" style="font-size:13px;margin:4px 0 12px">Para entrar no CRM, ela precisa de uma conta Google com e-mail @psjunior.com.</div><div style="display:flex;gap:10px;flex-wrap:wrap"><input id="tnm" class="srch" style="max-width:280px" maxlength="24" placeholder="Nome (como aparece na fila)" onkeydown="if(event.key=='Enter')addMember()"><button class="sv" onclick="addMember()">Adicionar e redistribuir</button></div></div>`}
+/* ===== Mapa dos leads ===== */
+function mapPage(){const fc=S.mc||'',cities=[...new Set(ALL.map(x=>x.ci).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt')),inC=x=>!fc||x.ci==fc,all=ALL.filter(inC),c=cnt(all);
+ const lg=(col,t,v)=>`<span><i style="${col?'background:'+col:''}"></i>${t}<b>${v}</b></span>`;
+ if(!ALL.length){$('body').innerHTML='<div class="card mu">Nenhum lead ainda. Importe a planilha para ver o mapa.</div>';return}
+ $('body').innerHTML=`<div class="card" style="margin-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;justify-content:space-between"><div class="x-lg">${lg('', 'Pendente',c.pend)}${ST5.map(k=>lg(C[k],L2[k],c[k])).join('')}</div>
+<select class="srch" style="width:auto;max-width:220px" onchange="S.mc=this.value;paint()"><option value="">Todas as cidades</option>${cities.map(ci=>`<option${ci==fc?' selected':''}>${esc(ci)}</option>`).join('')}</select></div>
+${PR().map(p=>{const l=LS(p).filter(inC),k=cnt(l);return `<div class="card" style="margin-bottom:14px"><div class="x-mh"><b>${esc(p)}${P.includes(p)?'':' <span>\u00b7 inativa</span>'}</b><span>${l.length} leads \u00b7 ${k.done} contatados \u00b7 ${k.resp} responderam \u00b7 ${k.pend} pendentes</span></div>
+<div class="x-map">${l.map(x=>{const s=stat(x);return `<button class="x-sq${hasAns(x.n)?' a':''}" style="${s?'background:'+C[s]:''}" title="${esc(x.e)}${x.ci?' \u00b7 '+esc(x.ci):''} \u00b7 ${s?L[s]:'Pendente'}" onclick="gotoLead('${x.n}')"></button>`}).join('')||'<span class="mu">Sem leads nesta cidade.</span>'}</div></div>`}).join('')}
+<div class="mu" style="font-size:12.5px">Borda branca = lead com respostas salvas. Clique em um quadradinho para abrir o lead.</div>`}
 /* ===== Busca ===== */
 function openSearch(){ov(`<h3>Buscar lead</h3><input id="sq" placeholder="Empresa, respons\u00e1vel, cidade, telefone ou CNPJ" oninput="doSearch(this.value)" autocomplete="off"><div id="sres" class="x-sres"></div><div class="ma"><button class="pl2" onclick="ovc()">Fechar</button></div>`);setTimeout(()=>{const e=$('sq');if(e)e.focus()},30)}
 function doSearch(v){const t=norm(v),dg=digs(v);const r=(!t&&!dg)?[]:ALL.filter(x=>(t&&norm(x.e+' '+(x.r||'')+' '+(x.ci||'')).includes(t))||(dg.length>=4&&(digs(x.t1)+' '+digs(x.t2)+' '+digs(x.cnpj)).includes(dg))).slice(0,12);
@@ -872,7 +942,7 @@ const pc=(a,b)=>b?Math.round(a/b*100)+'%':'0%';
 function stats(){const f=S.sf||'all',l=f=='all'?ALL:LS(f),o=cnt(l),sa=l.filter(x=>hasAns(x.n)).length;
  const kp=(t,v,sub,c)=>`<div class="card"><small>${t}</small><strong${c?` style="color:${c}"`:''}>${v}</strong><small>${sub}</small></div>`;
  const g=goalCalc();
- $('body').innerHTML=`<div class="card" style="margin-bottom:18px"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center"><b>\ud83c\udfaf Meta: ${g.m.alvo} respostas at\u00e9 ${esc(fdia(g.m.ate))}</b><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="mini" onclick="openMeta()">\u270e Editar meta</button><button class="mini" onclick="expRelXlsx()">\u2b07 Relat\u00f3rio (.xlsx)</button><button class="mini" onclick="expRelDoc()">\u2b07 Relat\u00f3rio (.docx)</button></div></div>${goalBar()}<div class="kp" style="margin:14px 0 6px"><div class="card" style="padding:14px"><small>Feitas</small><strong style="font-size:28px">${g.done}</strong></div><div class="card" style="padding:14px"><small>Faltam</small><strong style="font-size:28px">${g.faltam}</strong></div><div class="card" style="padding:14px"><small>${g.util?'Meta de hoje':'Pr\u00f3ximo dia \u00fatil'}</small><strong style="font-size:28px">${g.util?g.alvoHoje:g.prox}</strong></div><div class="card" style="padding:14px"><small>Feitas hoje</small><strong style="font-size:28px">${g.hoje}</strong></div></div><div class="mu" style="font-size:12.5px">Por pessoa (na meta / hoje): ${PR().map(p=>`${esc(p)} <b>${g.pp[p].f}</b>/<b>${g.pp[p].h}</b>`).join(' \u00b7 ')}${g.adj?` \u00b7 inclui ${g.adj} j\u00e1 feita(s) lan\u00e7ada(s) manualmente`:''}</div></div>
+ $('body').innerHTML=`<div class="card" style="margin-bottom:18px"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center"><b>Meta da pesquisa</b><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="mini" onclick="openMeta()">\u270e Editar meta</button><button class="mini" onclick="expRelXlsx()">\u2b07 Relat\u00f3rio (.xlsx)</button><button class="mini" onclick="expRelDoc()">\u2b07 Relat\u00f3rio (.docx)</button></div></div>${goalBar()}<div class="kp" style="margin:14px 0 6px"><div class="card" style="padding:14px"><small>Feitas</small><strong style="font-size:28px">${g.done}</strong></div><div class="card" style="padding:14px"><small>Faltam</small><strong style="font-size:28px">${g.faltam}</strong></div><div class="card" style="padding:14px"><small>${g.util?'Meta de hoje':'Pr\u00f3ximo dia \u00fatil'}</small><strong style="font-size:28px">${g.util?g.alvoHoje:g.prox}</strong></div><div class="card" style="padding:14px"><small>Feitas hoje</small><strong style="font-size:28px">${g.hoje}</strong></div></div><div class="mu" style="font-size:12.5px">Por pessoa (na meta / hoje): ${PR().map(p=>`${esc(p)} <b>${g.pp[p].f}</b>/<b>${g.pp[p].h}</b>`).join(' \u00b7 ')}${g.adj?` \u00b7 inclui ${g.adj} j\u00e1 feita(s) lan\u00e7ada(s) manualmente`:''}</div></div>
 ${chartsHtml(o)}
 <div class="seg" style="display:inline-flex;margin-top:18px"><button class="${f=='all'?'on':''}" onclick="S.sf='all';save();paint()">Geral</button>${P.map(n=>`<button class="${f==n?'on':''}" onclick="S.sf='${n}';save();paint()">${n}</button>`).join('')}</div>
 <div class="kp">${kp('Total de contatos',o.tot,'na lista')}${kp('Contatados',o.done,pc(o.done,o.tot)+' do total')}${kp('Faltam',o.pend,pc(o.pend,o.tot)+' do total')}${kp('Ligar depois',o.depois,'agendados',C.depois)}${kp('Leads com respostas salvas',sa,pc(sa,o.tot)+' do total','#22c55e')}
@@ -892,6 +962,6 @@ function sky(){const c=$('sky');if(!c)return;const W=c.width,H=c.height,x=c.getC
  for(let j=0;j<H;j++)for(let i=0;i<W;i++){const px=i/W,py=j/H,u=px*3.3,v=py*3.6,D=dens(u,v,py),D2=dens(u-.11,v-.2,py-.045),cov=ss(.46,.64,D)*.8;let lit=Math.max(0,Math.min(1,(D-D2)*5.5+.38));lit=Math.pow(lit,1.5);
   const thick=ss(.52,.8,D),hz=Math.exp(-Math.pow((py-.7)/.22,2)),dk=1-thick*(1-lit)*.55,k=(j*W+i)*4;
   d[k]=mx(mx(2,6,hz),mx(8,140,lit)*dk,cov);d[k+1]=mx(mx(8,44,hz),mx(22,215,lit)*dk,cov);d[k+2]=mx(mx(7,30,hz),mx(16,168,lit)*dk,cov);d[k+3]=255}
- x.putImageData(im,0,0);c.style.opacity=1}
+ x.putImageData(im,0,0);c.style.opacity=.55}
 build();Object.keys(S.dr).forEach(id=>DIRTY[id]=1);flushSave();render();paintUser();authInit();setTimeout(checkDue,800);setTimeout(()=>{try{sky()}catch(e){}},60);
 </script></body></html>
