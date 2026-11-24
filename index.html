@@ -392,42 +392,39 @@ const L={resp:'Respondeu a pesquisa',atend:'Atendeu, mas n\u00e3o respondeu',nao
 const K={resp:'R',atend:'A',nao:'N',erro:'E',depois:'D'};
 const C={resp:'#5dbb92',atend:'#a9c98a',nao:'#d9a25e',erro:'#d97070',depois:'#9a8fd0'};
 const ST=['resp','atend','nao','erro'],ST5=ST.concat(['depois']);
-const SC0=[
-{t:'Abertura',i:'\u201cBoa tarde, ___, tudo certo? Meu nome \u00e9 ___, te peguei num momento ruim? Sou estudante da UFRGS e fa\u00e7o parte da PS J\u00fanior, a empresa j\u00fanior da universidade. Estamos fazendo uma pesquisa de mercado sobre a satisfa\u00e7\u00e3o das empresas da regi\u00e3o com os servi\u00e7os de medicina e seguran\u00e7a do trabalho. A conversa leva de 10 a 15 minutos. Posso gravar o \u00e1udio, s\u00f3 para transcrever depois? A grava\u00e7\u00e3o fica com a equipe do projeto e as respostas s\u00e3o analisadas sem identificar a empresa.\u201d',n:'Se n\u00e3o autorizar a grava\u00e7\u00e3o, siga anotando as respostas.',q:[]},
-{t:'Bloco 1 \u00b7 Perfil da empresa',q:[
- {t:'Quantos funcion\u00e1rios a empresa tem hoje nesta cidade?',e:1,f:'porte',o:['10 a 49','50 a 99','100 a 400','Fora da faixa']},
- {t:'Voc\u00ea est\u00e1 diretamente envolvido nas decis\u00f5es de SST da empresa?',o:['Sim','Em parte','N\u00e3o']},
- {t:'Qual \u00e9 a atividade principal da empresa?',e:1}]},
-{t:'Bloco 2 \u00b7 Como a SST \u00e9 feita hoje',q:[
- {t:'Como a SST \u00e9 cuidada hoje?',g:1,o:['Prestador externo','Equipe pr\u00f3pria','Os dois','Ningu\u00e9m']},
- {t:'Qual empresa presta o servi\u00e7o? Ela tem sede na cidade ou vem de fora?',e:1,x:'ext',o:['Sede na cidade','Vem de fora']},
- {t:'H\u00e1 quanto tempo est\u00e3o com esse prestador?',x:'ext',o:['Menos de 1 ano','1 a 3 anos','Mais de 3 anos']},
- {t:'Quais servi\u00e7os voc\u00eas contratam dele?',x:'ext',m:1,o:['PGR','PCMSO','Exames e ASO','LTCAT e laudos','Treinamentos de NR','eSocial','CIPA']},
- {t:'Como chegaram a esse prestador?',x:'ext',o:['Indica\u00e7\u00e3o','Contabilidade','Redes sociais','Internet','Visita comercial']},
- {t:'Como voc\u00eas cuidam hoje das obriga\u00e7\u00f5es de SST?',x:'alt'},
- {t:'Por que n\u00e3o contratam um prestador? J\u00e1 contrataram antes?',x:'alt'},
- {t:'O que faria voc\u00eas contratarem um?',x:'alt'}]},
-{t:'Bloco 3 \u00b7 Satisfa\u00e7\u00e3o com o prestador atual (6 min)',q:[
- {t:'De 0 a 10, qual a sua satisfa\u00e7\u00e3o com o prestador atual? Por que essa nota, e n\u00e3o uma maior?',e:1,x:'ext',k:'s',o:['0','1','2','3','4','5','6','7','8','9','10']},
- {t:'O que ele faz bem?',x:'ext'},
- {t:'O que mais incomoda ou poderia melhorar?',e:1,x:'ext',m:1,o:['Prazo','Atendimento','Qualidade t\u00e9cnica','Pre\u00e7o','Cobran\u00e7a extra','Dist\u00e2ncia','Sistema']},
- {t:'Conte uma situa\u00e7\u00e3o recente em que o servi\u00e7o deixou a desejar, ou em que surpreendeu para melhor. O que aconteceu e como foi resolvido?',e:1,x:'ext',o:['Negativo','Positivo','Nenhum']}]},
-{t:'Bloco 4 \u00b7 Outros prestadores e pre\u00e7o',q:[
- {t:'J\u00e1 usaram outro prestador de SST antes? Qual, e por que trocaram?',e:1},
- {t:'Receberam proposta ou visita de outra SST nos \u00faltimos 12 meses? De quem? O que chamou a aten\u00e7\u00e3o?',e:1},
- {t:'Que outros prestadores voc\u00ea conhece na cidade ou na regi\u00e3o, mesmo sem ter contratado?'},
- {t:'(opcional) Como \u00e9 a cobran\u00e7a: mensalidade por funcion\u00e1rio, pacote fechado ou servi\u00e7o avulso? Considera caro, justo ou barato?',o:['Caro','Justo','Barato','N\u00e3o respondeu']}]},
-{t:'Bloco 5 \u00b7 Papel da contabilidade',q:[
- {t:'Se a contabilidade indicasse outro prestador de SST, isso pesaria na sua decis\u00e3o? Quem mais influencia essa escolha?',e:1}]},
-{t:'Bloco 6 \u00b7 Expectativas e fechamento',q:[
- {t:'Quais s\u00e3o os tr\u00eas fatores mais importantes para voc\u00ea ao escolher uma SST?'},
- {t:'O que faria a empresa trocar de prestador hoje? E o que impediria?',o:['Alta','M\u00e9dia','Baixa']},
- {t:'Um prestador de fora, que atende na cidade em dias marcados, seria uma op\u00e7\u00e3o para voc\u00eas? Por qu\u00ea?',o:['Sim','Com condi\u00e7\u00f5es','N\u00e3o']}]},
-{t:'Fechamento',i:'\u201cTem algo sobre SST que eu n\u00e3o perguntei e voc\u00ea acha importante?\u201d',n:'Agrade\u00e7a e pe\u00e7a a indica\u00e7\u00e3o de outra empresa da cidade que toparia conversar.',q:[
- {t:'Indica\u00e7\u00e3o de outra empresa (nome e telefone)',u:1}]}];
+const SC0=[{"t":"Abertura","i":"\u201cBoa tarde, ___, tudo certo? Meu nome \u00e9 ___, te peguei num momento ruim? Sou estudante da UFRGS e fa\u00e7o parte da PS J\u00fanior, a empresa j\u00fanior da universidade. Estamos fazendo uma pesquisa de mercado sobre a satisfa\u00e7\u00e3o das empresas da regi\u00e3o com os servi\u00e7os de medicina e seguran\u00e7a do trabalho. A conversa leva de 10 a 15 minutos. Posso gravar o \u00e1udio, s\u00f3 para transcrever depois? A grava\u00e7\u00e3o fica com a equipe do projeto e as respostas s\u00e3o analisadas sem identificar a empresa.\u201d","n":"Se n\u00e3o autorizar a grava\u00e7\u00e3o, siga anotando as respostas.","q":[]},
+{"t":"Bloco 1 \u00b7 Perfil da empresa","q":[{"t":"Quantos funcion\u00e1rios a empresa tem hoje nesta cidade?","f":"porte","o":["10 a 49","50 a 99","100 a 400","Fora da faixa"]},
+{"t":"Qual \u00e9 o seu cargo? Voc\u00ea est\u00e1 diretamente envolvido nas decis\u00f5es de SST da empresa? (Se n\u00e3o estiver, pe\u00e7a para falar com quem decide)","o":["Sim","Em parte","N\u00e3o"]},
+{"t":"Qual \u00e9 a atividade principal da empresa?"}]},
+{"t":"Bloco 2 \u00b7 Como a SST \u00e9 feita hoje","q":[{"t":"A empresa contrata hoje alguma empresa de fora para cuidar da SST, tem equipe pr\u00f3pria ou os dois?","g":1,"o":["Prestador externo","Equipe pr\u00f3pria","Os dois","Ningu\u00e9m"],"h":"Contexto por porte: micro e pequenas empresas ou n\u00e3o t\u00eam SST (cada vez mais raro) ou contratam uma consultoria externa. Com 40 a 50 funcion\u00e1rios, pode haver consultoria externa + um t\u00e9cnico interno, mas muitas vezes s\u00f3 a consultoria. A partir de 100 funcion\u00e1rios, a empresa pode ser obrigada a ter t\u00e9cnico de seguran\u00e7a do trabalho interno e a chance de ter equipe pr\u00f3pria aumenta, mas de 100 a 150 funcion\u00e1rios o grosso do trabalho ainda costuma ficar com a consultoria externa. S\u00f3 empresas muito grandes (acima de 300 funcion\u00e1rios) tendem a fazer tudo internamente: cen\u00e1rio raro, mas poss\u00edvel. Use o termo \u201cconsultoria\u201d ao conversar."},
+{"t":"Qual empresa presta o servi\u00e7o? Ela tem sede na cidade ou vem de fora?","x":"ext","o":["Sede na cidade","Vem de fora"],"h":"Muitas vezes a empresa n\u00e3o sabe se o prestador tem sede na cidade. Explore se os funcion\u00e1rios v\u00e3o at\u00e9 a sede do prestador fazer os exames (local comercial pr\u00f3prio, com placa e nome da SST) ou se o prestador atende uma ou duas vezes por semana em um espa\u00e7o emprestado, tipicamente um sindicato ou parceiro. Neste caso, ele n\u00e3o tem sede na cidade. Se n\u00e3o tem sede f\u00edsica, ele vem de fora."},
+{"t":"H\u00e1 quanto tempo est\u00e3o com esse prestador?","x":"ext","o":["Menos de 1 ano","1 a 3 anos","Mais de 3 anos"]},
+{"t":"Quanto a empresa paga hoje pela SST e como \u00e9 feita a cobran\u00e7a? Pe\u00e7a um valor aproximado (mensal ou anual) e o modelo: por funcion\u00e1rio, pacote fechado ou avulso.","x":"ext","o":["Por funcion\u00e1rio","Pacote fechado","Avulso","N\u00e3o soube informar"],"h":"Muitas vezes a empresa n\u00e3o sabe direito quanto nem como paga. Se n\u00e3o souber o valor exato, pe\u00e7a uma estimativa ou quem poderia informar (financeiro, contabilidade). Para entender o modelo de cobran\u00e7a, use as op\u00e7\u00f5es detalhadas na pergunta 19."},
+{"t":"Como chegaram a esse prestador? Indica\u00e7\u00e3o (de quem: contabilidade, outro empres\u00e1rio, redes sociais, visita comercial...).","x":"ext","o":["Indica\u00e7\u00e3o","Contabilidade","Outro empres\u00e1rio","Redes sociais","Internet","Visita comercial"]},
+{"t":"Quais servi\u00e7os voc\u00eas contratam dele?","x":"ext","m":1,"o":["PGR","PCMSO","Exames e ASO","LTCAT e laudos","Treinamentos de NR","eSocial","CIPA"]},
+{"t":"Onde os funcion\u00e1rios fazem os exames: na pr\u00f3pria cidade, em outra cidade ou com atendimento na empresa?","x":"ext","o":["Na pr\u00f3pria cidade","Em outra cidade","Atendimento na empresa"]},
+{"t":"Quanto tempo leva, em m\u00e9dia, do pedido do exame at\u00e9 o ASO pronto?","x":"ext"},
+{"t":"Como voc\u00eas cuidam hoje das obriga\u00e7\u00f5es de SST?","x":"alt"},
+{"t":"Por que n\u00e3o contratam um prestador? J\u00e1 contrataram antes?","x":"alt"},
+{"t":"O que faria voc\u00eas contratarem um?","x":"alt"}]},
+{"t":"Bloco 3 \u00b7 Satisfa\u00e7\u00e3o com o prestador atual","q":[{"t":"De 0 a 10, qual a sua satisfa\u00e7\u00e3o com o prestador atual? Por que essa nota, e n\u00e3o uma maior?","x":"ext","k":"s","o":["0","1","2","3","4","5","6","7","8","9","10"]},
+{"t":"O que ele faz bem?","x":"ext"},
+{"t":"O que mais incomoda ou poderia melhorar?","x":"ext","m":1,"o":["Prazo","Atendimento","Qualidade t\u00e9cnica","Pre\u00e7o","Cobran\u00e7a extra","Dist\u00e2ncia","Sistema","eSocial"],"h":"Se precisar, explore: prazo de entrega, atendimento, qualidade t\u00e9cnica, pre\u00e7o, cobran\u00e7as extras, dist\u00e2ncia, sistema e eSocial. Se n\u00e3o surgir: o prestador orientou a empresa sobre a atualiza\u00e7\u00e3o da NR-1 (riscos psicossociais no PGR)?"},
+{"t":"Conte uma situa\u00e7\u00e3o recente em que o servi\u00e7o deixou a desejar, ou em que surpreendeu para melhor. O que aconteceu e como foi resolvido?","x":"ext","o":["Negativo","Positivo","Nenhum"]}]},
+{"t":"Bloco 4 \u00b7 Outros prestadores, qualidade percebida e pre\u00e7o","q":[{"t":"J\u00e1 usaram outro prestador de SST antes? Qual, e por que trocaram?"},
+{"t":"Receberam proposta ou visita de outra SST nos \u00faltimos 12 meses? De quem? O que chamou a aten\u00e7\u00e3o?"},
+{"t":"Que outros prestadores voc\u00ea conhece na cidade ou na regi\u00e3o, mesmo sem ter contratado? O que ouve falar deles, de bom e de ruim? (Se a empresa j\u00e1 teve outro prestador, pode comparar o atual com o antigo: melhor, igual ou pior, e em qu\u00ea?)"},
+{"t":"Como \u00e9 a cobran\u00e7a: mensalidade por funcion\u00e1rio, pacote fechado ou servi\u00e7o avulso? Se for pacote fechado, o ASO (exame cl\u00ednico) est\u00e1 incluso ou \u00e9 cobrado \u00e0 parte? Os exames complementares (audiometria, acuidade visual) s\u00e3o cobrados \u00e0 parte? Eles cobram por exame ou \u00e9 um valor parcelado \u201ctudo incluso\u201d? Pelo que recebe, considera justo?","o":["Caro","Justo","Barato","N\u00e3o respondeu"],"h":"O que importa para n\u00f3s \u00e9 saber em qual modelo a empresa se encaixa. (1) Pacote fechado, op\u00e7\u00e3o 1: valor dos laudos parcelado em X vezes + valor por funcion\u00e1rio (\u201cgest\u00e3o de vidas\u201d), com o ASO incluso. \u00c9 a forma mais t\u00edpica. (2) Pacote fechado, op\u00e7\u00e3o 2: valor do pacote de laudos, com o exame cl\u00ednico/ASO comprado \u00e0 parte. (3) Mensalidade fixa por funcion\u00e1rio, todo m\u00eas: pouco comum hoje. (4) Avulso: s\u00f3 faz sentido se a empresa n\u00e3o tem pacote de laudos. Nos modelos 1 e 2, os exames complementares (audiometria, acuidade visual) s\u00e3o quase sempre comprados \u00e0 parte; \u00e9 raro um pacote inclu\u00ed-los."}]},
+{"t":"Bloco 5 \u00b7 Papel da contabilidade","q":[{"t":"Qual escrit\u00f3rio de contabilidade atende a empresa?"},
+{"t":"A contabilidade participa de algo da SST hoje? Por exemplo: indicou o prestador, envia ou confere os eventos de SST no eSocial, cobra a regularidade dos exames e laudos."},
+{"t":"Se a contabilidade indicasse outro prestador de SST, isso pesaria na sua decis\u00e3o? Quem mais influencia essa escolha: associa\u00e7\u00e3o comercial, sindicato, outros empres\u00e1rios?"}]},
+{"t":"Bloco 6 \u00b7 M\u00e3o de obra local","q":[{"t":"Aqui na cidade \u00e9 f\u00e1cil encontrar t\u00e9cnico de seguran\u00e7a do trabalho, t\u00e9cnico de enfermagem ou m\u00e9dico do trabalho? Conhece alguma escola t\u00e9cnica ou faculdade dessas \u00e1reas na cidade ou perto?"}]},
+{"t":"Bloco 7 \u00b7 Expectativas e fechamento","q":[{"t":"Quais s\u00e3o os tr\u00eas fatores mais importantes para voc\u00ea ao escolher uma SST?"},
+{"t":"O que faria a empresa trocar de prestador hoje? E o que impediria: contrato, multa, relacionamento?","o":["Alta","M\u00e9dia","Baixa"]}]},
+{"t":"Fechamento","i":"\u201cTem algo sobre SST que eu n\u00e3o perguntei e voc\u00ea acha importante?\u201d","n":"Agrade\u00e7a e pe\u00e7a a indica\u00e7\u00e3o de outra empresa da cidade que toparia conversar.","q":[{"t":"Indica\u00e7\u00e3o de outra empresa (nome e telefone)","u":1}]}];
 
 const LSK='psj_crm_v4';
-let S={notas:{},theme:'dark',des:null,team:null,tn:{},ess:true,qrb:false,cfg:{},hist:{},rd:{},meta:null,st:{},ans:{},sv:{},imp:{},lotes:{},lem:{},dr:{},q:{},al:{},cur:{},prefix:'021',person:'Maria',tab:'call',qr:'M',ph:{},script:null,full:false,sf:'all',af:'all',lf:'all',edit:false,gmail:'',gauto:false};
+let S={notas:{},theme:'dark',des:null,team:null,tn:{},qrb:false,cfg:{},hist:{},rd:{},meta:null,st:{},ans:{},sv:{},imp:{},lotes:{},lem:{},dr:{},q:{},al:{},cur:{},prefix:'021',person:'Maria',tab:'call',qr:'M',ph:{},script:null,full:false,sf:'all',af:'all',lf:'all',edit:false,gmail:'',gauto:false};
 const DIRTY={};let online=false,cs='off',cerr=null,saveTm=null,SDIRTY=false,sTm=null;
 const clone=o=>JSON.parse(JSON.stringify(o));
 const sj=o=>JSON.stringify(Object.keys(o||{}).sort().map(k=>[k,o[k]]));
@@ -439,7 +436,7 @@ try{
  if(c){['st','ans','sv','imp','lotes','lem','rd','cfg','hist','tn','team','des','notas'].forEach(k=>{if(c[k])S[k]=c[k]});if(c.meta)S.meta=c.meta;if(c.script)S.script=c.script}
 }catch(e){}
 const qt=q=>q&&typeof q=='object'?(q.t||''):String(q||'');
-const normQ=q=>{if(q&&typeof q=='object'){const o={t:q.t||''};['e','m','k','x','g','f','h','u'].forEach(k=>{if(q[k])o[k]=q[k]});if(q.o){const a=(Array.isArray(q.o)?q.o:Object.values(q.o)).filter(v=>v!=null&&v!=='');if(a.length)o.o=a}return o}return{t:String(q||'')}};
+const normQ=q=>{if(q&&typeof q=='object'){const o={t:q.t||''};['m','k','x','g','f','h','u'].forEach(k=>{if(q[k])o[k]=q[k]});if(q.o){const a=(Array.isArray(q.o)?q.o:Object.values(q.o)).filter(v=>v!=null&&v!=='');if(a.length)o.o=a}return o}return{t:String(q||'')}};
 const normS=r=>r.map(b=>{const o={t:b.t||'',q:b.q?(Array.isArray(b.q)?b.q:Object.values(b.q)).map(normQ):[]};if(b.i)o.i=b.i;if(b.n)o.n=b.n;return o});
 S.script=normS((S.script&&S.script.length)?S.script:clone(SC0));
 function applyTheme(){document.documentElement.dataset.theme=S.theme=='light'?'light':'dark';const b=document.getElementById('n-theme');if(b){b.title=S.theme=='light'?'Mudar para o tema escuro':'Mudar para o tema claro';b.innerHTML=S.theme=='light'?'<svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>':'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>'}}
@@ -450,7 +447,7 @@ applyTeam();
 const PR=()=>PALL.filter(p=>P.includes(p)||(LSC[p]&&LSC[p].length));
 if(!['call','sched','ans','imp','bkp','stats','team','map','notes'].includes(S.tab))S.tab='call';
 S.edit=false;
-const save=()=>{try{localStorage.setItem(LSK,JSON.stringify({prefix:S.prefix,person:S.person,tab:S.tab,qr:S.qr,ph:S.ph,cur:S.cur,full:S.full,theme:S.theme,ess:S.ess,sf:S.sf,af:S.af,lf:S.lf,dr:S.dr,q:S.q,al:S.al,gmail:S.gmail,gauto:S.gauto}))}catch(e){}};
+const save=()=>{try{localStorage.setItem(LSK,JSON.stringify({prefix:S.prefix,person:S.person,tab:S.tab,qr:S.qr,ph:S.ph,cur:S.cur,full:S.full,theme:S.theme,sf:S.sf,af:S.af,lf:S.lf,dr:S.dr,q:S.q,al:S.al,gmail:S.gmail,gauto:S.gauto}))}catch(e){}};
 const saveCache=()=>{try{localStorage.setItem(LSK+'_c',JSON.stringify({notas:S.notas,des:S.des,team:S.team,tn:S.tn,cfg:S.cfg,hist:S.hist,rd:S.rd,meta:S.meta,st:S.st,ans:S.ans,sv:S.sv,imp:S.imp,lotes:S.lotes,lem:S.lem,script:S.script}))}catch(e){}};
 /* ===== Firebase Realtime Database ===== */
 const firebaseConfig={apiKey:"AIzaSyDgc2OiBIUgEmMvhYRor3y8o2OKp9cbbPA",authDomain:"crm-c130b.firebaseapp.com",databaseURL:"https://crm-c130b-default-rtdb.firebaseio.com",projectId:"crm-c130b",storageBucket:"crm-c130b.firebasestorage.app",messagingSenderId:"850118166656",appId:"1:850118166656:web:887ecdb9c1e09179b2fe65"};
@@ -557,7 +554,7 @@ const segName=x=>String(x.s||'').replace(/^\s*\d[\d.\-\/]*\s*-\s*/,'');
 function findQ(pred){for(let bi=0;bi<S.script.length;bi++){const b=S.script[bi];for(let qi=0;qi<b.q.length;qi++)if(pred(b.q[qi]))return bi+'|'+qi}return null}
 const gateKey=()=>findQ(q=>q.g),porteKey=()=>findQ(q=>q.f=='porte');
 function noExt(a){const k=gateKey();if(!k)return false;const v=String((a||{})[k+'|o']||'');return /pr[o\u00f3]pria|ningu[e\u00e9]m/i.test(v)&&!/externo|dois/i.test(v)}
-function qVis(q,a){if(q.x=='ext'&&noExt(a))return false;if(q.x=='alt'&&!noExt(a))return false;if(S.ess&&!(q.e||q.g||q.x=='alt'))return false;return true}
+function qVis(q,a){if(q.x=='ext'&&noExt(a))return false;if(q.x=='alt'&&!noExt(a))return false;return true}
 const QT={'10 a 49':2,'50 a 99':2,'100 a 400':1},QTOT=5;
 function quota(ci){const k=porteKey(),o={};Object.keys(QT).forEach(p=>o[p]=0);let tot=0;ALL.forEach(x=>{if((x.ci||'')!=ci||stat(x)!='resp')return;tot++;const v=k&&S.ans[x.n]&&S.ans[x.n][k+'|o'];if(v&&o[v]!==undefined)o[v]++});return{o,tot}}
 function nextPend(l,i){const full={},isF=c=>{if(!c)return false;if(full[c]===undefined)full[c]=quota(c).tot>=QTOT;return full[c]};const pe=[];for(let k=1;k<=l.length;k++){const j=(i+k)%l.length;if(j!=i&&!stat(l[j]))pe.push(j)}const a=pe.find(j=>!isF(l[j].ci));return a!==undefined?a:(pe.length?pe[0]:-1)}
@@ -603,32 +600,31 @@ function rpanel(x){
  const id=x.n,d=dr(id),ed=S.edit;let n=0,tot=0,ans=0;const vk=[],un=[];
  const blocks=S.script.map((b,bi)=>{let h='',vis=0,dn=0;
   b.q.forEach((q,qi)=>{const num=(q.x=='alt'||q.u)?null:++n;if(!qVis(q,d))return;vis++;const k=bi+'|'+qi,sel=String(d[k+'|o']||'').split('; ').filter(Boolean),has=sel.length||String(d[k]||'').trim();if(has)dn++;vk.push(k);if(!has)un.push(k);
-   h+=`<div class="x-qw __C${k}__" data-qk="${k}"><div class="x-qq"><em>${num?String(num).padStart(2,'0'):'\u2022'}</em>${esc(q.t)}${q.e?'<u class="x-es">essencial</u>':''}</div>${q.h?`<div class="x-hint">${esc(q.h)}</div>`:''}`+
+   h+=`<div class="x-qw __C${k}__" data-qk="${k}"><div class="x-qq"><em>${num?String(num).padStart(2,'0'):'\u2022'}</em>${esc(q.t)}</div>${q.h?`<div class="x-hint">${esc(q.h)}</div>`:''}`+
    (q.o?`<div class="${q.k=='s'?'x-sc':'x-qk'}">${q.o.map((o,oi)=>`<button class="${sel.includes(String(o))?'on':''}" onclick="pick('${id}',${bi},${qi},${oi})">${esc(o)}</button>`).join('')}</div>`:'')+
    (q.f=='porte'&&sel[0]=='Fora da faixa'?'<div class="warn" style="margin:0 0 8px"><b>Fora da cota.</b> Agrade\u00e7a e encerre a entrevista.</div>':'')+
    `<textarea class="x-ta" rows="1" data-k="${id}|${bi}|${qi}" placeholder="${q.o?'Detalhe ou cita\u00e7\u00e3o\u2026':'Resposta\u2026'}">${esc(d[k])}</textarea></div>`});
-  tot+=vis;ans+=dn;const show=vis||b.i||(!S.ess&&b.n);
+  tot+=vis;ans+=dn;const show=vis||b.i||b.n;
   return{done:vis>0&&dn==vis,part:dn>0,vis,h:show?`<div class="x-blk"><span class="x-lb">${esc(b.t)}</span>${b.i?`<div class="x-pitch">${esc(b.i)}</div>`:''}${b.n?`<div class="x-hint">${esc(b.n)}</div>`:''}${h}</div>`:''}});
  const ck=(CQ.id==id&&vk.includes(CQ.k))?CQ.k:(un[0]||vk[vk.length-1]||'');blocks.forEach(b=>{b.h=b.h.split('__C'+ck+'__').join('cur').replace(/__C[^_]*__/g,'')});
  const rows=t=>Math.max(2,Math.min(9,Math.ceil(String(t||'').length/52)+1));
  const editor=()=>S.script.map((b,bi)=>`<div class="eb"><div class="ebh">Bloco ${bi+1}</div>
 <label>T\u00edtulo do bloco</label><input class="ei" data-ed="t" data-b="${bi}" value="${esc(b.t)}">
 <label>Fala / pitch (aparece em destaque; deixe vazio se n\u00e3o houver)</label><textarea class="et" data-ed="i" data-b="${bi}" rows="${rows(b.i)}">${esc(b.i||'')}</textarea>
-<label>Perguntas</label>${b.q.map((q,qi)=>`<div class="eqr"><span>${qi+1}.</span><div style="flex:1"><textarea class="et" data-ed="q" data-b="${bi}" data-q="${qi}" rows="${rows(q.t)}">${esc(q.t)}</textarea><input class="ei" style="margin-top:6px;font-size:12.5px" data-ed="o" data-b="${bi}" data-q="${qi}" value="${esc((q.o||[]).join(', '))}" placeholder="Op\u00e7\u00f5es de um clique, separadas por v\u00edrgula (opcional)"><div style="display:flex;gap:14px;flex-wrap:wrap"><label class="chk" style="margin:6px 0 0"><input type="checkbox" data-ed="e" data-b="${bi}" data-q="${qi}" ${q.e?'checked':''}> Essencial</label><label class="chk" style="margin:6px 0 0"><input type="checkbox" data-ed="m" data-b="${bi}" data-q="${qi}" ${q.m?'checked':''}> Permite marcar v\u00e1rias op\u00e7\u00f5es</label></div></div></div>`).join('')||'<div class="mu" style="font-size:12.5px">Sem perguntas neste bloco.</div>'}
+<label>Perguntas</label>${b.q.map((q,qi)=>`<div class="eqr"><span>${qi+1}.</span><div style="flex:1"><textarea class="et" data-ed="q" data-b="${bi}" data-q="${qi}" rows="${rows(q.t)}">${esc(q.t)}</textarea><input class="ei" style="margin-top:6px;font-size:12.5px" data-ed="o" data-b="${bi}" data-q="${qi}" value="${esc((q.o||[]).join(', '))}" placeholder="Op\u00e7\u00f5es de um clique, separadas por v\u00edrgula (opcional)"><div style="display:flex;gap:14px;flex-wrap:wrap"><label class="chk" style="margin:6px 0 0"><input type="checkbox" data-ed="m" data-b="${bi}" data-q="${qi}" ${q.m?'checked':''}> Permite marcar v\u00e1rias op\u00e7\u00f5es</label></div></div></div>`).join('')||'<div class="mu" style="font-size:12.5px">Sem perguntas neste bloco.</div>'}
 <button class="mini" onclick="addQ(${bi})">\uff0b Nova pergunta</button>
 <label>Orienta\u00e7\u00e3o para quem liga (opcional)</label><textarea class="et" data-ed="n" data-b="${bi}" rows="${rows(b.n)}">${esc(b.n||'')}</textarea></div>`).join('')+`<button class="mini" onclick="addBlock()">\uff0b Novo bloco</button>`;
- return `<div class="card sp${S.full?' full':''}"><div class="sh"><b class="x-rt">Roteiro</b>${ed?'':`<span class="x-tg"><button class="${S.ess?'on':''}" onclick="setEss(true)">Essencial</button><button class="${S.ess?'':'on'}" onclick="setEss(false)">Completo</button></span>`}<span style="margin-left:auto;display:flex;gap:6px"><button class="x-gh${ed?' on':''}" onclick="toggleEdit()">${ed?'\u2713 Concluir edi\u00e7\u00e3o':'Editar roteiro'}</button><button class="x-gh" onclick="S.full=!S.full;save();paint()">${S.full?'Sair da tela cheia':'Tela cheia'}</button></span></div>
+ return `<div class="card sp${S.full?' full':''}"><div class="sh"><b class="x-rt">Roteiro</b><span style="margin-left:auto;display:flex;gap:6px"><button class="x-gh${ed?' on':''}" onclick="toggleEdit()">${ed?'\u2713 Concluir edi\u00e7\u00e3o':'Editar roteiro'}</button><button class="x-gh" onclick="S.full=!S.full;save();paint()">${S.full?'Sair da tela cheia':'Tela cheia'}</button></span></div>
 ${ed?'':`<div class="x-steps">${blocks.filter(b=>b.vis).map(b=>`<span class="${b.done?'d':b.part?'c':''}"></span>`).join('')}</div>`}
 <div class="sb">${ed?`<div class="hint">Modo edi\u00e7\u00e3o: altere falas, t\u00edtulos, perguntas e op\u00e7\u00f5es. Salva sozinho e vale para toda a equipe. Perguntas n\u00e3o s\u00e3o removidas, para n\u00e3o perder respostas j\u00e1 salvas.</div>${editor()}<button class="rs" onclick="ask('Restaurar o roteiro original? As edi\u00e7\u00f5es do roteiro ser\u00e3o perdidas (as respostas continuam salvas).',()=>{SDIRTY=false;S.script=normS(clone(SC0));W('fila/roteiro',clone(S.script));saveCache();render()})">Restaurar roteiro original</button>`:blocks.map(b=>b.h).join('')}</div>
 <div class="sf"><span id="sfs">${fsText(id)}</span>${ed?'':`<span class="x-cnt" style="margin-left:auto">${ans} de ${tot} respondidas</span>`}</div></div>`}
 document.addEventListener('focusin',e=>{const w=e.target&&e.target.closest&&e.target.closest('.x-qw');if(!w||!e.target.dataset||!e.target.dataset.k)return;CQ={id:e.target.dataset.k.split('|')[0],k:w.dataset.qk};document.querySelectorAll('.x-qw.cur').forEach(z=>z.classList.remove('cur'));w.classList.add('cur')});
-function setEss(v){flushSave();S.ess=!!v;save();paint()}
 function toggleEdit(){flushSave();S.edit=!S.edit;paint()}
 function flushScript(){clearTimeout(sTm);if(!SDIRTY)return;SDIRTY=false;saveCache();W('fila/roteiro',clone(S.script))}
 function addQ(bi){const b=S.script[bi];if(!b)return;b.q.push({t:''});SDIRTY=true;flushScript();paint();const t=document.querySelector(`textarea[data-ed="q"][data-b="${bi}"][data-q="${b.q.length-1}"]`);if(t)t.focus()}
 function addBlock(){S.script.push({t:'Novo bloco',q:[]});SDIRTY=true;flushScript();paint();const t=document.querySelector(`input[data-ed="t"][data-b="${S.script.length-1}"]`);if(t){t.focus();t.select()}}
 document.addEventListener('input',e=>{const t=e.target,f=t.dataset&&t.dataset.ed;if(!f)return;const b=S.script[+t.dataset.b];if(!b)return;const v=t.value,q=b.q[+t.dataset.q];
- if(f=='q'){if(q)q.t=v}else if(f=='o'){if(q){const a=v.split(',').map(z=>z.trim()).filter(Boolean);if(a.length)q.o=a;else delete q.o}}else if(f=='e'||f=='m'){if(q){if(t.checked)q[f]=1;else delete q[f]}}else if(f=='t')b.t=v;else if(v==='')delete b[f];else b[f]=v;
+ if(f=='q'){if(q)q.t=v}else if(f=='o'){if(q){const a=v.split(',').map(z=>z.trim()).filter(Boolean);if(a.length)q.o=a;else delete q.o}}else if(f=='m'){if(q){if(t.checked)q[f]=1;else delete q[f]}}else if(f=='t')b.t=v;else if(v==='')delete b[f];else b[f]=v;
  SDIRTY=true;clearTimeout(sTm);sTm=setTimeout(flushScript,700)});
 /* ===== respostas: rascunho + autosave ===== */
 const dr=id=>S.dr[id]||(S.dr[id]=clone(S.ans[id]||{}));
