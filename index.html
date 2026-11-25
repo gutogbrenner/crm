@@ -24,6 +24,8 @@ h1{margin:0;font-size:32px;font-weight:700;letter-spacing:-.5px}.sub{color:var(-
 .seg{display:flex;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:5px;gap:2px;flex-wrap:wrap}
 .seg button{border:0;background:none;color:var(--mu);padding:8px 15px;border-radius:9px;font:inherit;font-weight:500;cursor:pointer}
 .seg button.on{background:var(--pr);color:#fff}.seg b{font-size:11px;opacity:.75;margin-left:5px}
+.seg button.gen{border:1px dashed var(--bd);margin-left:4px}
+.seg .pdot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#ffb454;margin-left:6px;vertical-align:middle}
 .pf{display:flex;align-items:center;gap:8px;color:var(--mu);font-size:13px}
 .pf input{width:64px;background:var(--card);border:1px solid var(--bd);color:var(--tx);border-radius:9px;padding:8px;font:inherit;font-weight:700;text-align:center}
 .tb{background:var(--card);border:1px solid var(--bd);color:var(--tx);border-radius:9px;width:36px;height:36px;cursor:pointer;font-size:16px}
@@ -385,6 +387,7 @@ html[data-theme=light]{background:#e3e6e4;--bg:#e3e6e4;--tx:#1b2420;--mu:#5a6962
 <canvas id="sky" width="800" height="450"></canvas><aside><div class="x-logo">&#931;</div><button class="nav" id="n-call" title="Liga&#231;&#245;es" onclick="go('call')"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></button><button class="nav" id="n-sched" title="Agendadas" onclick="go('sched')"></button><button class="nav" id="n-ans" title="Respostas salvas" onclick="go('ans')"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></button><button class="nav" id="n-imp" title="Importar leads" onclick="go('imp')"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7 9m5-5 5 5M4 20h16"/></svg></button><button class="nav" id="n-stats" title="Resultados" onclick="go('stats')"><svg viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg></button><button class="nav" id="n-map" title="Mapa dos leads" onclick="go('map')"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.2"/><rect x="14" y="4" width="6" height="6" rx="1.2"/><rect x="4" y="14" width="6" height="6" rx="1.2"/><rect x="14" y="14" width="6" height="6" rx="1.2"/></svg></button><button class="nav" id="n-team" title="Equipe" onclick="go('team')"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M16 5.2a3.2 3.2 0 0 1 0 5.6M18 14.8c1.8.7 3 2.4 3 5.2"/></svg></button><button class="nav" id="n-notes" title="Patch notes" onclick="go('notes')"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4M10 12h6M10 16h6"/></svg></button><button class="nav" id="n-bkp" title="Backup e nova pesquisa" onclick="go('bkp')"><svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM8 4v5h7M8 20v-6h8v6"/></svg></button><button class="nav" id="n-theme" onclick="toggleTheme()"></button><div id="usr" style="display:none"></div><div id="conn"></div></aside><div id="cmsg" style="display:none"></div><main><div class="top" id="head"></div><div id="body"></div></main><div id="ov"></div><div id="toast"></div>
 <script>
 let D=[],ALL=[],BY={},LSC={};
+const GEN='Mudan\u00e7a geral',rkey=p=>encodeURIComponent(String(p)).replace(/\./g,'%2E');
 const TEAM0=[{n:'Maria',a:1},{n:'In\u00eas',a:1},{n:'Jo\u00e3o Paulo',a:1},{n:'GB',a:1}];
 const P=[];let PALL=[];
 const L2={resp:'Respondeu',atend:'Atendeu, sem resposta',nao:'N\u00e3o atendeu',erro:'Contato errado',depois:'Ligar depois'};
@@ -392,39 +395,42 @@ const L={resp:'Respondeu a pesquisa',atend:'Atendeu, mas n\u00e3o respondeu',nao
 const K={resp:'R',atend:'A',nao:'N',erro:'E',depois:'D'};
 const C={resp:'#5dbb92',atend:'#a9c98a',nao:'#d9a25e',erro:'#d97070',depois:'#9a8fd0'};
 const ST=['resp','atend','nao','erro'],ST5=ST.concat(['depois']);
-const SC0=[{"t":"Abertura","i":"\u201cBoa tarde, ___, tudo certo? Meu nome \u00e9 ___, te peguei num momento ruim? Sou estudante da UFRGS e fa\u00e7o parte da PS J\u00fanior, a empresa j\u00fanior da universidade. Estamos fazendo uma pesquisa de mercado sobre a satisfa\u00e7\u00e3o das empresas da regi\u00e3o com os servi\u00e7os de medicina e seguran\u00e7a do trabalho. A conversa leva de 10 a 15 minutos. Posso gravar o \u00e1udio, s\u00f3 para transcrever depois? A grava\u00e7\u00e3o fica com a equipe do projeto e as respostas s\u00e3o analisadas sem identificar a empresa.\u201d","n":"Se n\u00e3o autorizar a grava\u00e7\u00e3o, siga anotando as respostas.","q":[]},
-{"t":"Bloco 1 \u00b7 Perfil da empresa","q":[{"t":"Quantos funcion\u00e1rios a empresa tem hoje nesta cidade?","f":"porte","o":["10 a 49","50 a 99","100 a 400","Fora da faixa"]},
-{"t":"Qual \u00e9 o seu cargo? Voc\u00ea est\u00e1 diretamente envolvido nas decis\u00f5es de SST da empresa? (Se n\u00e3o estiver, pe\u00e7a para falar com quem decide)","o":["Sim","Em parte","N\u00e3o"]},
-{"t":"Qual \u00e9 a atividade principal da empresa?"}]},
-{"t":"Bloco 2 \u00b7 Como a SST \u00e9 feita hoje","q":[{"t":"A empresa contrata hoje alguma empresa de fora para cuidar da SST, tem equipe pr\u00f3pria ou os dois?","g":1,"o":["Prestador externo","Equipe pr\u00f3pria","Os dois","Ningu\u00e9m"],"h":"Contexto por porte: micro e pequenas empresas ou n\u00e3o t\u00eam SST (cada vez mais raro) ou contratam uma consultoria externa. Com 40 a 50 funcion\u00e1rios, pode haver consultoria externa + um t\u00e9cnico interno, mas muitas vezes s\u00f3 a consultoria. A partir de 100 funcion\u00e1rios, a empresa pode ser obrigada a ter t\u00e9cnico de seguran\u00e7a do trabalho interno e a chance de ter equipe pr\u00f3pria aumenta, mas de 100 a 150 funcion\u00e1rios o grosso do trabalho ainda costuma ficar com a consultoria externa. S\u00f3 empresas muito grandes (acima de 300 funcion\u00e1rios) tendem a fazer tudo internamente: cen\u00e1rio raro, mas poss\u00edvel. Use o termo \u201cconsultoria\u201d ao conversar."},
-{"t":"Qual empresa presta o servi\u00e7o? Ela tem sede na cidade ou vem de fora?","x":"ext","o":["Sede na cidade","Vem de fora"],"h":"Muitas vezes a empresa n\u00e3o sabe se o prestador tem sede na cidade. Explore se os funcion\u00e1rios v\u00e3o at\u00e9 a sede do prestador fazer os exames (local comercial pr\u00f3prio, com placa e nome da SST) ou se o prestador atende uma ou duas vezes por semana em um espa\u00e7o emprestado, tipicamente um sindicato ou parceiro. Neste caso, ele n\u00e3o tem sede na cidade. Se n\u00e3o tem sede f\u00edsica, ele vem de fora."},
-{"t":"H\u00e1 quanto tempo est\u00e3o com esse prestador?","x":"ext","o":["Menos de 1 ano","1 a 3 anos","Mais de 3 anos"]},
-{"t":"Quanto a empresa paga hoje pela SST e como \u00e9 feita a cobran\u00e7a? Pe\u00e7a um valor aproximado (mensal ou anual) e o modelo: por funcion\u00e1rio, pacote fechado ou avulso.","x":"ext","o":["Por funcion\u00e1rio","Pacote fechado","Avulso","N\u00e3o soube informar"],"h":"Muitas vezes a empresa n\u00e3o sabe direito quanto nem como paga. Se n\u00e3o souber o valor exato, pe\u00e7a uma estimativa ou quem poderia informar (financeiro, contabilidade). Para entender o modelo de cobran\u00e7a, use as op\u00e7\u00f5es detalhadas na pergunta 19."},
-{"t":"Como chegaram a esse prestador? Indica\u00e7\u00e3o (de quem: contabilidade, outro empres\u00e1rio, redes sociais, visita comercial...).","x":"ext","o":["Indica\u00e7\u00e3o","Contabilidade","Outro empres\u00e1rio","Redes sociais","Internet","Visita comercial"]},
-{"t":"Quais servi\u00e7os voc\u00eas contratam dele?","x":"ext","m":1,"o":["PGR","PCMSO","Exames e ASO","LTCAT e laudos","Treinamentos de NR","eSocial","CIPA"]},
-{"t":"Onde os funcion\u00e1rios fazem os exames: na pr\u00f3pria cidade, em outra cidade ou com atendimento na empresa?","x":"ext","o":["Na pr\u00f3pria cidade","Em outra cidade","Atendimento na empresa"]},
-{"t":"Quanto tempo leva, em m\u00e9dia, do pedido do exame at\u00e9 o ASO pronto?","x":"ext"},
-{"t":"Como voc\u00eas cuidam hoje das obriga\u00e7\u00f5es de SST?","x":"alt"},
-{"t":"Por que n\u00e3o contratam um prestador? J\u00e1 contrataram antes?","x":"alt"},
-{"t":"O que faria voc\u00eas contratarem um?","x":"alt"}]},
-{"t":"Bloco 3 \u00b7 Satisfa\u00e7\u00e3o com o prestador atual","q":[{"t":"De 0 a 10, qual a sua satisfa\u00e7\u00e3o com o prestador atual? Por que essa nota, e n\u00e3o uma maior?","x":"ext","k":"s","o":["0","1","2","3","4","5","6","7","8","9","10"]},
-{"t":"O que ele faz bem?","x":"ext"},
-{"t":"O que mais incomoda ou poderia melhorar?","x":"ext","m":1,"o":["Prazo","Atendimento","Qualidade t\u00e9cnica","Pre\u00e7o","Cobran\u00e7a extra","Dist\u00e2ncia","Sistema","eSocial"],"h":"Se precisar, explore: prazo de entrega, atendimento, qualidade t\u00e9cnica, pre\u00e7o, cobran\u00e7as extras, dist\u00e2ncia, sistema e eSocial. Se n\u00e3o surgir: o prestador orientou a empresa sobre a atualiza\u00e7\u00e3o da NR-1 (riscos psicossociais no PGR)?"},
-{"t":"Conte uma situa\u00e7\u00e3o recente em que o servi\u00e7o deixou a desejar, ou em que surpreendeu para melhor. O que aconteceu e como foi resolvido?","x":"ext","o":["Negativo","Positivo","Nenhum"]}]},
-{"t":"Bloco 4 \u00b7 Outros prestadores, qualidade percebida e pre\u00e7o","q":[{"t":"J\u00e1 usaram outro prestador de SST antes? Qual, e por que trocaram?"},
-{"t":"Receberam proposta ou visita de outra SST nos \u00faltimos 12 meses? De quem? O que chamou a aten\u00e7\u00e3o?"},
-{"t":"Que outros prestadores voc\u00ea conhece na cidade ou na regi\u00e3o, mesmo sem ter contratado? O que ouve falar deles, de bom e de ruim? (Se a empresa j\u00e1 teve outro prestador, pode comparar o atual com o antigo: melhor, igual ou pior, e em qu\u00ea?)"},
-{"t":"Como \u00e9 a cobran\u00e7a: mensalidade por funcion\u00e1rio, pacote fechado ou servi\u00e7o avulso? Se for pacote fechado, o ASO (exame cl\u00ednico) est\u00e1 incluso ou \u00e9 cobrado \u00e0 parte? Os exames complementares (audiometria, acuidade visual) s\u00e3o cobrados \u00e0 parte? Eles cobram por exame ou \u00e9 um valor parcelado \u201ctudo incluso\u201d? Pelo que recebe, considera justo?","o":["Caro","Justo","Barato","N\u00e3o respondeu"],"h":"O que importa para n\u00f3s \u00e9 saber em qual modelo a empresa se encaixa. (1) Pacote fechado, op\u00e7\u00e3o 1: valor dos laudos parcelado em X vezes + valor por funcion\u00e1rio (\u201cgest\u00e3o de vidas\u201d), com o ASO incluso. \u00c9 a forma mais t\u00edpica. (2) Pacote fechado, op\u00e7\u00e3o 2: valor do pacote de laudos, com o exame cl\u00ednico/ASO comprado \u00e0 parte. (3) Mensalidade fixa por funcion\u00e1rio, todo m\u00eas: pouco comum hoje. (4) Avulso: s\u00f3 faz sentido se a empresa n\u00e3o tem pacote de laudos. Nos modelos 1 e 2, os exames complementares (audiometria, acuidade visual) s\u00e3o quase sempre comprados \u00e0 parte; \u00e9 raro um pacote inclu\u00ed-los."}]},
-{"t":"Bloco 5 \u00b7 Papel da contabilidade","q":[{"t":"Qual escrit\u00f3rio de contabilidade atende a empresa?"},
-{"t":"A contabilidade participa de algo da SST hoje? Por exemplo: indicou o prestador, envia ou confere os eventos de SST no eSocial, cobra a regularidade dos exames e laudos."},
-{"t":"Se a contabilidade indicasse outro prestador de SST, isso pesaria na sua decis\u00e3o? Quem mais influencia essa escolha: associa\u00e7\u00e3o comercial, sindicato, outros empres\u00e1rios?"}]},
-{"t":"Bloco 6 \u00b7 M\u00e3o de obra local","q":[{"t":"Aqui na cidade \u00e9 f\u00e1cil encontrar t\u00e9cnico de seguran\u00e7a do trabalho, t\u00e9cnico de enfermagem ou m\u00e9dico do trabalho? Conhece alguma escola t\u00e9cnica ou faculdade dessas \u00e1reas na cidade ou perto?"}]},
-{"t":"Bloco 7 \u00b7 Expectativas e fechamento","q":[{"t":"Quais s\u00e3o os tr\u00eas fatores mais importantes para voc\u00ea ao escolher uma SST?"},
-{"t":"O que faria a empresa trocar de prestador hoje? E o que impediria: contrato, multa, relacionamento?","o":["Alta","M\u00e9dia","Baixa"]}]},
-{"t":"Fechamento","i":"\u201cTem algo sobre SST que eu n\u00e3o perguntei e voc\u00ea acha importante?\u201d","n":"Agrade\u00e7a e pe\u00e7a a indica\u00e7\u00e3o de outra empresa da cidade que toparia conversar.","q":[{"t":"Indica\u00e7\u00e3o de outra empresa (nome e telefone)","u":1}]}];
+const SC0=[
+{t:'Abertura',i:'\u201cBoa tarde, ___, tudo certo? Meu nome \u00e9 ___, te peguei num momento ruim? Sou estudante da UFRGS e fa\u00e7o parte da PS J\u00fanior, a empresa j\u00fanior da universidade. Estamos fazendo uma pesquisa de mercado sobre a satisfa\u00e7\u00e3o das empresas da regi\u00e3o com os servi\u00e7os de medicina e seguran\u00e7a do trabalho. A conversa leva de 10 a 15 minutos. Posso gravar o \u00e1udio, s\u00f3 para transcrever depois? A grava\u00e7\u00e3o fica com a equipe do projeto e as respostas s\u00e3o analisadas sem identificar a empresa.\u201d',n:'Se n\u00e3o autorizar a grava\u00e7\u00e3o, siga anotando as respostas.',q:[]},
+{t:'Bloco 1 \u00b7 Perfil da empresa',q:[
+ {t:'Quantos funcion\u00e1rios a empresa tem hoje nesta cidade?',e:1,f:'porte',o:['10 a 49','50 a 99','100 a 400','Fora da faixa']},
+ {t:'Voc\u00ea est\u00e1 diretamente envolvido nas decis\u00f5es de SST da empresa?',o:['Sim','Em parte','N\u00e3o']},
+ {t:'Qual \u00e9 a atividade principal da empresa?',e:1}]},
+{t:'Bloco 2 \u00b7 Como a SST \u00e9 feita hoje',q:[
+ {t:'Como a SST \u00e9 cuidada hoje?',g:1,o:['Prestador externo','Equipe pr\u00f3pria','Os dois','Ningu\u00e9m']},
+ {t:'Qual empresa presta o servi\u00e7o? Ela tem sede na cidade ou vem de fora?',e:1,x:'ext',o:['Sede na cidade','Vem de fora']},
+ {t:'H\u00e1 quanto tempo est\u00e3o com esse prestador?',x:'ext',o:['Menos de 1 ano','1 a 3 anos','Mais de 3 anos']},
+ {t:'Quais servi\u00e7os voc\u00eas contratam dele?',x:'ext',m:1,o:['PGR','PCMSO','Exames e ASO','LTCAT e laudos','Treinamentos de NR','eSocial','CIPA']},
+ {t:'Como chegaram a esse prestador?',x:'ext',o:['Indica\u00e7\u00e3o','Contabilidade','Redes sociais','Internet','Visita comercial']},
+ {t:'Como voc\u00eas cuidam hoje das obriga\u00e7\u00f5es de SST?',x:'alt'},
+ {t:'Por que n\u00e3o contratam um prestador? J\u00e1 contrataram antes?',x:'alt'},
+ {t:'O que faria voc\u00eas contratarem um?',x:'alt'}]},
+{t:'Bloco 3 \u00b7 Satisfa\u00e7\u00e3o com o prestador atual (6 min)',q:[
+ {t:'De 0 a 10, qual a sua satisfa\u00e7\u00e3o com o prestador atual? Por que essa nota, e n\u00e3o uma maior?',e:1,x:'ext',k:'s',o:['0','1','2','3','4','5','6','7','8','9','10']},
+ {t:'O que ele faz bem?',x:'ext'},
+ {t:'O que mais incomoda ou poderia melhorar?',e:1,x:'ext',m:1,o:['Prazo','Atendimento','Qualidade t\u00e9cnica','Pre\u00e7o','Cobran\u00e7a extra','Dist\u00e2ncia','Sistema']},
+ {t:'Conte uma situa\u00e7\u00e3o recente em que o servi\u00e7o deixou a desejar, ou em que surpreendeu para melhor. O que aconteceu e como foi resolvido?',e:1,x:'ext',o:['Negativo','Positivo','Nenhum']}]},
+{t:'Bloco 4 \u00b7 Outros prestadores e pre\u00e7o',q:[
+ {t:'J\u00e1 usaram outro prestador de SST antes? Qual, e por que trocaram?',e:1},
+ {t:'Receberam proposta ou visita de outra SST nos \u00faltimos 12 meses? De quem? O que chamou a aten\u00e7\u00e3o?',e:1},
+ {t:'Que outros prestadores voc\u00ea conhece na cidade ou na regi\u00e3o, mesmo sem ter contratado?'},
+ {t:'(opcional) Como \u00e9 a cobran\u00e7a: mensalidade por funcion\u00e1rio, pacote fechado ou servi\u00e7o avulso? Considera caro, justo ou barato?',o:['Caro','Justo','Barato','N\u00e3o respondeu']}]},
+{t:'Bloco 5 \u00b7 Papel da contabilidade',q:[
+ {t:'Se a contabilidade indicasse outro prestador de SST, isso pesaria na sua decis\u00e3o? Quem mais influencia essa escolha?',e:1}]},
+{t:'Bloco 6 \u00b7 Expectativas e fechamento',q:[
+ {t:'Quais s\u00e3o os tr\u00eas fatores mais importantes para voc\u00ea ao escolher uma SST?'},
+ {t:'O que faria a empresa trocar de prestador hoje? E o que impediria?',o:['Alta','M\u00e9dia','Baixa']},
+ {t:'Um prestador de fora, que atende na cidade em dias marcados, seria uma op\u00e7\u00e3o para voc\u00eas? Por qu\u00ea?',o:['Sim','Com condi\u00e7\u00f5es','N\u00e3o']}]},
+{t:'Fechamento',i:'\u201cTem algo sobre SST que eu n\u00e3o perguntei e voc\u00ea acha importante?\u201d',n:'Agrade\u00e7a e pe\u00e7a a indica\u00e7\u00e3o de outra empresa da cidade que toparia conversar.',q:[
+ {t:'Indica\u00e7\u00e3o de outra empresa (nome e telefone)',u:1}]}];
 
 const LSK='psj_crm_v4';
-let S={notas:{},theme:'dark',des:null,team:null,tn:{},qrb:false,cfg:{},hist:{},rd:{},meta:null,st:{},ans:{},sv:{},imp:{},lotes:{},lem:{},dr:{},q:{},al:{},cur:{},prefix:'021',person:'Maria',tab:'call',qr:'M',ph:{},script:null,full:false,sf:'all',af:'all',lf:'all',edit:false,gmail:'',gauto:false};
+let S={notas:{},theme:'dark',des:null,team:null,tn:{},ess:true,qrb:false,cfg:{},hist:{},rd:{},meta:null,st:{},ans:{},sv:{},imp:{},lotes:{},lem:{},dr:{},q:{},al:{},cur:{},prefix:'021',person:'Maria',tab:'call',qr:'M',ph:{},script:null,full:false,sf:'all',af:'all',lf:'all',edit:false,gmail:'',gauto:false};
 const DIRTY={};let online=false,cs='off',cerr=null,saveTm=null,SDIRTY=false,sTm=null;
 const clone=o=>JSON.parse(JSON.stringify(o));
 const sj=o=>JSON.stringify(Object.keys(o||{}).sort().map(k=>[k,o[k]]));
@@ -433,22 +439,30 @@ try{
  if(raw)Object.assign(S,JSON.parse(raw));
 
  const c=JSON.parse(localStorage.getItem(LSK+'_c')||'null');
- if(c){['st','ans','sv','imp','lotes','lem','rd','cfg','hist','tn','team','des','notas'].forEach(k=>{if(c[k])S[k]=c[k]});if(c.meta)S.meta=c.meta;if(c.script)S.script=c.script}
+ if(c){['st','ans','sv','imp','lotes','lem','rd','cfg','hist','tn','team','des','notas'].forEach(k=>{if(c[k])S[k]=c[k]});if(c.meta)S.meta=c.meta;if(c.gscript)S.gscript=c.gscript;else if(c.script)S.gscript=c.script;if(c.pscr)S.pscr=c.pscr;if(c.gts)S.gts=c.gts}
 }catch(e){}
 const qt=q=>q&&typeof q=='object'?(q.t||''):String(q||'');
-const normQ=q=>{if(q&&typeof q=='object'){const o={t:q.t||''};['m','k','x','g','f','h','u'].forEach(k=>{if(q[k])o[k]=q[k]});if(q.o){const a=(Array.isArray(q.o)?q.o:Object.values(q.o)).filter(v=>v!=null&&v!=='');if(a.length)o.o=a}return o}return{t:String(q||'')}};
+const normQ=q=>{if(q&&typeof q=='object'){const o={t:q.t||''};['e','m','k','x','g','f','h','u'].forEach(k=>{if(q[k])o[k]=q[k]});if(q.o){const a=(Array.isArray(q.o)?q.o:Object.values(q.o)).filter(v=>v!=null&&v!=='');if(a.length)o.o=a}return o}return{t:String(q||'')}};
 const normS=r=>r.map(b=>{const o={t:b.t||'',q:b.q?(Array.isArray(b.q)?b.q:Object.values(b.q)).map(normQ):[]};if(b.i)o.i=b.i;if(b.n)o.n=b.n;return o});
-S.script=normS((S.script&&S.script.length)?S.script:clone(SC0));
+S.gscript=normS((S.gscript&&S.gscript.length)?S.gscript:clone(SC0));S.pscr=S.pscr||{};S.gts=S.gts||0;S.script=S.gscript;
+/* roteiro: geral (fila/roteiro) + um pessoal por pessoa (fila/roteiros/<pessoa>) */
+function ownS(p){const o=p!=GEN&&S.pscr[rkey(p)];return o&&o.s&&o.s.length?o:null}
+function scriptFor(p){const o=ownS(p);return o?o.s:S.gscript}
+function pickScript(){if(SDIRTY)return;S.script=scriptFor(S.person)}
+function ensureOwn(){if(S.person==GEN){S.script=S.gscript;return}const k=rkey(S.person);if(!ownS(S.person))S.pscr[k]={s:clone(S.gscript),n:S.person,b:S.gts||0,ts:Date.now()};S.script=S.pscr[k].s}
+function useGeneral(){SDIRTY=false;clearTimeout(sTm);const k=rkey(S.person);delete S.pscr[k];W('fila/roteiros/'+k,null);pickScript();saveCache();render();toast('Voc\u00ea voltou ao roteiro geral')}
+function keepOwn(){const o=ownS(S.person);if(!o)return;o.b=S.gts||0;W('fila/roteiros/'+rkey(S.person)+'/b',o.b);saveCache();render()}
+function pushGeneral(){const ks=Object.keys(S.pscr);if(!ks.length){toast('Ningu\u00e9m tem roteiro pr\u00f3prio');return}const m={};ks.forEach(k=>m['fila/roteiros/'+k]=null);WM(m);S.pscr={};saveCache();render();toast('Roteiro geral enviado para toda a equipe')}
 function applyTheme(){document.documentElement.dataset.theme=S.theme=='light'?'light':'dark';const b=document.getElementById('n-theme');if(b){b.title=S.theme=='light'?'Mudar para o tema escuro':'Mudar para o tema claro';b.innerHTML=S.theme=='light'?'<svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>':'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>'}}
 function toggleTheme(){S.theme=S.theme=='light'?'dark':'light';save();applyTheme()}
 applyTheme();
-function applyTeam(){const t=(Array.isArray(S.team)?S.team:S.team?Object.values(S.team):[]).filter(m=>m&&m.n);S.team=t.length?t.map(m=>({n:String(m.n),a:m.a?1:0})):JSON.parse(JSON.stringify(TEAM0));if(!S.team.some(m=>m.a))S.team[0].a=1;P.length=0;S.team.forEach(m=>{if(m.a)P.push(m.n)});PALL=S.team.map(m=>m.n);if(!P.includes(S.person))S.person=P[0]}
-applyTeam();
+function applyTeam(){const t=(Array.isArray(S.team)?S.team:S.team?Object.values(S.team):[]).filter(m=>m&&m.n);S.team=t.length?t.map(m=>({n:String(m.n),a:m.a?1:0})):JSON.parse(JSON.stringify(TEAM0));if(!S.team.some(m=>m.a))S.team[0].a=1;P.length=0;S.team.forEach(m=>{if(m.a)P.push(m.n)});PALL=S.team.map(m=>m.n);if(S.person!=GEN&&!P.includes(S.person))S.person=P[0]}
+applyTeam();pickScript();
 const PR=()=>PALL.filter(p=>P.includes(p)||(LSC[p]&&LSC[p].length));
 if(!['call','sched','ans','imp','bkp','stats','team','map','notes'].includes(S.tab))S.tab='call';
 S.edit=false;
-const save=()=>{try{localStorage.setItem(LSK,JSON.stringify({prefix:S.prefix,person:S.person,tab:S.tab,qr:S.qr,ph:S.ph,cur:S.cur,full:S.full,theme:S.theme,sf:S.sf,af:S.af,lf:S.lf,dr:S.dr,q:S.q,al:S.al,gmail:S.gmail,gauto:S.gauto}))}catch(e){}};
-const saveCache=()=>{try{localStorage.setItem(LSK+'_c',JSON.stringify({notas:S.notas,des:S.des,team:S.team,tn:S.tn,cfg:S.cfg,hist:S.hist,rd:S.rd,meta:S.meta,st:S.st,ans:S.ans,sv:S.sv,imp:S.imp,lotes:S.lotes,lem:S.lem,script:S.script}))}catch(e){}};
+const save=()=>{try{localStorage.setItem(LSK,JSON.stringify({prefix:S.prefix,person:S.person,tab:S.tab,qr:S.qr,ph:S.ph,cur:S.cur,full:S.full,theme:S.theme,ess:S.ess,sf:S.sf,af:S.af,lf:S.lf,dr:S.dr,q:S.q,al:S.al,gmail:S.gmail,gauto:S.gauto}))}catch(e){}};
+const saveCache=()=>{try{localStorage.setItem(LSK+'_c',JSON.stringify({notas:S.notas,des:S.des,team:S.team,tn:S.tn,cfg:S.cfg,hist:S.hist,rd:S.rd,meta:S.meta,st:S.st,ans:S.ans,sv:S.sv,imp:S.imp,lotes:S.lotes,lem:S.lem,gscript:S.gscript,pscr:S.pscr,gts:S.gts}))}catch(e){}};
 /* ===== Firebase Realtime Database ===== */
 const firebaseConfig={apiKey:"AIzaSyDgc2OiBIUgEmMvhYRor3y8o2OKp9cbbPA",authDomain:"crm-c130b.firebaseapp.com",databaseURL:"https://crm-c130b-default-rtdb.firebaseio.com",projectId:"crm-c130b",storageBucket:"crm-c130b.firebasestorage.app",messagingSenderId:"850118166656",appId:"1:850118166656:web:887ecdb9c1e09179b2fe65"};
 
@@ -472,7 +486,7 @@ function overlay(v){const o=clone(v||{});for(const p in S.q){const parts=p.split
 function unk(o){const r={};if(o)Object.keys(o).forEach(k=>{if(o[k]!=null)r[String(k).replace(/^l/,'')]=o[k]});return r}
 function derive(v){S.st=unk(v.status);S.ans=unk(v.respostas);S.sv=unk(v.salvo);S.lem=unk(v.lembretes);S.rd=unk(v.rd);S.tn=unk(v.tent);S.team=v.equipe||null;applyTeam();S.des=v.desafio||null;S.notas=v.notas||{};S.meta=v.meta||null;S.cfg=v.config||{};S.hist=v.historico||{};S.imp=v.importados||{};S.lotes=v.lotes||{};
  const r=v.roteiro?(Array.isArray(v.roteiro)?v.roteiro:Object.values(v.roteiro)).filter(Boolean):null;
- if(!SDIRTY)S.script=normS(r||clone(SC0));
+ if(!SDIRTY){S.gscript=normS(r||clone(SC0));S.gts=+v.roteiroTs||0;const ps=v.roteiros||{},po={};Object.keys(ps).forEach(k=>{const z=ps[k];if(!z||!z.s)return;const a=(Array.isArray(z.s)?z.s:Object.values(z.s)).filter(Boolean);if(a.length)po[k]={s:normS(a),n:z.n||'',b:+z.b||0,ts:+z.ts||0}});S.pscr=po;pickScript()}
  Object.keys(S.dr).forEach(id=>{if(!DIRTY[id])delete S.dr[id]});build()}
 function sync(){conn('off');if(!db)return;
  try{db.ref('.info/connected').off();db.ref('fila').off()}catch(e){}
@@ -526,7 +540,7 @@ function cur(p){const l=LS(p);if(S.cur[p]==null||S.cur[p]>=l.length){let i=l.fin
 const fmt=iso=>{if(!iso)return '';const d=new Date(iso);return isNaN(d)?'':d.toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})};
 const fmtL=iso=>{const d=new Date(iso);return d.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'2-digit'})+' \u00e0s '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})};
 function go(t){flushSave();S.tab=t;S.full=false;save();render()}
-function setP(p){flushSave();S.person=p;save();render();checkDue()}
+function setP(p){flushSave();flushScript();S.person=p;pickScript();save();render();checkDue()}
 function render(){
  pendR=false;
  const sb=document.querySelector('.sb'),sy=window.scrollY,sbt=sb?sb.scrollTop:0,tab=S.tab;
@@ -542,11 +556,13 @@ function badges(){const e=$('n-sched');if(!e)return;const ids=Object.keys(S.lem)
 function head(){
  const T={notes:['Patch notes','O que mudou no CRM a cada atualiza\u00e7\u00e3o'],map:['Mapa dos leads','Cada quadradinho \u00e9 um lead; a cor mostra a situa\u00e7\u00e3o'],team:['Equipe','Quem liga, quantos leads cada um tem e a redistribui\u00e7\u00e3o dos pendentes'],sched:['Liga\u00e7\u00f5es agendadas','Lembretes de \u201cLigar depois\u201d'],ans:['Respostas salvas','Todas as respostas salvas, separadas por lead'],imp:['Importar leads','Qualquer pessoa pode subir uma planilha \u2014 os contatos s\u00e3o distribu\u00eddos por igual entre a equipe'],bkp:['Backup','Exporte tudo em um arquivo e restaure quando precisar'],stats:['Resultados',`Desempenho das liga\u00e7\u00f5es \u00b7 ${ALL.length} contatos`]};
  if(S.tab!='call'){const t=T[S.tab];$('head').innerHTML=`<div><h1>${t[0]}</h1><div class="sub">${t[1]}</div></div>`;return}
+ const segH=p=>`<div class="seg">${P.map(n=>`<button class="${n==p?'on':''}" onclick="setP('${n}')">${n}${ownS(n)?'<i class="pdot" title="Tem roteiro pr\u00f3prio"></i>':''}<b>${pend(n)}</b></button>`).join('')}<button class="gen${p==GEN?' on':''}" onclick="setP(GEN)" title="Perfil sem leads: altera o roteiro de toda a equipe">\u270e ${GEN}</button></div>`;
+ if(S.person==GEN){$('head').innerHTML=`<div><h1>Roteiro geral</h1><div class="sub">Perfil sem leads \u00b7 o que mudar aqui vale para toda a equipe</div></div>${segH(GEN)}`;return}
  const p=S.person,r=pend(p),ag=LS(p).filter(x=>stat(x)=='depois').length,g=goalCalc(),pct=Math.min(100,Math.round(g.done/g.m.alvo*100));
  $('head').innerHTML=`<div><h1>Fila de liga\u00e7\u00e3o</h1><div class="sub">${S.cfg&&S.cfg.nome?esc(S.cfg.nome)+' \u00b7 ':''}${esc(p)} \u00b7 ${r} ${r==1?'falta':'faltam'} de ${LS(p).length}${ag?` \u00b7 ${ag} para ligar depois`:''}</div></div>
 <button class="x-srch" onclick="openSearch()">Buscar empresa, telefone ou CNPJ<kbd>Ctrl K</kbd></button>
 <button class="x-goal" onclick="openMeta()" title="Clique para editar a meta"><span class="x-ring" style="background:conic-gradient(var(--pr) 0 ${pct*3.6}deg,var(--trk) 0)"></span><span><b>${g.done}/${g.m.alvo}</b><small>meta \u00b7 ${g.faltam==0?'batida':g.fim?'prazo encerrado':g.util?'hoje '+g.hoje+' de '+g.alvoHoje:'pr\u00f3x. dia '+g.prox}</small></span></button>
-<div class="seg">${P.map(n=>`<button class="${n==p?'on':''}" onclick="setP('${n}')">${n}<b>${pend(n)}</b></button>`).join('')}</div>`}
+${segH(p)}`}
 function paint(){({call,sched,ans:ansPage,imp:impPage,bkp:bkpPage,stats,team:teamPage,map:mapPage,notes:notesPage}[S.tab]||call)()}
 function tel(x){return(S.ph[x.n]==2&&x.t2?x.t2:x.t1)||''}
 /* ===== Liga\u00e7\u00f5es ===== */
@@ -554,13 +570,17 @@ const segName=x=>String(x.s||'').replace(/^\s*\d[\d.\-\/]*\s*-\s*/,'');
 function findQ(pred){for(let bi=0;bi<S.script.length;bi++){const b=S.script[bi];for(let qi=0;qi<b.q.length;qi++)if(pred(b.q[qi]))return bi+'|'+qi}return null}
 const gateKey=()=>findQ(q=>q.g),porteKey=()=>findQ(q=>q.f=='porte');
 function noExt(a){const k=gateKey();if(!k)return false;const v=String((a||{})[k+'|o']||'');return /pr[o\u00f3]pria|ningu[e\u00e9]m/i.test(v)&&!/externo|dois/i.test(v)}
-function qVis(q,a){if(q.x=='ext'&&noExt(a))return false;if(q.x=='alt'&&!noExt(a))return false;return true}
+function qVis(q,a){if(q.x=='ext'&&noExt(a))return false;if(q.x=='alt'&&!noExt(a))return false;if(S.ess&&!(q.e||q.g||q.x=='alt'))return false;return true}
 const QT={'10 a 49':2,'50 a 99':2,'100 a 400':1},QTOT=5;
 function quota(ci){const k=porteKey(),o={};Object.keys(QT).forEach(p=>o[p]=0);let tot=0;ALL.forEach(x=>{if((x.ci||'')!=ci||stat(x)!='resp')return;tot++;const v=k&&S.ans[x.n]&&S.ans[x.n][k+'|o'];if(v&&o[v]!==undefined)o[v]++});return{o,tot}}
 function nextPend(l,i){const full={},isF=c=>{if(!c)return false;if(full[c]===undefined)full[c]=quota(c).tot>=QTOT;return full[c]};const pe=[];for(let k=1;k<=l.length;k++){const j=(i+k)%l.length;if(j!=i&&!stat(l[j]))pe.push(j)}const a=pe.find(j=>!isF(l[j].ci));return a!==undefined?a:(pe.length?pe[0]:-1)}
 const PH='<svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg>';
+function genPage(){const ks=Object.keys(S.pscr).filter(k=>S.pscr[k]&&S.pscr[k].s);
+ $('body').innerHTML=`<div class="x-grid"><div><div class="card"><b>Perfil de mudan\u00e7a geral</b><div class="mu" style="margin:8px 0 14px;font-size:13px;line-height:1.55">Este perfil n\u00e3o tem leads. \u00c9 o \u00fanico que altera o roteiro de todo mundo. Quem editar o roteiro no pr\u00f3prio perfil passa a ter uma c\u00f3pia s\u00f3 sua e deixa de receber as mudan\u00e7as daqui, at\u00e9 voltar ao geral.</div>
+<span class="x-lb">Quem tem roteiro pr\u00f3prio</span><div style="margin:8px 0 14px">${ks.length?ks.map(k=>`<span class="x-chip" style="margin:0 6px 6px 0;display:inline-block">${esc(S.pscr[k].n||decodeURIComponent(k))}</span>`).join(''):'<span class="mu" style="font-size:13px">Ningu\u00e9m. Todos usam o roteiro geral.</span>'}</div>
+${ks.length?`<button class="x-gh" onclick="ask('Enviar o roteiro geral para toda a equipe? Os roteiros pr\u00f3prios de ${ks.length} pessoa(s) ser\u00e3o apagados. As respostas continuam salvas.',pushGeneral)">Enviar o geral para todos</button>`:''}</div></div>${rpanel({n:'__gen'})}</div>`}
 function call(){
- const p=S.person,l=LS(p);
+ const p=S.person;if(p==GEN){genPage();return}const l=LS(p);
  if(!l.length){$('body').innerHTML=`<div class="card" style="max-width:640px"><b>Nenhum lead para ${esc(p)} ainda.</b><div class="mu" style="margin:8px 0 16px">Suba a planilha de leads para come\u00e7ar. Os contatos s\u00e3o distribu\u00eddos por igual entre a equipe.</div><button class="sv" onclick="go('imp')">Importar leads</button></div>`;return}
  const i=cur(p),x=l[i],s=stat(x),id=x.n,done=l.filter(y=>stat(y)).length;
  const num=tel(x),dg=num.replace(/\D/g,''),href='tel:'+(S.prefix||'+55')+dg;
@@ -597,34 +617,38 @@ function pick(id,bi,qi,oi){const q=S.script[bi]&&S.script[bi].q[qi];if(!q||!q.o)
  d[k]=c.join('; ');CQ={id,k:bi+'|'+qi};DIRTY[id]=1;save();clearTimeout(saveTm);saveTm=setTimeout(flushSave,700);keepPaint()}
 let CQ={id:null,k:null};
 function rpanel(x){
- const id=x.n,d=dr(id),ed=S.edit;let n=0,tot=0,ans=0;const vk=[],un=[];
+ const id=x.n,G=S.person==GEN,own=ownS(S.person),d=G?{}:dr(id),ed=S.edit||G;let n=0,tot=0,ans=0;const vk=[],un=[];
  const blocks=S.script.map((b,bi)=>{let h='',vis=0,dn=0;
   b.q.forEach((q,qi)=>{const num=(q.x=='alt'||q.u)?null:++n;if(!qVis(q,d))return;vis++;const k=bi+'|'+qi,sel=String(d[k+'|o']||'').split('; ').filter(Boolean),has=sel.length||String(d[k]||'').trim();if(has)dn++;vk.push(k);if(!has)un.push(k);
-   h+=`<div class="x-qw __C${k}__" data-qk="${k}"><div class="x-qq"><em>${num?String(num).padStart(2,'0'):'\u2022'}</em>${esc(q.t)}</div>${q.h?`<div class="x-hint">${esc(q.h)}</div>`:''}`+
+   h+=`<div class="x-qw __C${k}__" data-qk="${k}"><div class="x-qq"><em>${num?String(num).padStart(2,'0'):'\u2022'}</em>${esc(q.t)}${q.e?'<u class="x-es">essencial</u>':''}</div>${q.h?`<div class="x-hint">${esc(q.h)}</div>`:''}`+
    (q.o?`<div class="${q.k=='s'?'x-sc':'x-qk'}">${q.o.map((o,oi)=>`<button class="${sel.includes(String(o))?'on':''}" onclick="pick('${id}',${bi},${qi},${oi})">${esc(o)}</button>`).join('')}</div>`:'')+
    (q.f=='porte'&&sel[0]=='Fora da faixa'?'<div class="warn" style="margin:0 0 8px"><b>Fora da cota.</b> Agrade\u00e7a e encerre a entrevista.</div>':'')+
    `<textarea class="x-ta" rows="1" data-k="${id}|${bi}|${qi}" placeholder="${q.o?'Detalhe ou cita\u00e7\u00e3o\u2026':'Resposta\u2026'}">${esc(d[k])}</textarea></div>`});
-  tot+=vis;ans+=dn;const show=vis||b.i||b.n;
+  tot+=vis;ans+=dn;const show=vis||b.i||(!S.ess&&b.n);
   return{done:vis>0&&dn==vis,part:dn>0,vis,h:show?`<div class="x-blk"><span class="x-lb">${esc(b.t)}</span>${b.i?`<div class="x-pitch">${esc(b.i)}</div>`:''}${b.n?`<div class="x-hint">${esc(b.n)}</div>`:''}${h}</div>`:''}});
  const ck=(CQ.id==id&&vk.includes(CQ.k))?CQ.k:(un[0]||vk[vk.length-1]||'');blocks.forEach(b=>{b.h=b.h.split('__C'+ck+'__').join('cur').replace(/__C[^_]*__/g,'')});
  const rows=t=>Math.max(2,Math.min(9,Math.ceil(String(t||'').length/52)+1));
  const editor=()=>S.script.map((b,bi)=>`<div class="eb"><div class="ebh">Bloco ${bi+1}</div>
 <label>T\u00edtulo do bloco</label><input class="ei" data-ed="t" data-b="${bi}" value="${esc(b.t)}">
 <label>Fala / pitch (aparece em destaque; deixe vazio se n\u00e3o houver)</label><textarea class="et" data-ed="i" data-b="${bi}" rows="${rows(b.i)}">${esc(b.i||'')}</textarea>
-<label>Perguntas</label>${b.q.map((q,qi)=>`<div class="eqr"><span>${qi+1}.</span><div style="flex:1"><textarea class="et" data-ed="q" data-b="${bi}" data-q="${qi}" rows="${rows(q.t)}">${esc(q.t)}</textarea><input class="ei" style="margin-top:6px;font-size:12.5px" data-ed="o" data-b="${bi}" data-q="${qi}" value="${esc((q.o||[]).join(', '))}" placeholder="Op\u00e7\u00f5es de um clique, separadas por v\u00edrgula (opcional)"><div style="display:flex;gap:14px;flex-wrap:wrap"><label class="chk" style="margin:6px 0 0"><input type="checkbox" data-ed="m" data-b="${bi}" data-q="${qi}" ${q.m?'checked':''}> Permite marcar v\u00e1rias op\u00e7\u00f5es</label></div></div></div>`).join('')||'<div class="mu" style="font-size:12.5px">Sem perguntas neste bloco.</div>'}
+<label>Perguntas</label>${b.q.map((q,qi)=>`<div class="eqr"><span>${qi+1}.</span><div style="flex:1"><textarea class="et" data-ed="q" data-b="${bi}" data-q="${qi}" rows="${rows(q.t)}">${esc(q.t)}</textarea><input class="ei" style="margin-top:6px;font-size:12.5px" data-ed="o" data-b="${bi}" data-q="${qi}" value="${esc((q.o||[]).join(', '))}" placeholder="Op\u00e7\u00f5es de um clique, separadas por v\u00edrgula (opcional)"><div style="display:flex;gap:14px;flex-wrap:wrap"><label class="chk" style="margin:6px 0 0"><input type="checkbox" data-ed="e" data-b="${bi}" data-q="${qi}" ${q.e?'checked':''}> Essencial</label><label class="chk" style="margin:6px 0 0"><input type="checkbox" data-ed="m" data-b="${bi}" data-q="${qi}" ${q.m?'checked':''}> Permite marcar v\u00e1rias op\u00e7\u00f5es</label></div></div></div>`).join('')||'<div class="mu" style="font-size:12.5px">Sem perguntas neste bloco.</div>'}
 <button class="mini" onclick="addQ(${bi})">\uff0b Nova pergunta</button>
 <label>Orienta\u00e7\u00e3o para quem liga (opcional)</label><textarea class="et" data-ed="n" data-b="${bi}" rows="${rows(b.n)}">${esc(b.n||'')}</textarea></div>`).join('')+`<button class="mini" onclick="addBlock()">\uff0b Novo bloco</button>`;
- return `<div class="card sp${S.full?' full':''}"><div class="sh"><b class="x-rt">Roteiro</b><span style="margin-left:auto;display:flex;gap:6px"><button class="x-gh${ed?' on':''}" onclick="toggleEdit()">${ed?'\u2713 Concluir edi\u00e7\u00e3o':'Editar roteiro'}</button><button class="x-gh" onclick="S.full=!S.full;save();paint()">${S.full?'Sair da tela cheia':'Tela cheia'}</button></span></div>
+ return `<div class="card sp${S.full?' full':''}"><div class="sh"><b class="x-rt">${G?'Roteiro geral':'Roteiro'}</b>${!G&&own?'<span class="x-chip" style="margin-left:8px;font-size:11px">pessoal</span>':''}${ed?'':`<span class="x-tg"><button class="${S.ess?'on':''}" onclick="setEss(true)">Essencial</button><button class="${S.ess?'':'on'}" onclick="setEss(false)">Completo</button></span>`}<span style="margin-left:auto;display:flex;gap:6px">${G?'':`<button class="x-gh${ed?' on':''}" onclick="toggleEdit()">${ed?'\u2713 Concluir edi\u00e7\u00e3o':own?'Editar meu roteiro':'Editar roteiro'}</button>`}<button class="x-gh" onclick="S.full=!S.full;save();paint()">${S.full?'Sair da tela cheia':'Tela cheia'}</button></span></div>
 ${ed?'':`<div class="x-steps">${blocks.filter(b=>b.vis).map(b=>`<span class="${b.done?'d':b.part?'c':''}"></span>`).join('')}</div>`}
-<div class="sb">${ed?`<div class="hint">Modo edi\u00e7\u00e3o: altere falas, t\u00edtulos, perguntas e op\u00e7\u00f5es. Salva sozinho e vale para toda a equipe. Perguntas n\u00e3o s\u00e3o removidas, para n\u00e3o perder respostas j\u00e1 salvas.</div>${editor()}<button class="rs" onclick="ask('Restaurar o roteiro original? As edi\u00e7\u00f5es do roteiro ser\u00e3o perdidas (as respostas continuam salvas).',()=>{SDIRTY=false;S.script=normS(clone(SC0));W('fila/roteiro',clone(S.script));saveCache();render()})">Restaurar roteiro original</button>`:blocks.map(b=>b.h).join('')}</div>
-<div class="sf"><span id="sfs">${fsText(id)}</span>${ed?'':`<span class="x-cnt" style="margin-left:auto">${ans} de ${tot} respondidas</span>`}</div></div>`}
+<div class="sb">${ed?`<div class="hint">${G?'Roteiro geral: salva sozinho e vale para toda a equipe, menos para quem tem roteiro pr\u00f3prio.':own?'Este \u00e9 o seu roteiro: salva sozinho e vale s\u00f3 para voc\u00ea.':'Voc\u00ea usa o roteiro geral. Ao alterar qualquer coisa, ele vira uma c\u00f3pia s\u00f3 sua; os outros n\u00e3o s\u00e3o afetados.'} Perguntas n\u00e3o s\u00e3o removidas, para n\u00e3o perder respostas j\u00e1 salvas.</div>${editor()}${G?`<button class="rs" onclick="ask('Restaurar o roteiro geral original? As edi\u00e7\u00f5es gerais ser\u00e3o perdidas (as respostas e os roteiros pr\u00f3prios continuam).',()=>{SDIRTY=false;clearTimeout(sTm);const t=Date.now();S.gscript=normS(clone(SC0));S.gts=t;S.script=S.gscript;WM({'fila/roteiro':clone(S.gscript),'fila/roteiroTs':t});saveCache();render()})">Restaurar roteiro original</button>`:own?`<button class="rs" onclick="ask('Voltar ao roteiro geral? O seu roteiro pr\u00f3prio ser\u00e1 apagado (as respostas continuam salvas).',useGeneral)">Voltar ao roteiro geral</button>`:''}`:(own&&(S.gts||0)>(own.b||0)?`<div class="warn" style="margin-bottom:12px"><b>O roteiro geral mudou</b> depois que voc\u00ea criou o seu. <button class="lnk" onclick="ask('Trocar o seu roteiro pelo geral? O seu ser\u00e1 apagado.',useGeneral)">Usar o geral</button><button class="lnk" onclick="keepOwn()">Manter o meu</button></div>`:'')+blocks.map(b=>b.h).join('')}</div>
+<div class="sf"><span id="sfs">${G?'O roteiro geral salva sozinho':fsText(id)}</span>${ed?'':`<span class="x-cnt" style="margin-left:auto">${ans} de ${tot} respondidas</span>`}</div></div>`}
 document.addEventListener('focusin',e=>{const w=e.target&&e.target.closest&&e.target.closest('.x-qw');if(!w||!e.target.dataset||!e.target.dataset.k)return;CQ={id:e.target.dataset.k.split('|')[0],k:w.dataset.qk};document.querySelectorAll('.x-qw.cur').forEach(z=>z.classList.remove('cur'));w.classList.add('cur')});
+function setEss(v){flushSave();S.ess=!!v;save();paint()}
 function toggleEdit(){flushSave();S.edit=!S.edit;paint()}
-function flushScript(){clearTimeout(sTm);if(!SDIRTY)return;SDIRTY=false;saveCache();W('fila/roteiro',clone(S.script))}
-function addQ(bi){const b=S.script[bi];if(!b)return;b.q.push({t:''});SDIRTY=true;flushScript();paint();const t=document.querySelector(`textarea[data-ed="q"][data-b="${bi}"][data-q="${b.q.length-1}"]`);if(t)t.focus()}
-function addBlock(){S.script.push({t:'Novo bloco',q:[]});SDIRTY=true;flushScript();paint();const t=document.querySelector(`input[data-ed="t"][data-b="${S.script.length-1}"]`);if(t){t.focus();t.select()}}
-document.addEventListener('input',e=>{const t=e.target,f=t.dataset&&t.dataset.ed;if(!f)return;const b=S.script[+t.dataset.b];if(!b)return;const v=t.value,q=b.q[+t.dataset.q];
- if(f=='q'){if(q)q.t=v}else if(f=='o'){if(q){const a=v.split(',').map(z=>z.trim()).filter(Boolean);if(a.length)q.o=a;else delete q.o}}else if(f=='m'){if(q){if(t.checked)q[f]=1;else delete q[f]}}else if(f=='t')b.t=v;else if(v==='')delete b[f];else b[f]=v;
+function flushScript(){clearTimeout(sTm);if(!SDIRTY)return;SDIRTY=false;const t=Date.now();
+ if(S.person==GEN){S.gscript=S.script;S.gts=t;WM({'fila/roteiro':clone(S.script),'fila/roteiroTs':t})}
+ else{const k=rkey(S.person),o=S.pscr[k]||(S.pscr[k]={b:S.gts||0});o.s=S.script;o.n=S.person;o.ts=t;W('fila/roteiros/'+k,{s:clone(S.script),n:S.person,b:o.b||0,ts:t})}
+ saveCache()}
+function addQ(bi){ensureOwn();const b=S.script[bi];if(!b)return;b.q.push({t:''});SDIRTY=true;flushScript();paint();const t=document.querySelector(`textarea[data-ed="q"][data-b="${bi}"][data-q="${b.q.length-1}"]`);if(t)t.focus()}
+function addBlock(){ensureOwn();S.script.push({t:'Novo bloco',q:[]});SDIRTY=true;flushScript();paint();const t=document.querySelector(`input[data-ed="t"][data-b="${S.script.length-1}"]`);if(t){t.focus();t.select()}}
+document.addEventListener('input',e=>{const t=e.target,f=t.dataset&&t.dataset.ed;if(!f)return;ensureOwn();const b=S.script[+t.dataset.b];if(!b)return;const v=t.value,q=b.q[+t.dataset.q];
+ if(f=='q'){if(q)q.t=v}else if(f=='o'){if(q){const a=v.split(',').map(z=>z.trim()).filter(Boolean);if(a.length)q.o=a;else delete q.o}}else if(f=='e'||f=='m'){if(q){if(t.checked)q[f]=1;else delete q[f]}}else if(f=='t')b.t=v;else if(v==='')delete b[f];else b[f]=v;
  SDIRTY=true;clearTimeout(sTm);sTm=setTimeout(flushScript,700)});
 /* ===== respostas: rascunho + autosave ===== */
 const dr=id=>S.dr[id]||(S.dr[id]=clone(S.ans[id]||{}));
@@ -696,7 +720,7 @@ function askRedist(){flushSave();const r=planRedist();if(!r.moves.length){toast(
  window.__ask=()=>doRedist();ov(`<h3>Redistribuir leads pendentes</h3><p>${r.moves.length} de ${r.pend} leads pendentes mudam de pessoa. Leads j\u00e1 marcados, com respostas ou agendados n\u00e3o mudam.</p><table class="tl"><tr><th>Pessoa</th><th>Pendentes hoje</th><th>Depois</th></tr>${P.map(p=>`<tr><td>${esc(p)}</td><td>${r.bef[p]}</td><td><b>${r.tot[p]}</b></td></tr>`).join('')}${r.orf?`<tr><td class="mu">De pessoas inativas</td><td>${r.orf}</td><td>0</td></tr>`:''}</table><p class="mu" style="font-size:12.5px">Fa\u00e7a isso quando ningu\u00e9m estiver no meio de uma liga\u00e7\u00e3o: a fila de cada um muda na hora.</p><div class="ma"><button class="sv" onclick="const f=window.__ask;ovc();f&&f()">Redistribuir agora</button><button class="pl2" onclick="ovc()">Cancelar</button></div>`)}
 function doRedist(){const r=planRedist(),m={};r.moves.forEach(([id,p])=>{if(S.imp[id]){S.imp[id].p=p;m['fila/importados/'+id+'/p']=p}});if(!Object.keys(m).length)return;
  WM(m);saveCache();build();S.cur={};UNDO=null;save();render();toast(r.moves.length+' leads redistribu\u00eddos')}
-function addMember(){const e=$('tnm'),n=cleanName(e&&e.value);if(!n){toast('Digite o nome da pessoa');return}
+function addMember(){const e=$('tnm'),n=cleanName(e&&e.value);if(!n){toast('Digite o nome da pessoa');return}if(norm(n)==norm(GEN)){toast('Esse nome \u00e9 reservado ao perfil de mudan\u00e7a geral');return}
  const ex=S.team.find(m=>norm(m.n)==norm(n));if(ex){if(ex.a){toast('Essa pessoa j\u00e1 est\u00e1 na equipe');return}ex.a=1}else S.team.push({n,a:1});
  saveTeam();render();toast(n+' entrou na equipe');setTimeout(askRedist,250)}
 function setMember(i,a){const mb=S.team[i];if(!mb)return;if(!a&&P.length<=1){toast('A equipe precisa de pelo menos uma pessoa');return}
@@ -862,8 +886,8 @@ function icsOne(id){if(S.lem[id])icsFile([id],'ligar-'+id+'.ics')}
 function icsAll(){const f=S.lf||'all';const ids=Object.keys(S.lem).filter(id=>BY[id]&&stat(BY[id])=='depois'&&(f=='all'||BY[id].p==f));if(ids.length)icsFile(ids,'ligacoes-agendadas-'+today()+'.ics')}
 /* ===== Respostas salvas (todas e apenas as salvas) ===== */
 function savedData(f){const out=[];ALL.forEach(x=>{if(f&&f!='all'&&x.p!=f)return;if(!hasAns(x.n))return;const a=S.ans[x.n];const blocks=[];
- S.script.forEach((b,bi)=>{const items=[];b.q.forEach((q,qi)=>{const o=a[bi+'|'+qi+'|o'],v=a[bi+'|'+qi];const txt=[o&&String(o).trim()?'['+o+']':'',v&&String(v).trim()?v:''].filter(Boolean).join(' ');if(txt)items.push({q:qt(q),a:txt})});const nv=a[bi+'|n'];if(nv&&String(nv).trim())items.push({q:'Anota\u00e7\u00f5es do bloco',a:nv});if(items.length)blocks.push({t:b.t,items})});
- const known=new Set();S.script.forEach((b,bi)=>{b.q.forEach((_,qi)=>{known.add(bi+'|'+qi);known.add(bi+'|'+qi+'|o')});known.add(bi+'|n')});
+ const SCX=scriptFor(x.p);SCX.forEach((b,bi)=>{const items=[];b.q.forEach((q,qi)=>{const o=a[bi+'|'+qi+'|o'],v=a[bi+'|'+qi];const txt=[o&&String(o).trim()?'['+o+']':'',v&&String(v).trim()?v:''].filter(Boolean).join(' ');if(txt)items.push({q:qt(q),a:txt})});const nv=a[bi+'|n'];if(nv&&String(nv).trim())items.push({q:'Anota\u00e7\u00f5es do bloco',a:nv});if(items.length)blocks.push({t:b.t,items})});
+ const known=new Set();SCX.forEach((b,bi)=>{b.q.forEach((_,qi)=>{known.add(bi+'|'+qi);known.add(bi+'|'+qi+'|o')});known.add(bi+'|n')});
  const extra=Object.keys(a).filter(k=>!known.has(k)&&String(a[k]).trim());if(extra.length)blocks.push({t:'Outras respostas',items:extra.map(k=>({q:'Resposta '+k,a:a[k]}))});
  out.push({x,blocks,when:S.sv[x.n]})});
  return out.sort((p,q)=>String(q.when||'').localeCompare(String(p.when||'')))}
@@ -896,7 +920,8 @@ async function expDoc(){flushSave();const f=S.af||'all',data=savedData(f);if(!da
 function expDocHtml(data,f){let h='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>Respostas</title></head><body style="font-family:Calibri,Arial"><h1>Respostas da pesquisa \u2014 Sigma</h1><p>'+esc(new Date().toLocaleString('pt-BR'))+'</p>';
  data.forEach((d,n)=>{const x=d.x;h+=`<h2${n?' style="page-break-before:always"':''}>${esc(x.e)}</h2><p>${esc([x.r,x.p,x.t1].filter(Boolean).join(' \u00b7 '))}</p>`;d.blocks.forEach(b=>{h+=`<h3>${esc(b.t)}</h3>`+b.items.map(i=>`<p><b>${esc(i.q)}</b><br>${esc(i.a).replace(/\n/g,'<br>')}</p>`).join('')})});
  dl(new Blob(['\ufeff'+h+'</body></html>'],{type:'application/msword'}),'respostas-sigma-'+today()+'.doc');toast('Documento exportado')}
-function qCols(){const cols=[];let n=0;S.script.forEach((b,bi)=>{b.q.forEach((q,qi)=>{const lb=((q.x=='alt'||q.u)?'':(++n)+'. ')+qt(q);if(q.o)cols.push([bi+'|'+qi+'|o',lb+' (op\u00e7\u00e3o)']);cols.push([bi+'|'+qi,lb])})});return cols}
+function qCols(){const cols=[];let n=0;S.gscript.forEach((b,bi)=>{b.q.forEach((q,qi)=>{const lb=((q.x=='alt'||q.u)?'':(++n)+'. ')+qt(q);if(q.o)cols.push([bi+'|'+qi+'|o',lb+' (op\u00e7\u00e3o)']);cols.push([bi+'|'+qi,lb])})});
+ const seen=new Set(cols.map(c=>c[0]));Object.keys(S.pscr).forEach(k=>{const o=S.pscr[k];if(!o||!o.s)return;o.s.forEach((b,bi)=>b.q.forEach((q,qi)=>{const kk=bi+'|'+qi;if(seen.has(kk))return;seen.add(kk);const lb=qt(q)+' (roteiro de '+(o.n||decodeURIComponent(k))+')';if(q.o)cols.push([kk+'|o',lb+' (op\u00e7\u00e3o)']);cols.push([kk,lb])}))});return cols}
 function expCsv(){flushSave();const data=savedData(S.af||'all');if(!data.length)return;const cols=qCols();
  const q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
  const rows=[['Lead','Cidade','Respons\u00e1vel','Atendente','Telefone','Status','CNPJ','Segmento','Grau de risco','Salvo em'].concat(cols.map(c=>c[1]))];
@@ -984,7 +1009,7 @@ function undoImp(b){const ids=Object.keys(S.imp).filter(k=>S.imp[k]&&S.imp[k].b=
  ask(`Desfazer esta importa\u00e7\u00e3o? ${ids.length} leads ser\u00e3o removidos${worked?` (${worked} deles j\u00e1 t\u00eam status ou respostas, que tamb\u00e9m ser\u00e3o apagados)`:''}.`,()=>{const m={};ids.forEach(id=>{delete S.imp[id];delete S.st[id];delete S.ans[id];delete S.sv[id];delete S.lem[id];delete S.dr[id];delete S.rd[id];delete S.tn[id];delete DIRTY[id];['tent/l','rd/l','importados/','status/l','respostas/l','salvo/l','lembretes/l'].forEach(p=>m['fila/'+p+id]=null)});delete S.lotes[b];m['fila/lotes/'+b]=null;WM(m);saveCache();build();render();toast('Importa\u00e7\u00e3o desfeita')})}
 
 /* ===== Backup ===== */
-function snapshotAll(){flushSave();const o={status:{},respostas:{},salvo:{},lembretes:{},importados:clone(S.imp),lotes:clone(S.lotes),roteiro:clone(S.script)};
+function snapshotAll(){flushSave();const o={status:{},respostas:{},salvo:{},lembretes:{},importados:clone(S.imp),lotes:clone(S.lotes),roteiro:clone(S.gscript),roteiroTs:S.gts||0,roteiros:clone(S.pscr)};
  Object.keys(S.st).forEach(k=>{if(S.st[k])o.status['l'+k]=S.st[k]});Object.keys(S.ans).forEach(k=>{if(hasAns(k))o.respostas['l'+k]=clone(S.ans[k])});
  Object.keys(S.sv).forEach(k=>{if(hasAns(k))o.salvo['l'+k]=S.sv[k]});Object.keys(S.lem).forEach(k=>o.lembretes['l'+k]=clone(S.lem[k]));o.equipe=clone(S.team);o.notas=clone(S.notas||{});if(S.des)o.desafio=S.des;o.tent={};Object.keys(S.tn).forEach(k=>{if(S.tn[k])o.tent['l'+k]=S.tn[k]});o.rd={};Object.keys(S.rd).forEach(k=>{if(S.st[k]=='resp')o.rd['l'+k]=S.rd[k]});if(S.meta)o.meta=clone(S.meta);o.config=clone(S.cfg||{});o.historico=clone(S.hist||{});return o}
 function bkpPage(){const o=snapshotAll(),n=k=>Object.keys(o[k]).length;
@@ -1005,7 +1030,7 @@ function expArquivo(){flushSave();const o=arquivoObj(),t=today();
   const cols=qCols();
   add('Leads',[['N','Origem','Atendente','Empresa','Respons\u00e1vel','Telefone','Telefone 2','Segmento','Porte','Faturamento','Funcion\u00e1rios','Cidade','CEP','CNPJ','Site','E-mail','Instagram','Tentativas','Status','Ligar em','Observa\u00e7\u00e3o do agendamento','Respostas salvas em']].concat(ALL.map(x=>{const s=stat(x),m=S.lem[x.n];return[x.n,x.b?'Importado':'Original',x.p,x.e,x.r,x.t1,x.t2||'',x.s||'',x.tp||'',x.f||'',x.fu||'',x.ci||'',x.cep||'',x.cnpj||'',x.si||'',x.em||'',x.ig||'',S.tn[x.n]||0,s?L[s]:'Pendente',m?fmt(m.w):'',m&&m.note||'',hasAns(x.n)?fmt(S.sv[x.n]):'']})),[7,10,12,32,26,16,16,28,10,18,16,16,12,20,24,26,30,10,24,16,30,18]);
   add('Respostas',[['N','Empresa','Cidade','Atendente','Status','Salvo em'].concat(cols.map(c=>c[1]))].concat(ALL.filter(x=>hasAns(x.n)).map(x=>{const a=S.ans[x.n],s=stat(x);return[x.n,x.e,x.ci||'',x.p,s?L[s]:'Pendente',fmt(S.sv[x.n])].concat(cols.map(c=>a[c[0]]||''))})),[7,30,16,12,22,16].concat(cols.map(()=>38)));
-  add('Roteiro',[['Bloco','Pitch / fala','Pergunta','Texto','Orienta\u00e7\u00e3o de anota\u00e7\u00e3o']].concat(S.script.flatMap((b,bi)=>[[b.t,b.i||'','','',b.n||'']].concat(b.q.map((q,qi)=>['','',qi+1,qt(q)+(q.o?' ['+q.o.join(' / ')+']':''),''])))),[28,60,10,70,50]);
+  add('Roteiro',[['Bloco','Pitch / fala','Pergunta','Texto','Orienta\u00e7\u00e3o de anota\u00e7\u00e3o']].concat(S.gscript.flatMap((b,bi)=>[[b.t,b.i||'','','',b.n||'']].concat(b.q.map((q,qi)=>['','',qi+1,qt(q)+(q.o?' ['+q.o.join(' / ')+']':''),''])))),[28,60,10,70,50]);
   dl(new Blob([XLSX.write(wb,{bookType:'xlsx',type:'array'})],{type:'application/octet-stream'}),'arquivo-pesquisa-completo-'+t+'.xlsx')}catch(e){console.error(e)}},600)}
  ARCH=true;toast('Arquivo da pesquisa baixado');setTimeout(()=>{if(S.tab=='bkp')paint()},900)}
 function novaPesquisa(){if(!ARCH){toast('Baixe primeiro o arquivo da pesquisa (passo 1)');return}
@@ -1028,8 +1053,8 @@ async function restoreBackup(file){if(!file)return;let o;try{o=JSON.parse(await 
  ask(`Restaurar este backup (${ns} status, ${nr} leads com respostas, ${Object.keys(o.importados||{}).length} leads importados)?`,()=>{const m={};
   if(o.meta)m['fila/meta']=o.meta;
   ['status','respostas','salvo','lembretes','importados','lotes','rd','tent'].forEach(k=>Object.keys(o[k]||{}).forEach(id=>m['fila/'+k+'/'+id]=o[k][id]));
-  if(o.roteiro&&o.roteiro.length)m['fila/roteiro']=o.roteiro;
-  WM(m);Object.assign(S.st,unk(o.status));Object.assign(S.ans,unk(o.respostas));Object.assign(S.sv,unk(o.salvo));Object.assign(S.lem,unk(o.lembretes));Object.assign(S.rd,unk(o.rd));Object.assign(S.tn,unk(o.tent));if(o.meta)S.meta=o.meta;Object.assign(S.imp,o.importados||{});Object.assign(S.lotes,o.lotes||{});if(o.roteiro&&o.roteiro.length)S.script=o.roteiro;saveCache();build();
+  if(o.roteiro&&o.roteiro.length){m['fila/roteiro']=o.roteiro;m['fila/roteiroTs']=+o.roteiroTs||Date.now()}if(o.roteiros)Object.keys(o.roteiros).forEach(k=>m['fila/roteiros/'+k]=o.roteiros[k]);
+  WM(m);Object.assign(S.st,unk(o.status));Object.assign(S.ans,unk(o.respostas));Object.assign(S.sv,unk(o.salvo));Object.assign(S.lem,unk(o.lembretes));Object.assign(S.rd,unk(o.rd));Object.assign(S.tn,unk(o.tent));if(o.meta)S.meta=o.meta;Object.assign(S.imp,o.importados||{});Object.assign(S.lotes,o.lotes||{});if(o.roteiro&&o.roteiro.length){S.gscript=normS(o.roteiro);S.gts=+o.roteiroTs||Date.now()}if(o.roteiros)Object.assign(S.pscr,o.roteiros);pickScript();saveCache();build();
   render();toast('Backup restaurado')})}
 /* ===== Gr\u00e1ficos, relat\u00f3rio .xlsx e .docx ===== */
 function dayList(m){const a=[],st=new Date(m.ini+'T12:00'),en=new Date(m.ate+'T12:00');for(let d=new Date(st);d<=en&&a.length<40;d.setDate(d.getDate()+1)){const w=d.getDay();if(w>0&&w<6)a.push(tkey(d))}return a}
