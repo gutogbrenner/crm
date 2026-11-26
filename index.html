@@ -286,7 +286,13 @@ h1{font-size:22px;font-weight:600;letter-spacing:-.01em}.sub{color:var(--mu)}
 .x-sq{width:20px;height:20px;border-radius:5px;cursor:pointer;border:0;padding:0}.x-sq:hover{outline:2px solid #fff;outline-offset:1px}
 .x-sq.a{box-shadow:inset 0 0 0 2px rgba(255,255,255,.85)}
 .x-mh{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}.x-mh b{font-size:16px;font-weight:600}.x-mh span{color:var(--mu);font-size:13px}
-.x-sts{grid-template-columns:1.05fr 1.5fr 1.1fr 1.2fr 1.1fr}
+.x-sts{grid-template-columns:repeat(3,1fr)}
+.x-bar i.nt{box-shadow:inset 0 0 0 2px #d9a25e}
+.x-chip.nt{color:#d9a25e;border-color:rgba(217,162,94,.5)}
+.x-sq.a{box-shadow:inset 0 0 0 2px #d9a25e}
+.x-stw{display:flex;gap:6px;min-width:0}.x-stw .x-st{flex:1;min-width:0}
+.x-wa{flex:none;width:40px;height:40px;align-self:center;border-radius:50%;display:grid;place-items:center;color:#25d366;border:1px solid rgba(37,211,102,.45);background:rgba(37,211,102,.08);transition:background .15s,transform .15s}
+.x-wa:hover{background:rgba(37,211,102,.2);transform:scale(1.06)}
 
 /* ---- tons mais suaves ---- */
 html{background:#0f1614}
@@ -383,6 +389,11 @@ html[data-theme=light]{background:#e3e6e4;--bg:#e3e6e4;--tx:#1b2420;--mu:#5a6962
 [data-theme=light] .warn{background:rgba(217,162,94,.16)}
 .x-note h4{margin:16px 0 6px;font-size:13px;font-weight:600;color:var(--mu);letter-spacing:.02em}.x-note ul{margin:0;padding-left:20px}.x-note li{margin:5px 0;line-height:1.5}.x-note p{margin:8px 0}.x-note li b{font-weight:600}
 .nav{height:40px}
+/* nome do ícone ao passar o mouse */
+#navtip{position:fixed;z-index:9999;pointer-events:none;opacity:0;transform:translate(-6px,-50%);transition:opacity .18s ease,transform .18s ease;white-space:nowrap;font-size:12.5px;font-weight:500;letter-spacing:.01em;color:#e9f3ee;background:rgba(18,28,25,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(93,187,146,.28);padding:7px 12px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+#navtip.on{opacity:1;transform:translate(0,-50%)}
+[data-theme=light] #navtip{color:#1b2420;background:rgba(255,255,255,.92);border-color:rgba(47,143,105,.3);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+@media (hover:none){#navtip{display:none}}
 </style></head><body>
 <canvas id="sky" width="800" height="450"></canvas><aside><div class="x-logo">&#931;</div><button class="nav" id="n-call" title="Liga&#231;&#245;es" onclick="go('call')"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></button><button class="nav" id="n-sched" title="Agendadas" onclick="go('sched')"></button><button class="nav" id="n-ans" title="Respostas salvas" onclick="go('ans')"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></button><button class="nav" id="n-imp" title="Importar leads" onclick="go('imp')"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7 9m5-5 5 5M4 20h16"/></svg></button><button class="nav" id="n-stats" title="Resultados" onclick="go('stats')"><svg viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg></button><button class="nav" id="n-map" title="Mapa dos leads" onclick="go('map')"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.2"/><rect x="14" y="4" width="6" height="6" rx="1.2"/><rect x="4" y="14" width="6" height="6" rx="1.2"/><rect x="14" y="14" width="6" height="6" rx="1.2"/></svg></button><button class="nav" id="n-team" title="Equipe" onclick="go('team')"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M16 5.2a3.2 3.2 0 0 1 0 5.6M18 14.8c1.8.7 3 2.4 3 5.2"/></svg></button><button class="nav" id="n-notes" title="Patch notes" onclick="go('notes')"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4M10 12h6M10 16h6"/></svg></button><button class="nav" id="n-bkp" title="Backup e nova pesquisa" onclick="go('bkp')"><svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM8 4v5h7M8 20v-6h8v6"/></svg></button><button class="nav" id="n-theme" onclick="toggleTheme()"></button><div id="usr" style="display:none"></div><div id="conn"></div></aside><div id="cmsg" style="display:none"></div><main><div class="top" id="head"></div><div id="body"></div></main><div id="ov"></div><div id="toast"></div>
 <script>
@@ -390,11 +401,13 @@ let D=[],ALL=[],BY={},LSC={};
 const GEN='Mudan\u00e7a geral',rkey=p=>encodeURIComponent(String(p)).replace(/\./g,'%2E');
 const TEAM0=[{n:'Maria',a:1},{n:'In\u00eas',a:1},{n:'Jo\u00e3o Paulo',a:1},{n:'GB',a:1}];
 const P=[];let PALL=[];
-const L2={resp:'Respondeu',atend:'Atendeu, sem resposta',nao:'N\u00e3o atendeu',erro:'Contato errado',depois:'Ligar depois'};
-const L={resp:'Respondeu a pesquisa',atend:'Atendeu, mas n\u00e3o respondeu',nao:'N\u00e3o atendeu',erro:'Contato errado',depois:'Ligar depois'};
-const K={resp:'R',atend:'A',nao:'N',erro:'E',depois:'D'};
-const C={resp:'#5dbb92',atend:'#a9c98a',nao:'#d9a25e',erro:'#d97070',depois:'#9a8fd0'};
-const ST=['resp','atend','nao','erro'],ST5=ST.concat(['depois']);
+const L2={resp:'Respondeu',form:'Formul\u00e1rio enviado',atend:'Atendeu, sem resposta',nao:'N\u00e3o atendeu',erro:'Contato errado',depois:'Ligar depois'};
+const L={resp:'Respondeu a pesquisa',form:'Formul\u00e1rio enviado',atend:'Atendeu, mas n\u00e3o respondeu',nao:'N\u00e3o atendeu',erro:'Contato errado',depois:'Ligar depois'};
+const K={resp:'R',form:'F',atend:'A',nao:'N',erro:'E',depois:'D'};
+const C={resp:'#5dbb92',form:'#5fb3d9',atend:'#a9c98a',nao:'#d9a25e',erro:'#d97070',depois:'#9a8fd0'};
+const FORM_MSG='Oi tudo bem?\n\nSomos estudantes da Universidade Federal do Rio Grande do Sul (UFRGS) e estamos fazendo uma pesquisa sobre como as empresas da regi\u00e3o cuidam da Sa\u00fade e Seguran\u00e7a do Trabalho (SST).\n\nAs informa\u00e7\u00f5es coletadas ser\u00e3o usadas apenas para fins acad\u00eamicos. Agradecemos muito a sua colabora\u00e7\u00e3o!\n\nhttps://forms.gle/SLXbtGgyxU3mWJfZA';
+const WA_IC='<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>';
+const ST=['resp','form','atend','nao','erro'],ST5=ST.concat(['depois']);
 const SC0=[
 {t:'Abertura',i:'\u201cBoa tarde, ___, tudo certo? Meu nome \u00e9 ___, te peguei num momento ruim? Sou estudante da UFRGS e fa\u00e7o parte da PS J\u00fanior, a empresa j\u00fanior da universidade. Estamos fazendo uma pesquisa de mercado sobre a satisfa\u00e7\u00e3o das empresas da regi\u00e3o com os servi\u00e7os de medicina e seguran\u00e7a do trabalho. A conversa leva de 10 a 15 minutos. Posso gravar o \u00e1udio, s\u00f3 para transcrever depois? A grava\u00e7\u00e3o fica com a equipe do projeto e as respostas s\u00e3o analisadas sem identificar a empresa.\u201d',n:'Se n\u00e3o autorizar a grava\u00e7\u00e3o, siga anotando as respostas.',q:[]},
 {t:'Bloco 1 \u00b7 Perfil da empresa',q:[
@@ -561,10 +574,10 @@ function head(){
  if(S.tab!='call'){const t=T[S.tab];$('head').innerHTML=`<div><h1>${t[0]}</h1><div class="sub">${t[1]}</div></div>`;return}
  const segH=p=>`<div class="seg">${P.map(n=>`<button class="${n==p?'on':''}" onclick="setP('${n}')">${n}${ownS(n)?'<i class="pdot" title="Tem roteiro pr\u00f3prio"></i>':''}<b>${pend(n)}</b></button>`).join('')}<button class="gen${p==GEN?' on':''}" onclick="setP(GEN)" title="Perfil sem leads: altera o roteiro de toda a equipe">\u270e ${GEN}</button></div>`;
  if(S.person==GEN){$('head').innerHTML=`<div><h1>Roteiro geral</h1><div class="sub">Perfil sem leads \u00b7 o que mudar aqui vale para toda a equipe</div></div>${segH(GEN)}`;return}
- const p=S.person,r=pend(p),ag=LS(p).filter(x=>stat(x)=='depois').length,g=goalCalc(),pct=Math.min(100,Math.round(g.done/g.m.alvo*100));
+ const p=S.person,r=pend(p),ag=LS(p).filter(x=>stat(x)=='depois').length,g=goalMain(),pct=Math.min(100,Math.round(g.done/g.m.alvo*100));
  $('head').innerHTML=`<div><h1>Fila de liga\u00e7\u00e3o</h1><div class="sub">${S.cfg&&S.cfg.nome?esc(S.cfg.nome)+' \u00b7 ':''}${esc(p)} \u00b7 ${r} ${r==1?'falta':'faltam'} de ${LS(p).length}${ag?` \u00b7 ${ag} para ligar depois`:''}</div></div>
 <button class="x-srch" onclick="openSearch()">Buscar empresa, telefone ou CNPJ<kbd>Ctrl K</kbd></button>
-<button class="x-goal" onclick="openMeta()" title="Clique para editar a meta"><span class="x-ring" style="background:conic-gradient(var(--pr) 0 ${pct*3.6}deg,var(--trk) 0)"></span><span><b>${g.done}/${g.m.alvo}</b><small>meta \u00b7 ${g.faltam==0?'batida':g.fim?'prazo encerrado':g.util?'hoje '+g.hoje+' de '+g.alvoHoje:'pr\u00f3x. dia '+g.prox}</small></span></button>
+<button class="x-goal" onclick="openMeta()" title="Clique para editar a meta"><span class="x-ring" style="background:conic-gradient(var(--pr) 0 ${pct*3.6}deg,var(--trk) 0)"></span><span><b>${g.done}/${g.m.alvo}</b><small>meta \u00b7 ${g.faltam==0?'batida':g.fim?'prazo encerrado':g.man?'faltam '+g.faltam:g.util?'hoje '+g.hoje+' de '+g.alvoHoje:'pr\u00f3x. dia '+g.prox}</small></span></button>
 ${segH(p)}`}
 function paint(){({call,sched,ans:ansPage,imp:impPage,bkp:bkpPage,stats,team:teamPage,map:mapPage,notes:notesPage}[S.tab]||call)()}
 function tel(x){return(S.ph[x.n]==2&&x.t2?x.t2:x.t1)||''}
@@ -592,7 +605,7 @@ function call(){
  const site=x.si?`<a href="${/^http/.test(x.si)?'':'https://'}${esc(x.si)}" target="_blank" rel="noopener">${esc(x.si)}</a>`:'\u2014';
  const em=x.em?`<a href="mailto:${esc(x.em)}">${esc(x.em)}</a>`:'\u2014';
  $('body').innerHTML=`<div class="x-grid"><div><div class="card x-lead">
-<div class="x-chips">${x.gr?`<span class="x-chip${+x.gr>=3?' w':''}">Grau de risco ${esc(x.gr)}</span>`:''}${tn?`<span class="x-chip">${tn+1}\u00aa tentativa</span>`:''}${s?`<span class="x-chip" style="color:${C[s]};border-color:${C[s]}77">${L[s]}</span>`:''}<span id="rbadge" class="x-chip ok" style="${hasAns(id)?'':'display:none'}">Respostas salvas</span>
+<div class="x-chips">${x.gr?`<span class="x-chip${+x.gr>=3?' w':''}">Grau de risco ${esc(x.gr)}</span>`:''}${tn?`<span class="x-chip">${tn+1}\u00aa tentativa</span>`:''}${s?`<span class="x-chip" style="color:${C[s]};border-color:${C[s]}77">${L[s]}</span>`:''}<span id="rbadge" class="x-chip${s=='resp'?' ok':' nt'}" style="${hasAns(id)?'':'display:none'}">${s=='resp'?'Respostas salvas':'\u270e Tem anota\u00e7\u00e3o \u00b7 s\u00f3 conta na meta com \u201cRespondeu\u201d'}</span>
 ${qa?`<div class="x-quota" title="Entrevistas j\u00e1 respondidas nesta cidade, por porte">${Object.keys(QT).map(k=>`<span>${k.replace(' a ','\u2013')}${Array.from({length:QT[k]},(_,j)=>`<i class="${j<qa.o[k]?'d':''}"></i>`).join('')}</span>`).join('')}</div>`:''}</div>
 <div class="x-kick">${esc([x.ci,segName(x)].filter(Boolean).join(' \u00b7 '))}</div>
 <h2 class="x-name">${esc(x.e)}</h2><div class="x-who">Respons\u00e1vel \u00b7 ${esc(x.r||'\u2014')}</div>
@@ -604,8 +617,8 @@ ${s=='depois'&&lm?`<div class="warn sch" style="margin-top:14px"><b>Ligar em ${e
 <div class="x-qr${S.qrb?' big':''}" onclick="S.qrb=!S.qrb;save();paint()" title="Escaneie para ligar pelo celular \u00b7 clique para ${S.qrb?'reduzir':'ampliar'}">${q}</div></div>
 <div class="x-info"><div><span class="x-lb">CNPJ</span><b class="mono">${esc(x.cnpj||'\u2014')}</b></div><div><span class="x-lb">Porte</span><b title="${esc(x.fu||x.tp||'')}">${esc(x.fu||x.tp||'\u2014')}</b></div><div><span class="x-lb">Site</span><b>${site}</b></div><div><span class="x-lb">E-mail</span><b>${em}</b></div></div></div>
 <div class="card x-res"><span class="x-lb">Resultado da liga\u00e7\u00e3o</span>
-<div class="x-sts">${ST5.map(k=>`<button class="x-st${k=='resp'?' pri':''}${s==k?' sel':''}" style="color:${C[k]}" onclick="mark('${k}')">${k=='resp'?'':'<u></u>'}<span>${L2[k]}</span><kbd>${K[k]}</kbd></button>`).join('')}</div>
-<div class="x-q"><span class="x-lb">Fila</span><div class="x-bar">${l.map((y,j)=>{const t=stat(y);return `<i class="${j==i?'cur':''}" style="${t?'background:'+C[t]:''}" onclick="sel(${j})" title="${j+1}. ${esc(y.e)}"></i>`}).join('')}</div><span class="x-cnt">lead ${i+1} de ${l.length} \u00b7 ${l.length-done} faltam</span>
+<div class="x-sts">${ST5.map(k=>{const bt=`<button class="x-st${k=='resp'?' pri':''}${s==k?' sel':''}" style="color:${C[k]}" onclick="mark('${k}')">${k=='resp'?'':'<u></u>'}<span>${L2[k]}</span><kbd>${K[k]}</kbd></button>`;return k=='form'?`<div class="x-stw">${bt}<a class="x-wa" href="https://wa.me/${dg.length<=11?'55':''}${dg}?text=${encodeURIComponent(FORM_MSG)}" target="_blank" rel="noopener" title="Enviar o formul\u00e1rio por WhatsApp para este n\u00famero">${WA_IC}</a></div>`:bt}).join('')}</div>
+<div class="x-q"><span class="x-lb">Fila</span><div class="x-bar">${l.map((y,j)=>{const t=stat(y);return `<i class="${j==i?'cur':''}${t!='resp'&&hasAns(y.n)?' nt':''}" style="${t?'background:'+C[t]:''}" onclick="sel(${j})" title="${j+1}. ${esc(y.e)}${t!='resp'&&hasAns(y.n)?' \u00b7 tem anota\u00e7\u00e3o, n\u00e3o conta na meta':''}"></i>`}).join('')}</div><span class="x-cnt">lead ${i+1} de ${l.length} \u00b7 ${l.length-done} faltam</span>
 <div class="x-nav"><button class="x-gh" onclick="mv(-1)">\u2190 Anterior</button><button class="x-gh" onclick="mv(1)">Pr\u00f3ximo \u2192</button><button class="x-gh" onclick="undoLast()" ${UNDO?'':'disabled'}>Desfazer</button></div></div>
 ${nxl?`<div class="x-nx">A seguir \u00b7 <b>${esc(nxl.e)}</b>${nxl.ci?' \u00b7 '+esc(nxl.ci):''}${nxl.fu?' \u00b7 '+esc(nxl.fu):''}</div>`:''}</div></div>
 ${rpanel(x)}</div>`;
@@ -740,7 +753,7 @@ function mapPage(){const fc=S.mc||'',cities=[...new Set(ALL.map(x=>x.ci).filter(
  $('body').innerHTML=`<div class="card" style="margin-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;justify-content:space-between"><div class="x-lg">${lg('', 'Pendente',c.pend)}${ST5.map(k=>lg(C[k],L2[k],c[k])).join('')}</div>
 <select class="srch" style="width:auto;max-width:220px" onchange="S.mc=this.value;paint()"><option value="">Todas as cidades</option>${cities.map(ci=>`<option${ci==fc?' selected':''}>${esc(ci)}</option>`).join('')}</select></div>
 ${PR().map(p=>{const l=LS(p).filter(inC),k=cnt(l);return `<div class="card" style="margin-bottom:14px"><div class="x-mh"><b>${esc(p)}${P.includes(p)?'':' <span>\u00b7 inativa</span>'}</b><span>${l.length} leads \u00b7 ${k.done} contatados \u00b7 ${k.resp} responderam \u00b7 ${k.pend} pendentes</span></div>
-<div class="x-map">${l.map(x=>{const s=stat(x);return `<button class="x-sq${hasAns(x.n)?' a':''}" style="${s?'background:'+C[s]:''}" title="${esc(x.e)}${x.ci?' \u00b7 '+esc(x.ci):''} \u00b7 ${s?L[s]:'Pendente'}" onclick="gotoLead('${x.n}')"></button>`}).join('')||'<span class="mu">Sem leads nesta cidade.</span>'}</div></div>`}).join('')}
+<div class="x-map">${l.map(x=>{const s=stat(x);return `<button class="x-sq${hasAns(x.n)?' a':''}" style="${s?'background:'+C[s]:''}" title="${esc(x.e)}${x.ci?' \u00b7 '+esc(x.ci):''} \u00b7 ${s?L[s]:'Pendente'}${s!='resp'&&hasAns(x.n)?' \u00b7 tem anota\u00e7\u00e3o, n\u00e3o conta na meta':''}" onclick="gotoLead('${x.n}')"></button>`}).join('')||'<span class="mu">Sem leads nesta cidade.</span>'}</div></div>`}).join('')}
 <div class="mu" style="font-size:12.5px">Borda branca = lead com respostas salvas. Clique em um quadradinho para abrir o lead.</div>`}
 /* ===== Patch notes ===== */
 const NOTE0={t:'2026-11-13T12:00:00.000Z',titulo:'Atualiza\u00e7\u00e3o de 13/11/2026',fixo:1,txt:`Para quem vai ligar
@@ -803,18 +816,22 @@ function goalCalc(){const m=metaG(),td=tkey(new Date());
  const pp={};PALL.forEach(p=>pp[p]={f:0,h:0});ids.forEach(id=>{const p=BY[id].p;if(pp[p]){pp[p].f++;if(S.rd[id]==td)pp[p].h++}});
  return{m,done,hoje,dias,util,faltam,alvoHoje,prox,pp,fim:td>m.ate,adj}}
 const fdia=k=>{const d=new Date(k+'T12:00');return d.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'2-digit'})};
-function goalBar(){const g=goalCalc(),m=g.m,pct=Math.min(100,Math.round(g.done/m.alvo*100));
- let h2;if(g.faltam==0)h2='\ud83c\udf89 Meta batida!';else if(g.fim)h2='Prazo encerrado \u00b7 faltaram '+g.faltam;else if(g.util)h2=`Hoje: <b>${g.hoje}/${g.alvoHoje}</b>${g.hoje>=g.alvoHoje?' \u2713':''}`;else h2=`Hoje \u00e9 folga \u00b7 pr\u00f3ximo dia \u00fatil: <b>${g.prox}</b>`;
+/* meta da tela principal: usa o n\u00famero manual quando preenchido */
+function goalMain(){const g=goalCalc(),m=g.m;g.man=m.manual!==undefined&&m.manual!==null&&m.manual!=='';if(g.man){g.done=Math.max(0,+m.manual||0);g.faltam=Math.max(0,m.alvo-g.done)}return g}
+function goalBar(){const g=goalMain(),m=g.m,man=g.man;
+ const pct=Math.min(100,Math.round(g.done/m.alvo*100));
+ let h2;if(g.faltam==0)h2='\ud83c\udf89 Meta batida!';else if(g.fim)h2='Prazo encerrado \u00b7 faltaram '+g.faltam;else if(man)h2=g.dias?`ritmo: <b>${Math.ceil(g.faltam/g.dias)}</b> por dia \u00fatil`:'';else if(g.util)h2=`Hoje: <b>${g.hoje}/${g.alvoHoje}</b>${g.hoje>=g.alvoHoje?' \u2713':''}`;else h2=`Hoje \u00e9 folga \u00b7 pr\u00f3ximo dia \u00fatil: <b>${g.prox}</b>`;
  return `<div class="goal" onclick="openMeta()" title="Clique para editar a meta"><div class="gt">\ud83c\udfaf Meta: <b>${g.done}/${m.alvo}</b> respostas at\u00e9 ${esc(fdia(m.ate))} \u00b7 ${h2}${g.faltam&&!g.fim?` \u00b7 faltam <b>${g.faltam}</b> em ${g.dias} ${g.dias==1?'dia \u00fatil':'dias \u00fateis'}`:''} <span class="ge">\u270e editar</span></div><div class="gb"><i style="width:${pct}%"></i></div></div>`}
 function openMeta(){const m=metaG();
  ov(`<h3>\ud83c\udfaf Meta de respostas</h3><p class="mu">Conta como resposta cada lead marcado como \u201cRespondeu a pesquisa\u201d entre as datas abaixo. Vale para toda a equipe.</p>
+<label>Respostas feitas (n\u00famero que aparece na barra da meta)</label><input type="number" id="mg0" min="0" placeholder="Vazio = contar sozinho pelos leads marcados" value="${m.manual!==undefined&&m.manual!==null&&m.manual!==''?+m.manual:''}">
 <label>Quantas respostas precisamos</label><input type="number" id="mg1" min="1" value="${m.alvo}">
 <label>De (primeiro dia)</label><input type="date" id="mg2" value="${esc(m.ini)}"><label>At\u00e9 (\u00faltimo dia)</label><input type="date" id="mg3" value="${esc(m.ate)}">
 <label>Respostas j\u00e1 feitas que n\u00e3o est\u00e3o contadas aqui (opcional)</label><input type="number" id="mg4" min="0" value="${+m.ajuste||0}"><div id="mge" class="err"></div>
 <div class="ma"><button class="sv" onclick="saveMeta()">Salvar meta</button><button class="pl2" onclick="ovc()">Cancelar</button></div>`)}
 function saveMeta(){const a=Math.floor(+$('mg1').value),i=$('mg2').value,e=$('mg3').value,j=Math.max(0,Math.floor(+$('mg4').value||0));
  if(!(a>=1)){$('mge').textContent='Informe quantas respostas precisamos.';return}if(!i||!e||e<i){$('mge').textContent='Confira as datas (o \u00faltimo dia n\u00e3o pode ser antes do primeiro).';return}
- S.meta={alvo:a,ini:i,ate:e,ajuste:j};W('fila/meta',clone(S.meta));saveCache();ovc();render();toast('Meta salva')}
+ const mv0=$('mg0').value.trim();S.meta={alvo:a,ini:i,ate:e,ajuste:j};if(mv0!=='')S.meta.manual=Math.max(0,Math.floor(+mv0||0));W('fila/meta',clone(S.meta));saveCache();ovc();render();toast('Meta salva')}
 /* ===== Ligar depois ===== */
 const loc=d=>{const p=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'T'+p(d.getHours())+':'+p(d.getMinutes())};
 function openSched(id){const x=BY[id],ex=S.lem[id];let d=ex?new Date(ex.w):new Date(Date.now()+3600e3);if(!ex){d.setMinutes(Math.ceil(d.getMinutes()/5)*5,0,0)}
@@ -888,7 +905,8 @@ function icsFile(ids,name){dl(new Blob(['BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODI
 function icsOne(id){if(S.lem[id])icsFile([id],'ligar-'+id+'.ics')}
 function icsAll(){const f=S.lf||'all';const ids=Object.keys(S.lem).filter(id=>BY[id]&&stat(BY[id])=='depois'&&(f=='all'||BY[id].p==f));if(ids.length)icsFile(ids,'ligacoes-agendadas-'+today()+'.ics')}
 /* ===== Respostas salvas (todas e apenas as salvas) ===== */
-function savedData(f){const out=[];ALL.forEach(x=>{if(f&&f!='all'&&x.p!=f)return;if(!hasAns(x.n))return;const a=S.ans[x.n];const blocks=[];
+const isResp=x=>!!x&&stat(x)=='resp'&&hasAns(x.n);
+function savedData(f){const out=[];ALL.forEach(x=>{if(f&&f!='all'&&x.p!=f)return;if(!isResp(x))return;const a=S.ans[x.n];const blocks=[];
  const SCX=scriptFor(x.p);SCX.forEach((b,bi)=>{const items=[];b.q.forEach((q,qi)=>{const o=a[bi+'|'+qi+'|o'],v=a[bi+'|'+qi];const txt=[o&&String(o).trim()?'['+o+']':'',v&&String(v).trim()?v:''].filter(Boolean).join(' ');if(txt)items.push({q:qt(q),a:txt})});const nv=a[bi+'|n'];if(nv&&String(nv).trim())items.push({q:'Anota\u00e7\u00f5es do bloco',a:nv});if(items.length)blocks.push({t:b.t,items})});
  const known=new Set();SCX.forEach((b,bi)=>{b.q.forEach((_,qi)=>{known.add(bi+'|'+qi);known.add(bi+'|'+qi+'|o')});known.add(bi+'|n')});
  const extra=Object.keys(a).filter(k=>!known.has(k)&&String(a[k]).trim());if(extra.length)blocks.push({t:'Outras respostas',items:extra.map(k=>({q:'Resposta '+k,a:a[k]}))});
@@ -1032,7 +1050,7 @@ function expArquivo(){flushSave();const o=arquivoObj(),t=today();
  if(typeof XLSX!='undefined'){setTimeout(()=>{try{const wb=XLSX.utils.book_new(),add=(n,rows,w)=>{const ws=XLSX.utils.aoa_to_sheet(rows);ws['!cols']=w.map(x=>({wch:x}));XLSX.utils.book_append_sheet(wb,ws,n)};
   const cols=qCols();
   add('Leads',[['N','Origem','Atendente','Empresa','Respons\u00e1vel','Telefone','Telefone 2','Segmento','Porte','Faturamento','Funcion\u00e1rios','Cidade','CEP','CNPJ','Site','E-mail','Instagram','Tentativas','Status','Ligar em','Observa\u00e7\u00e3o do agendamento','Respostas salvas em']].concat(ALL.map(x=>{const s=stat(x),m=S.lem[x.n];return[x.n,x.b?'Importado':'Original',x.p,x.e,x.r,x.t1,x.t2||'',x.s||'',x.tp||'',x.f||'',x.fu||'',x.ci||'',x.cep||'',x.cnpj||'',x.si||'',x.em||'',x.ig||'',S.tn[x.n]||0,s?L[s]:'Pendente',m?fmt(m.w):'',m&&m.note||'',hasAns(x.n)?fmt(S.sv[x.n]):'']})),[7,10,12,32,26,16,16,28,10,18,16,16,12,20,24,26,30,10,24,16,30,18]);
-  add('Respostas',[['N','Empresa','Cidade','Atendente','Status','Salvo em'].concat(cols.map(c=>c[1]))].concat(ALL.filter(x=>hasAns(x.n)).map(x=>{const a=S.ans[x.n],s=stat(x);return[x.n,x.e,x.ci||'',x.p,s?L[s]:'Pendente',fmt(S.sv[x.n])].concat(cols.map(c=>a[c[0]]||''))})),[7,30,16,12,22,16].concat(cols.map(()=>38)));
+  add('Respostas',[['N','Empresa','Cidade','Atendente','Status','Salvo em'].concat(cols.map(c=>c[1]))].concat(ALL.filter(isResp).map(x=>{const a=S.ans[x.n],s=stat(x);return[x.n,x.e,x.ci||'',x.p,s?L[s]:'Pendente',fmt(S.sv[x.n])].concat(cols.map(c=>a[c[0]]||''))})),[7,30,16,12,22,16].concat(cols.map(()=>38)));
   add('Roteiro',[['Bloco','Pitch / fala','Pergunta','Texto','Orienta\u00e7\u00e3o de anota\u00e7\u00e3o']].concat(S.gscript.flatMap((b,bi)=>[[b.t,b.i||'','','',b.n||'']].concat(b.q.map((q,qi)=>['','',qi+1,qt(q)+(q.o?' ['+q.o.join(' / ')+']':''),''])))),[28,60,10,70,50]);
   dl(new Blob([XLSX.write(wb,{bookType:'xlsx',type:'array'})],{type:'application/octet-stream'}),'arquivo-pesquisa-completo-'+t+'.xlsx')}catch(e){console.error(e)}},600)}
  ARCH=true;toast('Arquivo da pesquisa baixado');setTimeout(()=>{if(S.tab=='bkp')paint()},900)}
@@ -1094,7 +1112,7 @@ async function expRelDoc(){if(typeof JSZip=='undefined'){toast('Biblioteca de do
  b+=H('Meta de respostas')+Pp(`${g.done} de ${m.alvo} respostas (${Math.round(g.done/m.alvo*100)}%) \u00b7 per\u00edodo ${fdia(m.ini)} a ${fdia(m.ate)}.`)+Pp(g.faltam?`Faltam ${g.faltam} em ${g.dias} dia(s) \u00fatil(eis). ${g.util?'Meta de hoje: '+g.alvoHoje+' (feitas hoje: '+g.hoje+').':'Meta do pr\u00f3ximo dia \u00fatil: '+g.prox+'.'}`:'Meta batida.');
  b+=H('Respostas por dia')+rd.days.map(d=>Pp(`${fdia(d.k)}: ${d.v} resposta(s)`)).join('')+Pp(`Ritmo necess\u00e1rio: ${rd.ref} por dia.`);
  b+=H('Resultado por pessoa')+PR().map(p=>{const c=cnt(LS(p));return wp(wr(p,{b:1}),{af:20})+Pp(`${c.tot} contatos \u00b7 ${c.done} contatados \u00b7 ${c.pend} faltam \u00b7 ${c.resp} responderam (${c.done?Math.round(c.resp/c.done*100):0}%) \u00b7 ${g.pp[p].f} na meta (${g.pp[p].h} hoje) \u00b7 ${c.depois} para ligar depois`)}).join('');
- b+=H('Resultado geral')+ST5.map(k=>Pp(`${L[k]}: ${a[k]}${a.done&&k!='depois'?' ('+Math.round(a[k]/a.done*100)+'% dos contatados)':''}`)).join('')+Pp(`Pendentes: ${a.pend} de ${a.tot} contatos.`)+Pp(`Leads com respostas salvas: ${ALL.filter(x=>hasAns(x.n)).length}.`);
+ b+=H('Resultado geral')+ST5.map(k=>Pp(`${L[k]}: ${a[k]}${a.done&&k!='depois'?' ('+Math.round(a[k]/a.done*100)+'% dos contatados)':''}`)).join('')+Pp(`Pendentes: ${a.pend} de ${a.tot} contatos.`)+Pp(`Leads com respostas salvas: ${ALL.filter(isResp).length}.`);
  const ag=Object.keys(S.lem).filter(id=>BY[id]&&stat(BY[id])=='depois').sort((x,y)=>new Date(S.lem[x].w)-new Date(S.lem[y].w));
  b+=H('Liga\u00e7\u00f5es agendadas')+(ag.length?ag.map(id=>Pp(`${fmtL(S.lem[id].w)} \u2014 ${BY[id].e} (${BY[id].p})${S.lem[id].note?' \u00b7 '+S.lem[id].note:''}`)).join(''):Pp('Nenhuma liga\u00e7\u00e3o agendada.'));
  const doc='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'+b+'<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr></w:body></w:document>';
@@ -1113,15 +1131,15 @@ function desafioHtml(){const txt=(S.des&&S.des.txt)||DEF_DES,rk=PR().map(p=>({p,
 function editDes(){ov(`<h3>Texto do desafio</h3><textarea id="dtx" class="et" rows="5">${esc((S.des&&S.des.txt)||DEF_DES)}</textarea><div class="ma"><button class="sv" onclick="saveDes()">Salvar</button><button class="pl2" onclick="ovc()">Cancelar</button></div>`)}
 function saveDes(){const v=($('dtx').value||'').trim();S.des=v?{txt:v.slice(0,600)}:null;W('fila/desafio',S.des);saveCache();ovc();render();toast('Desafio atualizado')}
 /* ===== Resultados ===== */
-function cnt(l){const o={tot:l.length,resp:0,atend:0,nao:0,erro:0,depois:0};l.forEach(x=>{const s=stat(x);if(s)o[s]++});o.done=o.resp+o.atend+o.nao+o.erro;o.pend=o.tot-o.done-o.depois;return o}
+function cnt(l){const o={tot:l.length,resp:0,form:0,atend:0,nao:0,erro:0,depois:0};l.forEach(x=>{const s=stat(x);if(s&&o[s]!==undefined)o[s]++});o.done=o.resp+o.form+o.atend+o.nao+o.erro;o.pend=o.tot-o.done-o.depois;return o}
 const pc=(a,b)=>b?Math.round(a/b*100)+'%':'0%';
-function stats(){const f=S.sf||'all',l=f=='all'?ALL:LS(f),o=cnt(l),sa=l.filter(x=>hasAns(x.n)).length;
+function stats(){const f=S.sf||'all',l=f=='all'?ALL:LS(f),o=cnt(l),sa=l.filter(isResp).length;
  const kp=(t,v,sub,c)=>`<div class="card"><small>${t}</small><strong${c?` style="color:${c}"`:''}>${v}</strong><small>${sub}</small></div>`;
  const g=goalCalc();
  $('body').innerHTML=`${desafioHtml()}<div class="card" style="margin-bottom:18px"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center"><b>Meta da pesquisa</b><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="mini" onclick="openMeta()">\u270e Editar meta</button><button class="mini" onclick="expRelXlsx()">\u2b07 Relat\u00f3rio (.xlsx)</button><button class="mini" onclick="expRelDoc()">\u2b07 Relat\u00f3rio (.docx)</button></div></div>${goalBar()}<div class="kp" style="margin:14px 0 6px"><div class="card" style="padding:14px"><small>Feitas</small><strong style="font-size:28px">${g.done}</strong></div><div class="card" style="padding:14px"><small>Faltam</small><strong style="font-size:28px">${g.faltam}</strong></div><div class="card" style="padding:14px"><small>${g.util?'Meta de hoje':'Pr\u00f3ximo dia \u00fatil'}</small><strong style="font-size:28px">${g.util?g.alvoHoje:g.prox}</strong></div><div class="card" style="padding:14px"><small>Feitas hoje</small><strong style="font-size:28px">${g.hoje}</strong></div></div><div class="mu" style="font-size:12.5px">Por pessoa (na meta / hoje): ${PR().map(p=>`${esc(p)} <b>${g.pp[p].f}</b>/<b>${g.pp[p].h}</b>`).join(' \u00b7 ')}${g.adj?` \u00b7 inclui ${g.adj} j\u00e1 feita(s) lan\u00e7ada(s) manualmente`:''}</div></div>
 ${chartsHtml(o)}
 <div class="seg" style="display:inline-flex;margin-top:18px"><button class="${f=='all'?'on':''}" onclick="S.sf='all';save();paint()">Geral</button>${P.map(n=>`<button class="${f==n?'on':''}" onclick="S.sf='${n}';save();paint()">${n}</button>`).join('')}</div>
-<div class="kp">${kp('Total de contatos',o.tot,'na lista')}${kp('Contatados',o.done,pc(o.done,o.tot)+' do total')}${kp('Faltam',o.pend,pc(o.pend,o.tot)+' do total')}${kp('Ligar depois',o.depois,'agendados',C.depois)}${kp('Leads com respostas salvas',sa,pc(sa,o.tot)+' do total','#22c55e')}
+<div class="kp">${kp('Total de contatos',o.tot,'na lista')}${kp('Contatados',o.done,pc(o.done,o.tot)+' do total')}${kp('Faltam',o.pend,pc(o.pend,o.tot)+' do total')}${kp('Ligar depois',o.depois,'agendados',C.depois)}${kp('Leads com respostas salvas',sa,pc(sa,o.tot)+' do total','#22c55e')}${kp('Anotados sem \u201cRespondeu\u201d',l.filter(x=>stat(x)!='resp'&&hasAns(x.n)).length,'t\u00eam algo escrito, n\u00e3o contam na meta','#d9a25e')}
 ${ST.map(k=>kp(L[k],o[k],pc(o[k],o.done)+' dos contatados',C[k])).join('')}</div>
 <div class="card"><small style="color:var(--mu)">Distribui\u00e7\u00e3o dos contatados (${o.done})</small><div class="bar" style="margin-top:10px;height:14px">${ST.map(k=>`<i style="width:${o.done?o[k]/o.done*100:0}%;background:${C[k]}"></i>`).join('')}</div>
 <div class="lg">${ST.map(k=>`<span><i style="background:${C[k]}"></i>${L[k]}: ${pc(o[k],o.done)}</span>`).join('')}</div></div>
@@ -1140,4 +1158,14 @@ function sky(){const c=$('sky');if(!c)return;const W=c.width,H=c.height,x=c.getC
   d[k]=mx(mx(13,18,hz),mx(14,120,lit)*dk,cov);d[k+1]=mx(mx(20,46,hz),mx(24,165,lit)*dk,cov);d[k+2]=mx(mx(18,36,hz),mx(20,140,lit)*dk,cov);d[k+3]=255}
  x.putImageData(im,0,0);c.style.opacity=.55}
 build();Object.keys(S.dr).forEach(id=>DIRTY[id]=1);flushSave();render();paintUser();authInit();setTimeout(checkDue,800);applyTheme();
+
+/* ===== nome do ícone da barra lateral ao passar o mouse ===== */
+(function(){const tp=document.createElement('div');tp.id='navtip';document.body.appendChild(tp);let on=null;
+ const show=b=>{const t=b.dataset.tip||b.getAttribute('title');if(!t)return;if(b.getAttribute('title')){b.dataset.tip=t;b.removeAttribute('title')}
+  const r=b.getBoundingClientRect(),side=r.left<120&&innerWidth>900;tp.textContent=t;
+  if(side){tp.style.left=(r.right+12)+'px';tp.style.top=(r.top+r.height/2)+'px'}else{tp.style.left=Math.max(8,r.left)+'px';tp.style.top=(r.bottom+22)+'px'}
+  on=b;tp.classList.add('on')};
+ const hide=()=>{on=null;tp.classList.remove('on')};
+ document.addEventListener('mouseover',e=>{const b=e.target.closest&&e.target.closest('aside .nav');if(b){if(b!==on)show(b)}else if(on)hide()});
+ document.addEventListener('mousedown',hide);window.addEventListener('scroll',hide,true);window.addEventListener('blur',hide)})();
 </script></body></html>
